@@ -1,4 +1,3 @@
-import { height } from '@mui/system'
 import React from 'react'
 import styled from 'styled-components'
 import Footer from '../component/Footer'
@@ -20,7 +19,7 @@ const Button = styled.button`
   padding: 8px;
   justify-content: space-between;
   margin: 5px;
-  border: 2px solid blue
+  border: 2px solid blue;
 
   cursor: pointer;
 
