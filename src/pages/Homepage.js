@@ -29,7 +29,6 @@ const TextOnImage = styled.div`
 function Homepage() {
   return (
     <Container>
-      <Navbar />
       <Photo
         src='https://images.unsplash.com/photo-1468779036391-52341f60b55d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1368&q=80'
         alt='book-image'
@@ -45,7 +44,6 @@ function Homepage() {
 
       <NewItems />
       <Category />
-      <Footer />
     </Container>
   )
 }

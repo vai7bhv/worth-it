@@ -82,7 +82,7 @@ const SummaryPrice = styled.div``
 function Cart() {
   return (
     <Container>
-      <Navbar />
+      {/* <Navbar /> */}
       <Wrapper>
         <Title>Cart</Title>
 
@@ -132,7 +132,7 @@ function Cart() {
         </Bottom>
       </Wrapper>
 
-      <Footer />
+      {/* <Footer /> */}
     </Container>
   )
 }

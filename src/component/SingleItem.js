@@ -35,6 +35,7 @@ const Container = styled.div`
 
   align-items: center;
   position: relative;
+  flex-wrap: wrap;
 
   &:hover ${Info} {
     opacity: 1;
@@ -57,6 +58,10 @@ const Image = styled.img`
   border-radius: 10px;
   z-index: 2;
 `
+// const Title = styled.h3``
+// const Icons = styled.div`
+//   display: flex;
+// `
 const Icon = styled.div`
   width: 40px;
   height: 40px;
@@ -87,15 +92,17 @@ const Icon = styled.div`
 function SingleItem({ item }) {
   return (
     <Container>
-      <Circle />
       <Image src={item.img} />
       <Info>
+        {/* <Title>{item.name}</Title> */}
+        {/* <Icons> */}
         <Icon>
           <ShoppingCartOutlined />
         </Icon>
         <Icon>
           <FavoriteBorderOutlined />
         </Icon>
+        {/* </Icons> */}
       </Info>
     </Container>
   )
