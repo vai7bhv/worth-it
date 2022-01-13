@@ -20,17 +20,19 @@ const Info = styled.div`
   transition: all 0.5s ease;
 `
 const Container = styled.div`
-  margin: 5px;
+  margin: 10px;
   display: flex;
+  flex-wrap: wrap;
   flex: 1;
+  width: 280px;
   height: 350px;
   min-width: 280px;
   align-items: center;
   justify-content: center;
   padding: 10px;
-  /* background-color: #f5fbfd; */
-  /* border: 2px solid gray;
-  border-radius: 7px; */
+  background-color: #f5fbfd;
+
+  border-radius: 10px;
   cursor: pointer;
 
   align-items: center;
@@ -42,13 +44,13 @@ const Container = styled.div`
   }
 `
 
-const Circle = styled.div`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background-color: white;
-  position: absolute;
-`
+// const Circle = styled.div`
+//   width: 200px;
+//   height: 200px;
+//   border-radius: 50%;
+//   background-color: white;
+//   position: absolute;
+// `
 // const Item = styled.div``
 const Image = styled.img`
   width: 250px;
@@ -62,6 +64,22 @@ const Image = styled.img`
 // const Icons = styled.div`
 //   display: flex;
 // `
+const Details = styled.div`
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  background: none;
+  object-fit: cover;
+`
+const Name = styled.h3`
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 20px;
+  background: none;
+  margin: 10px;
+`
 const Icon = styled.div`
   width: 40px;
   height: 40px;
@@ -92,7 +110,10 @@ const Icon = styled.div`
 function SingleItem({ item }) {
   return (
     <Container>
-      <Image src={item.img} />
+      <Details>
+        <Image src={item.img} />
+        <Name>{item.name}</Name>
+      </Details>
       <Info>
         {/* <Title>{item.name}</Title> */}
         {/* <Icons> */}

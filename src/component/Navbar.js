@@ -7,7 +7,7 @@ const Container = styled.div`
   height: 60px;
   background-color: #f6f7f6;
   align-items: center;
-  width: 100vw;
+  width: 100%;
 `
 const Cover = styled.div`
   padding: 15px 20px;

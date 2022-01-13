@@ -5,23 +5,24 @@ import SingleItem from './SingleItem'
 
 const Container = styled.div`
   margin-top: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  flex: 1;
-
-  justify-content: space-between;
+  /* display: flex; */
+  flex-wrap: hidden;
+  /* justify-content: space-between; */
   border: 2px solid gray;
-  object-fit: contain;
+  /* object-fit: contain; */
   border-radius: 5px;
-  margin-left: 10vw;
-  margin-right: 10vh;
+  margin-left: 20px;
+  margin-right: 20px;
   padding: 20px;
+  overflow-x: scroll;
+
+  width: 90%;
 `
 const Heading = styled.div`
   font-weight: bolder;
-  font-size: 20px;
-  margin: 3px;
-  padding-top: 4px;
+  font-size: 25px;
+  /* margin: 2px; */
+  padding-top: 2px;
 `
 
 const Items = styled.div`

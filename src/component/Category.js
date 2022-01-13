@@ -9,8 +9,11 @@ const Container = styled.div`
   /* border: 2px solid gray; */
 
   border-radius: 5px;
-  margin-left: 10vw;
-  margin-right: 10vh;
+  margin-left: 50px;
+  /* margin-right: 20px; */
+  overflow-x: scroll;
+
+  width: 90%;
 `
 const Heading = styled.div`
   font-size: 20px;

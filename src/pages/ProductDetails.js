@@ -138,6 +138,8 @@ const Text = styled.button`
 const Similar = styled.div`
   margin: 10px;
   margin-left: 20px;
+  flex-wrap: wrap;
+  overflow-x: scroll;
 `
 const Items = styled.div`
   display: flex;

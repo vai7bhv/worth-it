@@ -8,6 +8,7 @@ const Container = styled.div`
   margin-bottom: 50px;
   height: 70vh;
   cursor: pointer;
+  flex-wrap: wrap;
 `
 
 // const Item = styled.div``

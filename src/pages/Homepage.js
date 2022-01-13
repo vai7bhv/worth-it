@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import Category from '../component/Category'
-import Footer from '../component/Footer'
-import Navbar from '../component/Navbar'
 import NewItems from '../component/NewItems'
 
 const Container = styled.div`

@@ -38,3 +38,46 @@ export const category = [
     name: 'Books',
   },
 ]
+
+export const allProducts = [
+  {
+    id: 1,
+    img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
+    name: 'item1',
+  },
+  {
+    id: 2,
+    img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
+    name: 'item2',
+  },
+  {
+    id: 3,
+    img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
+    name: 'item3',
+  },
+  {
+    id: 4,
+    img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
+    name: 'item4',
+  },
+  {
+    id: 5,
+    img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
+    name: 'item5',
+  },
+  {
+    id: 6,
+    img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
+    name: 'item6',
+  },
+  {
+    id: 7,
+    img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
+    name: 'item7',
+  },
+  {
+    id: 8,
+    img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
+    name: 'item8',
+  },
+]
