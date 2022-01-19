@@ -7,16 +7,16 @@ const Container = styled.div`
   margin-top: 50px;
   /* display: flex; */
   flex-wrap: hidden;
-  /* justify-content: space-between; */
+  justify-content: center;
+  align-items: center;
   border: 2px solid gray;
   /* object-fit: contain; */
   border-radius: 5px;
   margin-left: 20px;
-  margin-right: 20px;
   padding: 20px;
   overflow-x: scroll;
 
-  width: 90%;
+  width: 95%;
 `
 const Heading = styled.div`
   font-weight: bolder;

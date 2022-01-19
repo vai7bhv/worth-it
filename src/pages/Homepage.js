@@ -18,7 +18,7 @@ const TextOnImage = styled.div`
   font-weight: bolder;
   justify-content: space-between;
   position: absolute;
-  background-color: #f9f9f9;
+  /* background-color: #f9f9f9; */
 
   /* display: flex; */
   /* flex-direction: column; */

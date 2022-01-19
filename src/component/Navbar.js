@@ -19,6 +19,7 @@ const Cover = styled.div`
 const Left = styled.div`
   flex: 1;
   font-weight: 900;
+  cursor: pointer;
 `
 const SearchContainer = styled.div`
   border: 1px solid grey;
