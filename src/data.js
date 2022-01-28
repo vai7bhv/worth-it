@@ -1,83 +1,91 @@
 export const newItems = [
   {
-    id: 1,
+    _id: '7yybhhdb',
     img: 'https://www.madrasshoppe.com/26746-large_default/programming-in-ansi-c-balagurusamy.jpg',
     name: 'Programming in ANSI C',
   },
   {
-    id: 2,
+    _id: 'ugewif838',
     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm-SosWJjTRb8OsGurPr1VA5e-dfa8BfFMRA&usqp=CAU',
     name: 'KeyBoard',
   },
   {
-    id: 3,
+    _id: '99cugdeuy8f4',
     img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
     name: 'BreadBoard',
   },
   {
-    id: 4,
-    img: 'https://media.istockphoto.com/photos/isolated-shot-of-empty-measuring-beaker-on-white-background-picture-id175601617?k=20&m=175601617&s=612x612&w=0&h=eE3Z3ZmLBuapCV7wbuS6Nm-V-SI_TPlUN95wLb87iu4=',
+    _id: '78sdvlih',
+    img: 'https://media.istockphoto.com/photos/isolated-shot-of-empty-measuring-beaker-on-white-background-picture-_id175601617?k=20&m=175601617&s=612x612&w=0&h=eE3Z3ZmLBuapCV7wbuS6Nm-V-SI_TPlUN95wLb87iu4=',
     name: 'Beaker 100ml',
   },
 ]
 
 export const category = [
   {
-    id: 1,
+    _id: 'electronic',
     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmgH3Hsh3lUnknOZ54DIupopR5Hk3WesgruA&usqp=CAU',
     name: 'Electronics item',
   },
   {
-    id: 2,
-    img: 'https://media.istockphoto.com/photos/laboratory-research-picture-id658148844?k=20&m=658148844&s=612x612&w=0&h=5IeS_2UnzjRAHQ-zXkwhYZmXAELRfxgYThCpW7p65eE=',
+    _id: 'chemical',
+    img: 'https://media.istockphoto.com/photos/laboratory-research-picture-_id658148844?k=20&m=658148844&s=612x612&w=0&h=5IeS_2UnzjRAHQ-zXkwhYZmXAELRfxgYThCpW7p65eE=',
     name: 'Chemical Equipment',
   },
   {
-    id: 3,
-    img: 'https://media.istockphoto.com/photos/composition-with-books-on-the-table-picture-id1158413597?b=1&k=20&m=1158413597&s=170667a&w=0&h=ozkhrcaG5CSHTrfz9YRsEWNYnA-gsLap6cOfSQUAQ78=',
+    _id: 'books',
+    img: 'https://media.istockphoto.com/photos/composition-with-books-on-the-table-picture-_id1158413597?b=1&k=20&m=1158413597&s=170667a&w=0&h=ozkhrcaG5CSHTrfz9YRsEWNYnA-gsLap6cOfSQUAQ78=',
     name: 'Books',
   },
 ]
 
 export const allProducts = [
   {
-    id: 1,
+    _id: 1,
     img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
     name: 'item1',
+    price: 199,
   },
   {
-    id: 2,
+    _id: 2,
     img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
     name: 'item2',
+    price: 199,
   },
   {
-    id: 3,
+    _id: 3,
     img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
     name: 'item3',
+    price: 199,
   },
   {
-    id: 4,
+    _id: 4,
     img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
     name: 'item4',
+    price: 199,
   },
   {
-    id: 5,
+    _id: 5,
     img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
     name: 'item5',
+    price: 199,
   },
   {
-    id: 6,
+    _id: 6,
     img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
     name: 'item6',
+    price: 199,
   },
   {
-    id: 7,
+    _id: 7,
     img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
     name: 'item7',
+    price: 199,
   },
   {
-    id: 8,
+    _id: 8,
     img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
     name: 'item8',
+    price: 199,
   },
 ]

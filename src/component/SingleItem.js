@@ -3,6 +3,7 @@ import {
   ShoppingCartOutlined,
 } from '@mui/icons-material'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Info = styled.div`
@@ -10,7 +11,7 @@ const Info = styled.div`
   height: 100%;
   position: absolute;
   opacity: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
   top: 0;
   left: 0;
   z-index: 3;
@@ -20,7 +21,7 @@ const Info = styled.div`
   transition: all 0.5s ease;
 `
 const Container = styled.div`
-  margin: 10px;
+  margin: 10px auto;
   display: flex;
   flex-wrap: wrap;
   flex: 1;
@@ -31,10 +32,9 @@ const Container = styled.div`
   justify-content: center;
   padding: 10px;
   background-color: #f5fbfd;
-
+  text-decoration: none;
   border-radius: 10px;
   cursor: pointer;
-
   align-items: center;
   position: relative;
   flex-wrap: wrap;
@@ -68,28 +68,30 @@ const Details = styled.div`
   align-items: center;
   justify-content: space-between;
   display: flex;
-  flex-direction: column;
+
   background: none;
   object-fit: cover;
 `
 const Name = styled.h3`
   align-items: center;
   justify-content: center;
-  font-weight: 900;
+  font-weight: 400;
   font-size: 20px;
   background: none;
   margin: 10px;
+  text-decoration: none;
+  font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
 `
 const Icon = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 43px;
+  height: 43px;
   border-radius: 50%;
   background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 10px;
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 
   &:hover {
     background-color: #e9f5f5;
@@ -110,21 +112,30 @@ const Icon = styled.div`
 function SingleItem({ item }) {
   return (
     <Container>
-      <Details>
-        <Image src={item.img} />
-        <Name>{item.name}</Name>
-      </Details>
-      <Info>
-        {/* <Title>{item.name}</Title> */}
-        {/* <Icons> */}
-        <Icon>
-          <ShoppingCartOutlined />
-        </Icon>
-        <Icon>
-          <FavoriteBorderOutlined />
-        </Icon>
-        {/* </Icons> */}
-      </Info>
+      <Link
+        style={{
+          textDecoration: 'none',
+          color: 'black',
+        }}
+        to={`/product/${item._id}`}
+      >
+        <Image src={item.images[0].url} alt='product image' />
+        <Details>
+          <Name>{item.name}</Name>
+          <Name>₹{item.price}</Name>
+        </Details>
+        <Info>
+          {/* <Title>{item.name}</Title> */}
+          {/* <Icons> */}
+          <Icon>
+            <ShoppingCartOutlined />
+          </Icon>
+          <Icon>
+            <FavoriteBorderOutlined />
+          </Icon>
+          {/* </Icons> */}
+        </Info>
+      </Link>
     </Container>
   )
 }

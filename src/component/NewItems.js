@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { newItems } from '../data'
 import SingleItem from './SingleItem'
+import { getProduct } from '../action/productAction'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Container = styled.div`
   margin-top: 50px;
@@ -30,15 +31,21 @@ const Items = styled.div`
 `
 
 function NewItems() {
+  const dispatch = useDispatch()
+  const { loading, products, productCount } = useSelector(
+    (state) => state.products
+  )
+  useEffect(() => {
+    dispatch(getProduct())
+  }, [dispatch])
   return (
     <Container>
       <Heading>
         <h4>Newly added items</h4>
       </Heading>
       <Items>
-        {newItems.map((item) => (
-          <SingleItem item={item} />
-        ))}
+        {products &&
+          products.slice(4, 8).map((item) => <SingleItem item={item} />)}
       </Items>
     </Container>
   )

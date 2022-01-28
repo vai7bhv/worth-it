@@ -6,6 +6,7 @@ import Navbar from './component/Navbar'
 import AddItem from './pages/AddItem'
 import AllProduct from './pages/AllProduct'
 import Cart from './pages/Cart'
+import DashBoard from './pages/DashBoard'
 import Homepage from './pages/Homepage'
 import Login from './pages/Login'
 import ProductDetails from './pages/ProductDetails'
@@ -20,12 +21,13 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' element={<Homepage />} />
-          <Route path='/all-product' element={<AllProduct />} />
+          <Route path='/products' element={<AllProduct />} />
           <Route path='/product/:id' element={<ProductDetails />} />
           <Route path='/cart' element={<Cart />} />
-          <Route path='/add-item' element={<AddItem />} />
+          <Route path='/additem' element={<AddItem />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/Signup' element={<Signup />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/dashboard' element={<DashBoard />} />
         </Routes>
 
         <Footer />

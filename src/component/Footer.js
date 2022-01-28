@@ -8,7 +8,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
   /* flex-direction: column; */
   justify-content: center;
-  max-width: 1000px;
+  max-width: 100vw;
   margin: 0 auto;
   background-color: gray;
   display: flex;

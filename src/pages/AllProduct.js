@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { getProduct } from '../action/productAction'
 import SingleItem from '../component/SingleItem'
 import { allProducts } from '../data'
 
@@ -54,6 +56,13 @@ const CategoryName = styled.h2`
 `
 
 function AllProduct() {
+  const dispatch = useDispatch()
+  const { products } = useSelector((state) => state.products)
+  useEffect(() => {
+    dispatch(getProduct())
+  }, [dispatch])
+  console.log(products[0])
+
   return (
     <Container>
       <FilterContainer>
@@ -68,7 +77,7 @@ function AllProduct() {
             <Option>1000-max</Option>
           </Select>
         </Filter>
-        <FilterText>Category</FilterText>
+        {/* <FilterText>Category</FilterText>
         <Select>
           <Option>0-100</Option>
           <Option>100-200</Option>
@@ -79,16 +88,19 @@ function AllProduct() {
 
         <Filter>
           <FilterText>SORT</FilterText>
-        </Filter>
+        </Filter> */}
       </FilterContainer>
       <Categories>
         <CategoryName>Category 1</CategoryName>
 
         <Items>
-          {allProducts.slice(0, 6).map((item) => (
-            <SingleItem item={item} />
-          ))}
+          {products && products.map((item) => <SingleItem item={item} />)}
         </Items>
+
+        {/* <Items>
+          {allProducts &&
+            allProducts.slice(0, 6).map((item) => <SingleItem item={item} />)}
+        </Items> */}
       </Categories>
     </Container>
   )

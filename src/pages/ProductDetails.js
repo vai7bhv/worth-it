@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   FavoriteBorderOutlined,
   ShoppingCartOutlined,
@@ -6,6 +6,9 @@ import {
 import styled from 'styled-components'
 import SingleItem from '../component/SingleItem'
 import { newItems } from '../data'
+import { useDispatch, useSelector } from 'react-redux'
+import { getProductDetails } from '../action/productAction'
+import { useParams } from 'react-router-dom'
 //import "../data"
 
 const Container = styled.div`
@@ -15,6 +18,10 @@ const Container = styled.div`
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
+  @media (max-width: 700px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 const ImgContainer = styled.div`
@@ -36,13 +43,8 @@ const Image = styled.img`
 const Info = styled.div`
   height: 100%;
   width: 100%;
-  /* position: absolute; */
   opacity: 1;
 
-  /* background-color: rgba(0, 0, 0, 0.2); */
-  /* top: 0;
-  left: 0;
-  z-index: 3; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,29 +78,29 @@ const Desc = styled.p`
   font-weight: 600;
 `
 const Price = styled.span`
-  font-weight: 200;
-  font-size: 40px;
+  font-weight: 900;
+  font-size: 30px;
 `
 
-const AddContainer = styled.div`
-  width: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`
+// const AddContainer = styled.div`
+//   width: 50%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+// `
 // const AmountContainer=styled.div`
 // display : flex;
 // align-items:center;
 // font-weight: 700;
 // `;
-const Amount = styled.span`
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  border: 1px solid teal;
-  display: flex;
-  justify-content: space-between;
-`
+// const Amount = styled.span`
+//   width: 30px;
+//   height: 30px;
+//   border-radius: 10px;
+//   border: 1px solid teal;
+//   display: flex;
+//   justify-content: space-between;
+// `
 const Button = styled.button`
   background-color: 'gray';
   color: 'white';
@@ -145,12 +147,22 @@ const Items = styled.div`
   display: flex;
 `
 
-const Product = () => {
+const ProductDetails = () => {
+  const dispatch = useDispatch()
+  const { product, loading } = useSelector((state) => state.productDetails)
+  const { products } = useSelector((state) => state.products)
+  const { id } = useParams()
+  // console.log(id)
+  useEffect(() => {
+    dispatch(getProductDetails(id))
+  }, [dispatch])
+
   return (
     <Container>
       <Wrapper>
         <ImgContainer>
-          <Image src='https://images-na.ssl-images-amazon.com/images/I/41AyOrtLJ6L._SX367_BO1,204,203,200_.jpg' />
+          {/* <Image src='https://images-na.ssl-images-amazon.com/images/I/41AyOrtLJ6L._SX367_BO1,204,203,200_.jpg' /> */}
+          <Image src={product.images[0].url} />
           <Info>
             <Icon>
               <ShoppingCartOutlined fontSize='large' />
@@ -161,15 +173,11 @@ const Product = () => {
           </Info>
         </ImgContainer>
         <InfoContainer>
-          <Title>ANSI C</Title>
-          <Desc>
-            Learn Programming C.ANSI C, ISO C, and Standard C are successive
-            standards for the C programming language published by the American
-            National Standards Institute (ANSI) and the International
-            Organization for Standardization (ISO).
-          </Desc>
+          <Title>{product.name}</Title>
+          {/* <Title>Ansic</Title> */}
+          <Desc>{product.description}</Desc>
           <Price>
-            ₹500 <br />
+            ₹{product.price} <br />
           </Price>
           <Button>
             <Text>Contact Owner </Text>
@@ -180,7 +188,7 @@ const Product = () => {
       <Similar>
         <Title>Similar Items</Title>
         <Items>
-          {newItems.map((item) => (
+          {products.slice(0, 4).map((item) => (
             <SingleItem item={item} />
           ))}
         </Items>
@@ -189,4 +197,4 @@ const Product = () => {
   )
 }
 
-export default Product
+export default ProductDetails
