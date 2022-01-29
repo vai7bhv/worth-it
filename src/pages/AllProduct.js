@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react'
+import { Slider } from '@mui/material'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { getProduct } from '../action/productAction'
 import SingleItem from '../component/SingleItem'
-import { allProducts } from '../data'
+// import { allProducts } from '../data'
 
 const Container = styled.div`
   align-items: center;
@@ -16,6 +18,7 @@ const Filter = styled.div`
   margin: 20px;
   font-weight: 900;
   font-size: 17px;
+  width: 15vmax;
 `
 const FilterText = styled.span`
   display: flex;
@@ -26,12 +29,7 @@ const FilterCover = styled.div`
   display: flex;
   flex-direction: column;
 `
-const Select = styled.select`
-  font-weight: 900;
-  font-size: 15px;
-  padding: 5px;
-  margin: 2px;
-`
+
 const Option = styled.option`
   font-weight: 900;
   font-size: 15px;
@@ -56,12 +54,18 @@ const CategoryName = styled.h2`
 `
 
 function AllProduct() {
+  const { keyword } = useParams()
+  const [price, setPrice] = useState([0, 1000])
   const dispatch = useDispatch()
   const { products } = useSelector((state) => state.products)
+
+  const priceHandler = (event, newPrice) => {
+    setPrice(newPrice)
+  }
+
   useEffect(() => {
-    dispatch(getProduct())
-  }, [dispatch])
-  console.log(products[0])
+    dispatch(getProduct(keyword, price))
+  }, [dispatch, keyword, price])
 
   return (
     <Container>
@@ -69,13 +73,14 @@ function AllProduct() {
         <Filter>
           <FilterText>Price</FilterText>
 
-          <Select>
-            <Option>0-100</Option>
-            <Option>100-200</Option>
-            <Option>200-500</Option>
-            <Option>500-1000</Option>
-            <Option>1000-max</Option>
-          </Select>
+          <Slider
+            value={price}
+            onChange={priceHandler}
+            valueLabelDisplay='auto'
+            aria-labelledby='range-slider'
+            min={0}
+            max={1000}
+          />
         </Filter>
         {/* <FilterText>Category</FilterText>
         <Select>
@@ -91,7 +96,7 @@ function AllProduct() {
         </Filter> */}
       </FilterContainer>
       <Categories>
-        <CategoryName>Category 1</CategoryName>
+        {/* <CategoryName>Category 1</CategoryName> */}
 
         <Items>
           {products && products.map((item) => <SingleItem item={item} />)}

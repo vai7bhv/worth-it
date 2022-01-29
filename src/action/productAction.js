@@ -8,28 +8,31 @@ import {
 } from '../reducers/constant/productConstant'
 import axios from 'axios'
 
-export const getProduct = () => async (dispatch) => {
-  try {
-    dispatch({ type: ALL_PRODUCT_REQUEST })
+export const getProduct =
+  (keyword = '', price = [0, 1000]) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: ALL_PRODUCT_REQUEST })
 
-    const { data } = await axios.get('/api/products')
+      let link = `/api/products?keyword=${keyword}&price[gte]=${price[0]}&price[lte]=${price[1]}`
 
-    dispatch({
-      type: ALL_PRODUCT_SUCCESS,
-      payload: data,
-    })
-  } catch (err) {
-    dispatch({
-      type: ALL_PRODUCT_FAILED,
-      payload: err.response.data.message,
-    })
+      const { data } = await axios.get(link)
+
+      dispatch({
+        type: ALL_PRODUCT_SUCCESS,
+        payload: data,
+      })
+    } catch (err) {
+      dispatch({
+        type: ALL_PRODUCT_FAILED,
+        payload: err.response.data.message,
+      })
+    }
   }
-}
 
 export const getProductDetails = (id) => async (dispatch) => {
   try {
-    const pid = '61f271c0b8c2525c7aa6445a'
-    console.log('vyuu,sw,hj')
+    const pid = '61f3e8ed06c5dbf8c21c4082'
     // console.log(id)
     dispatch({ type: PRODUCT_DETAILS_REQUEST })
     const { data } = await axios.get(`/api/product/${id}`)

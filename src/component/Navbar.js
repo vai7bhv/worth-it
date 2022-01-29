@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { LocalGroceryStoreOutlined, Person, Search } from '@mui/icons-material'
 import { Badge } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 const Container = styled.div`
   height: 60px;
@@ -82,6 +83,20 @@ const Options = styled.div`
 `
 
 function Navbar() {
+  const [keyword, setKeyword] = useState('')
+  const history = useNavigate()
+  // const { history } = this.props
+
+  const searchHandler = (e) => {
+    e.preventDefault()
+    if (keyword.trim()) {
+      history(`/products/${keyword}`)
+    } else {
+      history('/products')
+    }
+  }
+  console.log(keyword)
+
   return (
     <Container>
       <Cover>
@@ -90,8 +105,17 @@ function Navbar() {
         </Left>
         <Middle>
           <SearchContainer>
-            <Input placeholder='search ...' />
-            <Search style={{ color: 'gray', fontSize: '20px' }} />
+            <Input
+              placeholder='search ...'
+              type='search'
+              onSubmit={searchHandler}
+              onChange={(e) => setKeyword(e.target.value)}
+            />
+
+            <Search
+              onClick={searchHandler}
+              style={{ color: 'gray', fontSize: '20px' }}
+            />
           </SearchContainer>
         </Middle>
         <Right>

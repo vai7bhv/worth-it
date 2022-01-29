@@ -155,7 +155,7 @@ const ProductDetails = () => {
   // console.log(id)
   useEffect(() => {
     dispatch(getProductDetails(id))
-  }, [dispatch])
+  }, [dispatch, id])
 
   return (
     <Container>

@@ -21,7 +21,7 @@ const Info = styled.div`
   transition: all 0.5s ease;
 `
 const Container = styled.div`
-  margin: 10px auto;
+  margin: 10px;
   display: flex;
   flex-wrap: wrap;
   flex: 1;
@@ -53,10 +53,11 @@ const Container = styled.div`
 // `
 // const Item = styled.div``
 const Image = styled.img`
-  width: 250px;
-  height: 75%;
-  object-fit: cover;
+  max-width: 80%;
+  max-height: auto;
+  object-fit: contain;
   align-items: center;
+  justify-content: center;
   border-radius: 10px;
   z-index: 2;
 `

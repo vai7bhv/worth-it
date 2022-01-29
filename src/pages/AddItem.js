@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+import { useForm } from 'react-hook-form'
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -52,8 +52,20 @@ const Button = styled.button`
   border-radius: 3px;
   cursor: pointer;
 `
+const Button1 = styled.button`
+  width: 10%;
+  padding: 5px 7px;
+  color: 'white';
+  font-size: 12px;
+  margin: 1em;
+  font-weight: 900;
+  border-radius: 3px;
+  cursor: pointer;
+`
 
 const AddItem = () => {
+  const { register } = useForm()
+
   return (
     <Container>
       <Wrapper>
@@ -62,8 +74,12 @@ const AddItem = () => {
           <Input placeholder='Name of an Item' />
           <Input placeholder='Description' />
           <Input placeholder='Category' />
+
           <Input type='number' placeholder='Price' min='0' />
+          <Input type='file' name='picture' />
         </Form>
+        <Button1>Upload</Button1>
+        <br></br>
         <Button>
           <b>SUBMIT</b>
         </Button>
