@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -62,6 +63,7 @@ const Link = styled.a`
 `
 
 const Login = () => {
+  const navigate = useNavigate()
   return (
     <Container>
       <Wrapper>
@@ -73,7 +75,7 @@ const Login = () => {
           <Button>LOGIN</Button>
           <Link>FORGOT PASSWORD?</Link>
           {/* <label >New at Worth It?</label> */}
-          <Link>CREATE AN ACCOUNT</Link>
+          <Link onClick={() => navigate('/signup')}>CREATE AN ACCOUNT</Link>
         </Form>
       </Wrapper>
     </Container>

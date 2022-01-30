@@ -9,12 +9,13 @@ import { newItems } from '../data'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductDetails } from '../action/productAction'
 import { useParams } from 'react-router-dom'
-//import "../data"
+import '../data'
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
 `
+
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
@@ -162,7 +163,7 @@ const ProductDetails = () => {
       <Wrapper>
         <ImgContainer>
           {/* <Image src='https://images-na.ssl-images-amazon.com/images/I/41AyOrtLJ6L._SX367_BO1,204,203,200_.jpg' /> */}
-          <Image src={product.images[0].url} />
+          <Image src={product.images[0].url} alt={product.images[0].alt} />
           <Info>
             <Icon>
               <ShoppingCartOutlined fontSize='large' />
@@ -176,8 +177,17 @@ const ProductDetails = () => {
           <Title>{product.name}</Title>
           {/* <Title>Ansic</Title> */}
           <Desc>{product.description}</Desc>
+          {/* <Desc>
+            This seventh edition is thoroughly updated with outcome based
+            learning approach as per standard Bloom’s Taxonomy. The new
+            additions are important contents like “Graphic programming using C.
+            Self-explanatory interactive simulation videos and case studies are
+            integrated throughout the book using QR codes. Additional write-ups
+            and projects are also available for reference of the user.
+          </Desc> */}
           <Price>
             ₹{product.price} <br />
+            <br />
           </Price>
           <Button>
             <Text>Contact Owner </Text>

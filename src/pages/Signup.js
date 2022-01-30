@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -67,8 +68,10 @@ const Link = styled.a`
   font-weight: 900;
   margin-left: 3px;
 `
+const LoginOp = styled.div``
 
 const Signup = () => {
+  const navigate = useNavigate()
   return (
     <Container>
       <Wrapper>
@@ -76,8 +79,8 @@ const Signup = () => {
         <Form>
           <Input placeholder='name' />
           <Input placeholder='email address' />
-          <Input placeholder='confirm password' />
           <Input placeholder='password' />
+          <Input placeholder='confirm password' />
         </Form>
         <Agreement>
           By creating an account I consent to the processing of my personal data
@@ -85,6 +88,10 @@ const Signup = () => {
           <Link>PRIVACY POLICY</Link>
           <br />
         </Agreement>
+        <LoginOp>
+          <h3>Already have an account</h3>
+          <Link onClick={() => navigate('/Login')}>Login</Link>
+        </LoginOp>
         <Button>SIGN UP</Button>
       </Wrapper>
     </Container>

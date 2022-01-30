@@ -29,12 +29,12 @@ export const category = [
   },
   {
     _id: 'chemical',
-    img: 'https://media.istockphoto.com/photos/laboratory-research-picture-_id658148844?k=20&m=658148844&s=612x612&w=0&h=5IeS_2UnzjRAHQ-zXkwhYZmXAELRfxgYThCpW7p65eE=',
+    img: 'https://i.imgur.com/gQVQC06.jpg',
     name: 'Chemical Equipment',
   },
   {
     _id: 'books',
-    img: 'https://media.istockphoto.com/photos/composition-with-books-on-the-table-picture-_id1158413597?b=1&k=20&m=1158413597&s=170667a&w=0&h=ozkhrcaG5CSHTrfz9YRsEWNYnA-gsLap6cOfSQUAQ78=',
+    img: 'https://images.theconversation.com/files/45159/original/rptgtpxd-1396254731.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=754&fit=clip',
     name: 'Books',
   },
 ]

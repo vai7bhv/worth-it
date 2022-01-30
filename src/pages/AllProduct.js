@@ -1,4 +1,4 @@
-import { Slider } from '@mui/material'
+import { MenuItem, Select, Slider } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
@@ -30,11 +30,6 @@ const FilterCover = styled.div`
   flex-direction: column;
 `
 
-const Option = styled.option`
-  font-weight: 900;
-  font-size: 15px;
-`
-
 const Categories = styled.div`
   margin: 20px;
   margin-top: 50px;
@@ -54,8 +49,18 @@ const CategoryName = styled.h2`
 `
 
 function AllProduct() {
+  const categories = [
+    'Books',
+    'Electronics',
+    'Chemical',
+    'Mechanical',
+    'Civil',
+    'Computer',
+  ]
+
   const { keyword } = useParams()
   const [price, setPrice] = useState([0, 1000])
+  const [category, setCategory] = useState('')
   const dispatch = useDispatch()
   const { products } = useSelector((state) => state.products)
 
@@ -64,8 +69,9 @@ function AllProduct() {
   }
 
   useEffect(() => {
-    dispatch(getProduct(keyword, price))
-  }, [dispatch, keyword, price])
+    dispatch(getProduct(keyword, price, category))
+    console.log(category)
+  }, [dispatch, keyword, price, category])
 
   return (
     <Container>
@@ -82,30 +88,23 @@ function AllProduct() {
             max={1000}
           />
         </Filter>
-        {/* <FilterText>Category</FilterText>
-        <Select>
-          <Option>0-100</Option>
-          <Option>100-200</Option>
-          <Option>200-500</Option>
-          <Option>500-1000</Option>
-          <Option>1000-max</Option>
-        </Select>
-
         <Filter>
-          <FilterText>SORT</FilterText>
-        </Filter> */}
+          <FilterText>Categories</FilterText>
+
+          <Select
+            onChange={(event) => setCategory(event.target.value)}
+            style={{ width: '15vw' }}
+          >
+            {categories.map((c) => (
+              <MenuItem value={c}>{c}</MenuItem>
+            ))}
+          </Select>
+        </Filter>
       </FilterContainer>
       <Categories>
-        {/* <CategoryName>Category 1</CategoryName> */}
-
         <Items>
           {products && products.map((item) => <SingleItem item={item} />)}
         </Items>
-
-        {/* <Items>
-          {allProducts &&
-            allProducts.slice(0, 6).map((item) => <SingleItem item={item} />)}
-        </Items> */}
       </Categories>
     </Container>
   )

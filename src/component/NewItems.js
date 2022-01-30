@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import SingleItem from './SingleItem'
 import { getProduct } from '../action/productAction'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const Container = styled.div`
   margin-top: 50px;
@@ -24,7 +25,10 @@ const Heading = styled.div`
   font-size: 25px;
   /* margin: 2px; */
   padding-top: 2px;
+  justify-content: space-between;
+  display: flex;
 `
+const HeadingRight = styled.h4``
 
 const Items = styled.div`
   display: flex;
@@ -35,6 +39,12 @@ function NewItems() {
   const { loading, products, productCount } = useSelector(
     (state) => state.products
   )
+
+  const navigate = useNavigate()
+  const productHandle = () => {
+    navigate('/products')
+  }
+
   useEffect(() => {
     dispatch(getProduct())
   }, [dispatch])
@@ -42,10 +52,13 @@ function NewItems() {
     <Container>
       <Heading>
         <h4>Newly added items</h4>
+        <h6 onClick={productHandle} style={{ cursor: 'pointer' }}>
+          All Products
+        </h6>
       </Heading>
       <Items>
         {products &&
-          products.slice(4, 8).map((item) => <SingleItem item={item} />)}
+          products.slice(0, 4).map((item) => <SingleItem item={item} />)}
       </Items>
     </Container>
   )

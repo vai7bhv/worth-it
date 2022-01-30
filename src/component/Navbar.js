@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { LocalGroceryStoreOutlined, Person, Search } from '@mui/icons-material'
 import { Badge } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import Signup from '../pages/Signup'
 
 const Container = styled.div`
   height: 60px;
@@ -29,6 +30,7 @@ const Left = styled.div`
     padding: 0%;
   }
 `
+const Title = styled.h2``
 const SearchContainer = styled.div`
   border: 1px solid grey;
   display: flex;
@@ -61,7 +63,7 @@ const Middle = styled.div`
 const Right = styled.div`
   flex: 1;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: flex-end;
   margin: 5px;
   @media (max-width: 600px) {
@@ -76,6 +78,7 @@ const Options = styled.div`
   padding: 3px;
   margin: 5px;
   font-size: 16px;
+  cursor: pointer;
   @media (max-width: 600px) {
     font-size: 12px;
     margin-left: 0;
@@ -84,24 +87,40 @@ const Options = styled.div`
 
 function Navbar() {
   const [keyword, setKeyword] = useState('')
-  const history = useNavigate()
-  // const { history } = this.props
+  const navigate = useNavigate()
+  // const { navigate } = this.props
+
+  const titleHandle = () => {
+    navigate('/')
+  }
+  const signUpHandle = () => {
+    navigate('/signup')
+  }
+  const loginHandle = () => {
+    navigate('/login')
+  }
+  const cartHandle = () => {
+    navigate('/cart')
+  }
+  const profileHandle = () => {
+    navigate('/dashboard')
+  }
 
   const searchHandler = (e) => {
     e.preventDefault()
     if (keyword.trim()) {
-      history(`/products/${keyword}`)
+      navigate(`/products/${keyword}`)
     } else {
-      history('/products')
+      navigate('/products')
     }
   }
-  console.log(keyword)
+  // console.log(keyword)
 
   return (
     <Container>
       <Cover>
         <Left>
-          <h2>WorthIT</h2>
+          <Title onClick={titleHandle}>WorthIT</Title>
         </Left>
         <Middle>
           <SearchContainer>
@@ -119,12 +138,20 @@ function Navbar() {
           </SearchContainer>
         </Middle>
         <Right>
-          <Options>SIGN IN</Options>
-          <Options>LOG IN</Options>
+          <Options onClick={signUpHandle}>SIGN IN</Options>
+          <Options onClick={loginHandle}>LOG IN</Options>
           <Badge badgeContent={1} color='secondary'>
-            <LocalGroceryStoreOutlined fontSize='large' />
+            <LocalGroceryStoreOutlined
+              style={{ marginLeft: '5px', cursor: 'pointer' }}
+              onClick={cartHandle}
+              fontSize='large'
+            />
           </Badge>
-          <Person fontSize='large' style={{ marginLeft: '5px' }} />
+          <Person
+            onClick={profileHandle}
+            fontSize='large'
+            style={{ marginLeft: '5px', cursor: 'pointer' }}
+          />
         </Right>
       </Cover>
     </Container>
