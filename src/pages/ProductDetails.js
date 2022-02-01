@@ -5,11 +5,12 @@ import {
 } from '@mui/icons-material'
 import styled from 'styled-components'
 import SingleItem from '../component/SingleItem'
-import { newItems } from '../data'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProductDetails } from '../action/productAction'
+import { getProduct, getProductDetails } from '../action/productAction'
 import { useParams } from 'react-router-dom'
 import '../data'
+import { addToCart } from '../action/cartAction'
+import { useAlert } from 'react-alert'
 
 const Container = styled.div`
   display: flex;
@@ -153,9 +154,18 @@ const ProductDetails = () => {
   const { product, loading } = useSelector((state) => state.productDetails)
   const { products } = useSelector((state) => state.products)
   const { id } = useParams()
+  const alert = useAlert()
+
+  const cartHandler = (e) => {
+    e.preventDefault()
+    dispatch(addToCart(id))
+    alert.success('Item added to cart')
+  }
+
   // console.log(id)
   useEffect(() => {
     dispatch(getProductDetails(id))
+    dispatch(getProduct())
   }, [dispatch, id])
 
   return (
@@ -163,10 +173,14 @@ const ProductDetails = () => {
       <Wrapper>
         <ImgContainer>
           {/* <Image src='https://images-na.ssl-images-amazon.com/images/I/41AyOrtLJ6L._SX367_BO1,204,203,200_.jpg' /> */}
-          <Image src={product.images[0].url} alt={product.images[0].alt} />
+          {/* <Image src={product.images[0].url} alt={product.images[0].alt} /> */}
+
           <Info>
             <Icon>
-              <ShoppingCartOutlined fontSize='large' />
+              <ShoppingCartOutlined
+                onClick={(e) => cartHandler(e)}
+                fontSize='large'
+              />
             </Icon>
             <Icon>
               <FavoriteBorderOutlined fontSize='large' />
@@ -177,14 +191,7 @@ const ProductDetails = () => {
           <Title>{product.name}</Title>
           {/* <Title>Ansic</Title> */}
           <Desc>{product.description}</Desc>
-          {/* <Desc>
-            This seventh edition is thoroughly updated with outcome based
-            learning approach as per standard Bloom’s Taxonomy. The new
-            additions are important contents like “Graphic programming using C.
-            Self-explanatory interactive simulation videos and case studies are
-            integrated throughout the book using QR codes. Additional write-ups
-            and projects are also available for reference of the user.
-          </Desc> */}
+
           <Price>
             ₹{product.price} <br />
             <br />

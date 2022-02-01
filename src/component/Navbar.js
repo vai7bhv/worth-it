@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { LocalGroceryStoreOutlined, Person, Search } from '@mui/icons-material'
-import { Badge } from '@mui/material'
+import { Badge, SpeedDial, SpeedDialAction } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import Signup from '../pages/Signup'
+import { useSelector } from 'react-redux'
 
 const Container = styled.div`
   height: 60px;
@@ -84,27 +85,28 @@ const Options = styled.div`
     margin-left: 0;
   }
 `
+// const Reg = styled.div``
 
-function Navbar() {
+function Navbar({ isAuthUser }) {
   const [keyword, setKeyword] = useState('')
+  const [open, setOpen] = useState('')
   const navigate = useNavigate()
   // const { navigate } = this.props
+  const { cartItems } = useSelector((state) => state.cart)
 
-  const titleHandle = () => {
-    navigate('/')
-  }
-  const signUpHandle = () => {
-    navigate('/signup')
-  }
-  const loginHandle = () => {
-    navigate('/login')
-  }
-  const cartHandle = () => {
-    navigate('/cart')
-  }
-  const profileHandle = () => {
-    navigate('/dashboard')
-  }
+  // const titleHandle = () => {}
+  // const signUpHandle = () => {
+  //   navigate('/signup')
+  // }
+  // const loginHandle = () => {
+  //   navigate('/login')
+  // }
+  // const cartHandle = () => {
+  //   navigate('/cart')
+  // }
+  // const profileHandle = () => {
+  //   navigate('/profile')
+  // }
 
   const searchHandler = (e) => {
     e.preventDefault()
@@ -120,7 +122,7 @@ function Navbar() {
     <Container>
       <Cover>
         <Left>
-          <Title onClick={titleHandle}>WorthIT</Title>
+          <Title onClick={() => navigate('/')}>WorthIT</Title>
         </Left>
         <Middle>
           <SearchContainer>
@@ -138,20 +140,42 @@ function Navbar() {
           </SearchContainer>
         </Middle>
         <Right>
-          <Options onClick={signUpHandle}>SIGN IN</Options>
-          <Options onClick={loginHandle}>LOG IN</Options>
-          <Badge badgeContent={1} color='secondary'>
+          {!isAuthUser && (
+            <>
+              <Options onClick={() => navigate('/signUp')}>SIGN IN</Options>
+              <Options onClick={() => navigate('/login')}>LOG IN</Options>
+            </>
+          )}
+          <Badge badgeContent={cartItems.length} color='secondary'>
             <LocalGroceryStoreOutlined
               style={{ marginLeft: '5px', cursor: 'pointer' }}
-              onClick={cartHandle}
+              onClick={() => navigate('/cart')}
               fontSize='large'
             />
           </Badge>
-          <Person
-            onClick={profileHandle}
-            fontSize='large'
-            style={{ marginLeft: '5px', cursor: 'pointer' }}
-          />
+          {isAuthUser && (
+            <Person
+              onClick={() => navigate('/profile')}
+              fontSize='large'
+              style={{ marginLeft: '5px', cursor: 'pointer' }}
+            />
+          )}
+
+          {/* <SpeedDial
+            ariaLabel='SpeedDail tooltip example'
+            onClose={() => setOpen(false)}
+            onOpen={() => setOpen(true)}
+            open={open}
+            icon={
+              <Person
+                // onClick={profileHandle}
+                fontSize='large'
+                style={{ marginLeft: '5px', cursor: 'pointer' }}
+              />
+            }
+          >
+            <SpeedDialAction icon={<LocalGroceryStoreOutlined />} />
+          </SpeedDial> */}
         </Right>
       </Cover>
     </Container>

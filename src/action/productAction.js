@@ -5,7 +5,7 @@ import {
   PRODUCT_DETAILS_FAILED,
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
-} from '../reducers/constant/productConstant'
+} from '../reducers/constant/allConstant'
 import axios from 'axios'
 
 export const getProduct =
@@ -18,7 +18,6 @@ export const getProduct =
       if (category)
         link = `/api/products?keyword=${keyword}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}`
 
-      console.log(link)
       const { data } = await axios.get(link)
 
       dispatch({
@@ -35,8 +34,6 @@ export const getProduct =
 
 export const getProductDetails = (id) => async (dispatch) => {
   try {
-    const pid = '61f3e8ed06c5dbf8c21c4082'
-    // console.log(id)
     dispatch({ type: PRODUCT_DETAILS_REQUEST })
     const { data } = await axios.get(`/api/product/${id}`)
 

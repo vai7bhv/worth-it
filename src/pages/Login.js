@@ -1,5 +1,9 @@
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
+import { clearError, login } from '../action/userAction'
+import { useAlert } from 'react-alert'
 
 const Container = styled.div`
   width: 100vw;
@@ -63,18 +67,65 @@ const Link = styled.a`
 `
 
 const Login = () => {
+  const alert = useAlert()
+  const location = useLocation()
+  const dispatch = useDispatch()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const { loading, error, isAuthUser } = useSelector((state) => state.user)
+
+  const link = location.search ? location.search.split('=')[1] : '/profile'
+  console.log(link)
+  // const [user, setUser] = useState({})
+  // console.log(email)
+  // console.log(password)
+  const handleLogin = (e) => {
+    e.preventDefault()
+    // console.log(e)
+
+    dispatch(login(email, password))
+  }
   const navigate = useNavigate()
+  useEffect(() => {
+    if (error) {
+      alert.error(error)
+      dispatch(clearError())
+    }
+
+    if (isAuthUser) {
+      navigate(link)
+    }
+  }, [isAuthUser, error, link])
+
   return (
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
         <Form>
-          <Input placeholder='email address' />
+          <Input
+            type='email'
+            required
+            value={email}
+            placeholder='email address'
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-          <Input placeholder='password' />
-          <Button>LOGIN</Button>
-          <Link>FORGOT PASSWORD?</Link>
-          {/* <label >New at Worth It?</label> */}
+          <Input
+            type='password'
+            placeholder='password'
+            required
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value)
+            }}
+          />
+          <Button type='submit' onClick={(e) => handleLogin(e)}>
+            LOGIN
+          </Button>
+          <Link onClick={() => navigate('/forgotPassword')}>
+            FORGOT PASSWORD?
+          </Link>
+          <label>New at Worth It?</label>
           <Link onClick={() => navigate('/signup')}>CREATE AN ACCOUNT</Link>
         </Form>
       </Wrapper>

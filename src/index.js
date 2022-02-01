@@ -4,10 +4,20 @@ import './index.css'
 import App from './App'
 import { Provider } from 'react-redux'
 import store from './store'
+import { positions, transitions, Provider as AlertMessage } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
+
+const option = {
+  timeout: 3000,
+  position: positions.BOTTOM_CENTER,
+  transition: transitions.SCALE,
+}
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <AlertMessage template={AlertTemplate} {...option}>
+      <App />
+    </AlertMessage>
   </Provider>,
   document.getElementById('root')
 )

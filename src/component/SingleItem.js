@@ -3,18 +3,21 @@ import {
   ShoppingCartOutlined,
 } from '@mui/icons-material'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useAlert } from 'react-alert'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { addToCart } from '../action/cartAction'
 
 const Info = styled.div`
   width: 100%;
-  height: 100%;
+  height: 10%;
   position: absolute;
   opacity: 0;
-  background-color: rgba(0, 0, 0, 0.1);
-  top: 0;
+  /* background-color: rgba(0, 0, 0, 0.1); */
+  top: 85%;
   left: 0;
-  z-index: 3;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,7 +37,6 @@ const Container = styled.div`
   background-color: #f5fbfd;
   text-decoration: none;
   border-radius: 10px;
-  cursor: pointer;
   align-items: center;
   position: relative;
   flex-wrap: wrap;
@@ -55,11 +57,13 @@ const Container = styled.div`
 const Image = styled.img`
   max-width: 80%;
   max-height: auto;
+  cursor: pointer;
+
   object-fit: contain;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  z-index: 2;
+  z-index: 1;
 `
 // const Title = styled.h3``
 // const Icons = styled.div`
@@ -69,7 +73,6 @@ const Details = styled.div`
   align-items: center;
   justify-content: space-between;
   display: flex;
-
   background: none;
   object-fit: cover;
 `
@@ -111,32 +114,38 @@ const Icon = styled.div`
 //   height: 4vh;
 /* ` */
 function SingleItem({ item }) {
+  const dispatch = useDispatch()
+  const alert = useAlert()
+  const navigate = useNavigate()
+
+  const addCartHandler = (id) => {
+    dispatch(addToCart(id))
+    alert.success('Item added to Cart')
+  }
   return (
     <Container>
-      <Link
-        style={{
-          textDecoration: 'none',
-          color: 'black',
-        }}
-        to={`/product/${item._id}`}
-      >
-        <Image src={item.images[0].url} alt='product image' />
-        <Details>
-          <Name>{item.name}</Name>
-          <Name>₹{item.price}</Name>
-        </Details>
-        <Info>
-          {/* <Title>{item.name}</Title> */}
-          {/* <Icons> */}
-          <Icon>
-            <ShoppingCartOutlined />
-          </Icon>
-          <Icon>
-            <FavoriteBorderOutlined />
-          </Icon>
-          {/* </Icons> */}
-        </Info>
-      </Link>
+      <Image
+        src={item.images[0].url}
+        alt={item.images[0].alt}
+        onClick={() => navigate(`/product/${item._id}`)}
+      />
+
+      <Details>
+        <Name>{item.name}</Name>
+        <Name>₹{item.price}</Name>
+      </Details>
+      <Info>
+        {/* <Title>{item.name}</Title> */}
+        {/* <Icons> */}
+        <Icon>
+          <ShoppingCartOutlined onClick={() => addCartHandler(item._id)} />
+        </Icon>
+        <Icon>
+          <FavoriteBorderOutlined />
+        </Icon>
+        {/* </Icons> */}
+      </Info>
+      {/* </Link> */}
     </Container>
   )
 }
