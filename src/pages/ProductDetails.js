@@ -73,14 +73,14 @@ const InfoContainer = styled.div`
 `
 
 const Title = styled.h1`
-  font-weight: 900;
+  font-weight: 400;
 `
 const Desc = styled.p`
   margin: 20px 0px;
-  font-weight: 600;
+  font-weight: 200;
 `
 const Price = styled.span`
-  font-weight: 900;
+  font-weight: 300;
   font-size: 30px;
 `
 
@@ -104,15 +104,15 @@ const Price = styled.span`
 //   justify-content: space-between;
 // `
 const Button = styled.button`
-  background-color: 'gray';
+  /* background-color: 'gray'; */
   color: 'white';
 
   font-size: 0.8em;
   margin: 1em;
-  padding: 0.25em 1em;
+  /* padding: 0.25em 1em; */
   border: none;
 
-  cursor: pointer;
+  /* cursor: pointer; */
 
   /* &:hover {
     background-color: #f8f4f9;
@@ -125,7 +125,7 @@ const Text = styled.button`
   margin-bottom: 200px;
   margin: 0.9em;
   font-size: 17px;
-  font-weight: 900;
+  font-weight: 200;
   padding: -0.25em 1em;
   border: 2px solid gray;
   border-radius: 3px;
@@ -173,7 +173,7 @@ const ProductDetails = () => {
       <Wrapper>
         <ImgContainer>
           {/* <Image src='https://images-na.ssl-images-amazon.com/images/I/41AyOrtLJ6L._SX367_BO1,204,203,200_.jpg' /> */}
-          {/* <Image src={product.images[0].url} alt={product.images[0].alt} /> */}
+          <Image src={product.images[0].url} alt={product.images[0].alt} />
 
           <Info>
             <Icon>

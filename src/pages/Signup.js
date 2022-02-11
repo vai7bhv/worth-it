@@ -74,12 +74,32 @@ const Link = styled.a`
   margin-left: 3px;
 `
 const LoginOp = styled.div``
+const Avatar = styled.div`
+  display: flex;
+  padding: 0%;
+`
+const Image = styled.img`
+  cursor: pointer;
+  width: 5vw;
+  z-index: 2;
+  height: 5vh;
+  border: none;
+  margin: 0%;
+  font: 400 0.8vmax;
+  transition: all 0.5s;
+  padding: 1vmax;
+  color: rgba(0, 0, 0, 0.623);
+  background-color: rgb(255, 255, 255);
+`
 
 const Signup = () => {
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [avatar, setAvatar] = useState('./profile.png')
+  const [avatarPreview, setAvatarPreview] = useState('./profile.png')
+
   const alert = useAlert()
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -92,7 +112,7 @@ const Signup = () => {
     e.preventDefault()
 
     if (password === confirmPassword) {
-      dispatch(registerUser(name, email, password))
+      dispatch(registerUser(name, email, password, avatar))
       if (!email) alert.error('Invalid email')
       if (!name) alert.error('Invalid name')
     } else {
@@ -105,6 +125,20 @@ const Signup = () => {
   // useEffect(() => {
   //   if (isAuthUser) navigate('/')
   // }, [isAuthUser])
+  const registerDataChange = (e) => {
+    if (e.target.name === 'avatar') {
+      const reader = new FileReader()
+
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setAvatarPreview(reader.result)
+          setAvatar(reader.result)
+        }
+      }
+
+      reader.readAsDataURL(e.target.files[0])
+    }
+  }
 
   return (
     <Container>
@@ -138,6 +172,15 @@ const Signup = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
+          <Avatar>
+            <Image src={avatarPreview} alt='Avatar Preview' />
+            <Input
+              type='file'
+              name='avatar'
+              accept='image/*'
+              onChange={registerDataChange}
+            />
+          </Avatar>
         </Form>
         <Agreement>
           By creating an account I consent to the processing of my personal data

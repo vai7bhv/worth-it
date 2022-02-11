@@ -27,18 +27,19 @@ const Heading = styled.h1`
   margin: 1vmax;
 `
 const Image = styled.img`
-  width: 40vw;
+  width: 20vw;
   /* height: 40vh; */
   border-radius: 50%;
   transition: all 0.5s;
-  /* margin: 1vmax; */
+  margin: 1vmax;
+  margin-left: 1vmax;
 `
 const Btn = styled.div`
   font: 900 2.5vmax;
   color: white;
-  background-color: black;
+  background-color: rgb(58, 57, 57);
   padding: 1vmax;
-  width: 30%;
+  width: 25%;
   margin: 2vmax;
   text-align: center;
   cursor: pointer;
@@ -76,7 +77,8 @@ const Field = styled.p`
   color: rgba(0, 0, 0, 10);
 `
 const TwoBtn = styled.div`
-  /* display: flex; */
+  display: flex;
+  flex-wrap: wrap;
 `
 // const Btn = styled.div`
 //   font: 900 2.5vmax;
@@ -109,7 +111,8 @@ function Profile() {
     <Container>
       <Left>
         <Heading>My Profile</Heading>
-        <Image src='https://images.theconversation.com/files/45159/original/rptgtpxd-1396254731.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=754&fit=clip' />
+        {/* <Image src='https://images.theconversation.com/files/45159/original/rptgtpxd-1396254731.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=754&fit=clip' /> */}
+        <Image src={user.avatar.url} />
         <Btn onClick={() => navigate('/profile/update')}>Edit Profile</Btn>
       </Left>
       <Right>

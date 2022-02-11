@@ -28,6 +28,7 @@ const Cover = styled.div`
 const Left = styled.div`
   flex: 1;
   /* font-weight: 500; */
+  margin: 10px;
   /* cursor: pointer; */
   @media (max-width: 600px) {
     flex: 0.5;
@@ -64,6 +65,7 @@ const Input = styled.input`
 `
 const Middle = styled.div`
   flex: 1;
+  align-items: center;
   @media (max-width: 600px) {
     flex: 0.5;
   }
@@ -73,7 +75,7 @@ const Right = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin: 10px;
+  margin: 15px;
 
   @media (max-width: 600px) {
     margin-right: 0;
@@ -165,7 +167,7 @@ function Navbar({ isAuthUser }) {
             <Person
               onClick={() => navigate('/profile')}
               fontSize='large'
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: 'pointer', marginLeft: '5px' }}
             />
           )}
 

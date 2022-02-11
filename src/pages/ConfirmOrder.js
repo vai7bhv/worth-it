@@ -19,7 +19,7 @@ const Info = styled.div`
 const Heading = styled.h2`
   margin-top: 2vh;
   margin-left: 2vh;
-  font-weight: 900;
+  font-weight: 400;
 `
 const Left = styled.div``
 const Address = styled.div`
@@ -27,6 +27,7 @@ const Address = styled.div`
   margin-bottom: 2vh;
   margin-left: 2vw;
   font-weight: 700;
+  font-weight: 300;
 `
 const Item = styled.div``
 const Image = styled.img`
@@ -37,9 +38,11 @@ const Image = styled.img`
 `
 const Title = styled.h3`
   margin: 5px;
+  font-weight: 300;
 `
 const Price = styled.h4`
   margin: 1vw;
+  font-weight: 300;
 `
 const Right = styled.div`
   flex: 1;
@@ -54,7 +57,7 @@ const Right = styled.div`
   height: 40vh;
 `
 const SummaryTitle = styled.h2`
-  font-weight: 900;
+  font-weight: 400;
 `
 const SummaryItem = styled.div`
   margin: 30px 0px;
@@ -64,11 +67,14 @@ const SummaryItem = styled.div`
 const SummaryText = styled.div``
 const SummaryPrice = styled.div``
 const Button = styled.button`
-  font-weight: 900;
+  font-weight: 400;
   padding: 8px;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  margin-left:20vw
   margin: 5px;
-  border: 2px solid blue;
+  border:none
+  /* border: 2px solid blue; */
 
   cursor: pointer;
 
@@ -116,15 +122,17 @@ const ConfirmOrder = () => {
       <Left>
         <Heading>Shipping Details</Heading>
         <Address>
-          <p>Name:</p>
-          {/* <span>{user.name}</span> */}
-          {/* <span>{user.email}</span> */}
-
           <p>
-            Mobile Number :<span>{shippingInfo.mobileNo}</span>
+            Name :<span>{user.name}</span>
           </p>
           <p>
-            Address :<span>{shippingInfo.address}</span>
+            Email :<span>{user.email}</span>{' '}
+          </p>
+          <p>
+            Mobile Number : <span>{shippingInfo.mobileNo}</span>
+          </p>
+          <p>
+            Address : <span>{shippingInfo.address}</span>
           </p>
         </Address>
         <Item>

@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   margin: 0 auto;
   background-color: gray;
   display: flex;
+  margin-top: 10px;
 `
 const Column = styled.div`
   display: flex;
@@ -51,14 +52,13 @@ function Footer() {
         {/* <Row> */}
         <Column>
           <Title>About Us</Title>
-          <Link href='#'>story</Link>
         </Column>
         <Column>
           <Title>Menu</Title>
-          <Link href='#'>View Items</Link>
+          <Link href='/products'>View Items</Link>
           <Link href='#'>Categories</Link>
-          <Link href='#'>MyCart</Link>
-          <Link href='#'>Profile</Link>
+          <Link href='/cart'>MyCart</Link>
+          <Link href='/profile'>Profile</Link>
         </Column>
         <Column>
           <Title>Contact Us</Title>

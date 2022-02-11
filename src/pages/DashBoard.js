@@ -26,7 +26,7 @@ const Orders = styled.div`
 const Item = styled.div`
   display: flex;
   margin: 20px;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   margin: 3vh;
 `
@@ -51,6 +51,7 @@ const Title = styled.h3`
   flex-wrap: wrap;
   max-width: 30vw;
 `
+const Status = styled.h4``
 const Price = styled.h3``
 const Sell = styled.div`
   margin: 20px;
@@ -125,6 +126,7 @@ function DashBoard() {
     })
 
   useEffect(() => {
+    setTimeout(() => {}, 1000)
     dispatch(myOrders())
     dispatch(getMyProducts())
   }, [])
@@ -155,6 +157,7 @@ function DashBoard() {
 
             <Title>{i.name}</Title>
             <Price>₹{i.price}</Price>
+            <Status>available</Status>
             <Delete fontSize='large' />
           </Item>
         ))}

@@ -8,6 +8,7 @@ import {
   MY_PRODUCTS_SUCCESS,
   NEW_PRODUCT_FAILED,
   NEW_PRODUCT_REQUEST,
+  NEW_PRODUCT_RESET,
   NEW_PRODUCT_SUCCESS,
   PRODUCT_DETAILS_FAILED,
   PRODUCT_DETAILS_REQUEST,
@@ -79,6 +80,11 @@ export const newProductReducer = (state = { product: {} }, action) => {
         ...state,
         loading: false,
         error: action.payload,
+      }
+    case NEW_PRODUCT_RESET:
+      return {
+        ...state,
+        success: false,
       }
 
     default:

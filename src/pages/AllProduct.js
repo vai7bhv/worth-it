@@ -69,6 +69,18 @@ function AllProduct() {
     setPrice(newPrice)
   }
 
+  // var newArray = myArray.filter((item) => item.id !== 1)
+  // console.log(newArray)
+  // const removeItem = (i) => {
+  //   return i.status === 'sold'
+  // }
+  let availableProducts = products.filter((i) => i.status !== 'sold')
+
+  // for (let i = 0; i < products.length; i++) {
+  //   if (products[i].price > 200) availableProducts.push(products[i])
+  // }
+
+  // console.log(availableProducts)
   useEffect(() => {
     dispatch(getProduct(keyword, price, category))
   }, [dispatch, keyword, price, category])
@@ -104,8 +116,10 @@ function AllProduct() {
       </FilterContainer>
       <Categories>
         <Items>
-          {products &&
-            products.slice(0, 12).map((item) => <SingleItem item={item} />)}
+          {availableProducts &&
+            availableProducts
+              .slice(0, 12)
+              .map((item) => <SingleItem item={item} />)}
         </Items>
       </Categories>
     </Container>

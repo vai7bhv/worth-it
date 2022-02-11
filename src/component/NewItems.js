@@ -46,7 +46,9 @@ function NewItems() {
     navigate('/products')
   }
 
-  console.log(SortJsonArray(products, 'createdAt', 'des'))
+  SortJsonArray(products, 'createdAt', 'des')
+  let availableProducts = products.filter((i) => i.status !== 'sold')
+
   useEffect(() => {
     dispatch(getProduct())
   }, [dispatch])
@@ -59,8 +61,10 @@ function NewItems() {
         </h6>
       </Heading>
       <Items>
-        {products &&
-          products.slice(0, 4).map((item) => <SingleItem item={item} />)}
+        {availableProducts &&
+          availableProducts
+            .slice(0, 4)
+            .map((item) => <SingleItem item={item} />)}
       </Items>
     </Container>
   )
