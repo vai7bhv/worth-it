@@ -6,7 +6,11 @@ import {
 import styled from 'styled-components'
 import SingleItem from '../component/SingleItem'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProduct, getProductDetails } from '../action/productAction'
+import {
+  getProduct,
+  getProductDetails,
+  getProductImages,
+} from '../action/productAction'
 import { useParams } from 'react-router-dom'
 import '../data'
 import { addToCart } from '../action/cartAction'
@@ -152,6 +156,8 @@ const Items = styled.div`
 const ProductDetails = () => {
   const dispatch = useDispatch()
   const { product, loading } = useSelector((state) => state.productDetails)
+  // const { image } = useSelector((state) => state.productImage)
+  // const { product, loading } = useSelector((state) => state.productDetails)
   const { products } = useSelector((state) => state.products)
   const { id } = useParams()
   const alert = useAlert()
@@ -161,20 +167,26 @@ const ProductDetails = () => {
     dispatch(addToCart(id))
     alert.success('Item added to cart')
   }
+  // console.log('current cat', product.category)
+  let pr = products.filter((i) => i._id === product._id)
+  // console.log('prdt for image', pr[0])
 
-  // console.log(id)
+  let similarPr = products.filter((i) => i.category === product.category)
+  similarPr = similarPr.filter((i) => i._id !== product._id)
+  // console.log('similar', similarPr)
+
   useEffect(() => {
     dispatch(getProductDetails(id))
+
     dispatch(getProduct())
   }, [dispatch, id])
-
+  // const imgU = pr[0]
+  // console.log('img url', imgU)
   return (
     <Container>
       <Wrapper>
         <ImgContainer>
-          {/* <Image src='https://images-na.ssl-images-amazon.com/images/I/41AyOrtLJ6L._SX367_BO1,204,203,200_.jpg' /> */}
-          <Image src={product.images[0].url} alt={product.images[0].alt} />
-
+          {pr && pr.map((i) => <Image src={i.images[0].url} />)}
           <Info>
             <Icon>
               <ShoppingCartOutlined
@@ -205,9 +217,11 @@ const ProductDetails = () => {
       <Similar>
         <Title>Similar Items</Title>
         <Items>
-          {products.slice(0, 4).map((item) => (
-            <SingleItem item={item} />
-          ))}
+          {similarPr &&
+            similarPr.slice(0, 4).map((item) => (
+              // <img src={item.images[0].url} />
+              <SingleItem item={item} />
+            ))}
         </Items>
       </Similar>
     </Container>

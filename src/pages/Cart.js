@@ -1,6 +1,6 @@
 import { RemoveCircleOutline } from '@mui/icons-material'
 import { Link, Tooltip, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
@@ -109,22 +109,52 @@ const EmptyCart = styled.div`
   padding: 10vmax;
 `
 
-function Cart() {
+function Cart({}) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { cartItems } = useSelector((state) => state.cart)
+  const { user } = useSelector((state) => state.user)
   let cost = 0
-  {
-    cartItems.map((i) => (cost += i.price))
-  }
+
+  cartItems.map((i) => (cost += i.price))
 
   const removeItem = (id) => {
     // e.preventDefault()
     dispatch(removeCartItem(id))
   }
 
+  // const socket = io('http://localhost:5000')
+
+  // const receiveNotification = () => {
+  //   console.log('rcvCLicked')
+  //   socket.on('getNotification', (data) => {
+  //     setNotification(data)
+  //   })
+  const data = {
+    to_name: user.name,
+    from_name: user,
+  }
+  // const sendEmail = (e) => {
+  //   e.preventDefault()
+  //   emailjs
+  //     .sendForm(
+  //       'service_qfkn687',
+  //       'template_tiwde1d',
+
+  //       'user_lmYx5RWozPhPcGqXPgyOn'
+  //     )
+  //     .then(
+  //       (result) => {
+  //         console.log(result.text)
+  //       },
+  //       (error) => {
+  //         console.log(error.text)
+  //       }
+  //     )
+  // }
   return (
     <Container>
+      {/* <button onClick={(e) => sendEmail(e)}> email</button> */}
       {cartItems.length === 0 ? (
         <EmptyCart>
           <Typography style={{ fontSize: '3vmax' }}>

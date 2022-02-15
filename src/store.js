@@ -6,6 +6,7 @@ import {
   newProductReducer,
   productDetailsReducer,
   productReducer,
+  productsReducer,
 } from './reducers/productReducer'
 import { userReducer, registerUserReducer } from './reducers/userReducer'
 import { cartReducer } from './reducers/cartReducer'
@@ -13,20 +14,27 @@ import {
   myOrdersReducer,
   newOrderReducer,
   orderDetailsReducer,
+  orderReducer,
 } from './reducers/orderReducer'
+import { newRequestReducer } from './reducers/RequestReducer'
 // import {  } from './action/userAction'
 
 const reducer = combineReducers({
-  products: productReducer,
+  products: productsReducer,
+  product: productReducer,
   productDetails: productDetailsReducer,
+
   myProducts: myProductsReducer,
   user: userReducer,
   registerUser: registerUserReducer,
   cart: cartReducer,
   newOrder: newOrderReducer,
   myOrders: myOrdersReducer,
+  order: orderReducer,
   orderDetails: orderDetailsReducer,
   newProduct: newProductReducer,
+  newRequest: newRequestReducer,
+
   // removeCart: removeCartItem,
 })
 

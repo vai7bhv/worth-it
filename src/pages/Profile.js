@@ -112,7 +112,7 @@ function Profile() {
       <Left>
         <Heading>My Profile</Heading>
         {/* <Image src='https://images.theconversation.com/files/45159/original/rptgtpxd-1396254731.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=754&fit=clip' /> */}
-        <Image src={user.avatar.url} />
+        {/* <Image src={user.avatar.url} alt={user.name} /> */}
         <Btn onClick={() => navigate('/profile/update')}>Edit Profile</Btn>
       </Left>
       <Right>
@@ -126,7 +126,7 @@ function Profile() {
         </Info>
         <TwoBtn>
           <Btn onClick={() => navigate('/dashboard')}>dashboard</Btn>
-          <Btn onClick={() => navigate('/profile/updatePassword')}>
+          <Btn onClick={() => navigate('/password/update')}>
             update Password
           </Btn>
           <Btn onClick={handleLogout}>Logout</Btn>

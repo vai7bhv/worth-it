@@ -1,14 +1,16 @@
 import styled from 'styled-components'
-import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
-import { createProduct } from '../action/productAction'
+import {
+  getProductDetails,
+  updateProduct,
+  UpdateProduct,
+} from '../action/productAction'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { clearErrors } from '../action/orderAction'
-import { NEW_PRODUCT_RESET } from '../reducers/constant/allConstant'
+import { UPDATE_PRODUCT_RESET } from '../reducers/constant/allConstant'
 import { useAlert } from 'react-alert'
 import { MenuItem, Select } from '@mui/material'
-
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -20,6 +22,7 @@ const Container = styled.div`
       center;
   display: flex;
   /* font-weight: 900; */
+
   align-items: center;
   justify-content: center;
 `
@@ -80,16 +83,20 @@ const Button1 = styled.button`
   cursor: pointer;
 `
 
-const AddItem = () => {
+const UpdateProductDetails = () => {
   const dispatch = useDispatch()
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
   const [description, setDescription] = useState('')
   const [category, setCategory] = useState('')
   const [images, setImages] = useState([])
+  // const [pStatus, setPStatus] = useState("Available")
+  const [oldImages, setOldImages] = useState([])
   const [imagesPreview, setImagesPreview] = useState([])
+  const [productStatus, setProductStatus] = useState('available')
   // const { register } = useForm()
   const navigate = useNavigate()
+  const { id } = useParams()
   const alert = useAlert()
   const categories = [
     'Books',
@@ -101,8 +108,13 @@ const AddItem = () => {
     'Other',
   ]
 
-  const { loading, error, success } = useSelector((state) => state.newProduct)
+  const { error, product } = useSelector((state) => state.productDetails)
 
+  const {
+    loading,
+    error: updateError,
+    isUpdated,
+  } = useSelector((state) => state.product)
   // const myForm = new FormData()
 
   // myForm.set('name', name)
@@ -111,28 +123,56 @@ const AddItem = () => {
   // myForm.set('category', category)
   // console.log(myForm.get(name))
   useEffect(() => {
+    if (product && product._id !== id) {
+      dispatch(getProductDetails(id))
+    } else {
+      setName(product.name)
+      setDescription(product.description)
+      setPrice(product.price)
+      setCategory(product.category)
+      // setImages(product.images[0])
+      setOldImages(product.images)
+      setProductStatus(product.productStatus)
+    }
     if (error) {
       alert.error(error)
       dispatch(clearErrors())
     }
 
-    if (success) {
-      alert.success('Product Created Successfully')
-      navigate('/dashboard')
-      dispatch({ type: NEW_PRODUCT_RESET })
+    if (updateError) {
+      alert.error(updateError)
+      dispatch(clearErrors())
     }
-  }, [dispatch, alert, error, success])
+
+    if (isUpdated) {
+      alert.success('Product Updated Successfully')
+
+      navigate('/dashboard')
+      dispatch({ type: UPDATE_PRODUCT_RESET })
+    }
+  }, [dispatch, alert, error, isUpdated, id, product, updateError])
 
   const handleUp = () => {
-    dispatch(createProduct(name, description, price, category, images))
+    console.log(productStatus)
+    dispatch(
+      updateProduct(
+        id,
+        name,
+        description,
+        price,
+        category,
+        images,
+        productStatus
+      )
+    )
     navigate('/dashboard')
   }
-
-  const createProductImagesChange = (e) => {
+  const updateProductImagesChange = (e) => {
     const files = Array.from(e.target.files)
 
     setImages([])
     setImagesPreview([])
+    setOldImages([])
 
     files.forEach((file) => {
       const reader = new FileReader()
@@ -151,7 +191,7 @@ const AddItem = () => {
   return (
     <Container>
       <Wrapper>
-        <Title>Add an Item</Title>
+        <Title>Update Item</Title>
         <Form>
           <Input
             placeholder='Name of an Item'
@@ -174,7 +214,6 @@ const AddItem = () => {
               <MenuItem value={c}>{c}</MenuItem>
             ))}
           </Select>
-
           <Input
             type='number'
             placeholder='Price'
@@ -183,13 +222,31 @@ const AddItem = () => {
             value={price}
             onChange={(e) => setPrice(e.target.value)}
           />
+          <Select
+            onChange={(event) => setProductStatus(event.target.value)}
+            style={{ width: '100%', margin: '5px' }}
+            value={productStatus}
+          >
+            <MenuItem value='available'>Available</MenuItem>
+            <MenuItem value='delivered'>delivered</MenuItem>
+          </Select>
           <Input
             type='file'
             name='avatar'
             accept='image/*'
-            onChange={createProductImagesChange}
+            onChange={updateProductImagesChange}
             multiple
           />
+          <Prv>
+            {oldImages &&
+              oldImages.map((image, index) => (
+                <PreviewImg
+                  key={index}
+                  src={image.url}
+                  alt='Old Product Preview'
+                />
+              ))}
+          </Prv>
           <Prv>
             {imagesPreview.map((image, index) => (
               <PreviewImg key={index} src={image} alt='Product Preview' />
@@ -197,12 +254,10 @@ const AddItem = () => {
           </Prv>
         </Form>
 
-        <Button onClick={() => handleUp()}>
-          <b>SUBMIT</b>
-        </Button>
+        <Button onClick={() => handleUp()}>Update</Button>
       </Wrapper>
     </Container>
   )
 }
 
-export default AddItem
+export default UpdateProductDetails

@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Category from '../component/Category'
 import NewItems from '../component/NewItems'
-
+import webNotification from 'simple-web-notification'
+import { useNavigate } from 'react-router-dom'
 const Container = styled.div`
   position: relative;
   max-width: 100vw;
@@ -26,6 +27,19 @@ const TextOnImage = styled.div`
 `
 
 function Homepage() {
+  const navigate = useNavigate()
+
+  const showNotf = () => {
+    console.log('btn clicked')
+    webNotification.showNotification('Example Notification', {
+      body: 'Notification Text...',
+      onClick: function onNotificationClicked() {
+        navigate('/dashboard')
+      },
+      autoClose: 24 * 60 * 60 * 1000, //auto close the notification after 4 seconds (you can manually close it via hide function)
+    })
+  }
+
   return (
     <Container>
       <Photo
@@ -40,6 +54,8 @@ function Homepage() {
       </TextOnImage>
 
       <NewItems />
+      {/* <button onClick={() => showNotf()}>notifiaction</button> */}
+
       <Category />
     </Container>
   )

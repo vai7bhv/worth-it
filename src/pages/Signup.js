@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAlert } from 'react-alert'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { registerUser } from '../action/userAction'
+import { registerUserAction } from '../action/userAction'
 
 const Container = styled.div`
   width: 100vw;
@@ -103,18 +103,20 @@ const Signup = () => {
   const alert = useAlert()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  // const { isAuthUser } = useSelector((state) => state.user)
 
   const { isAuthUser } = useSelector((state) => state.user)
+  const { isAuthUserReg } = useSelector((state) => state.registerUser)
 
   if (isAuthUser) navigate('/')
   const handleSignup = (e) => {
     e.preventDefault()
 
     if (password === confirmPassword) {
-      dispatch(registerUser(name, email, password, avatar))
+      dispatch(registerUserAction(name, email, password, avatar))
+
       if (!email) alert.error('Invalid email')
       if (!name) alert.error('Invalid name')
+      // navigate('/')
     } else {
       setPassword('')
       setConfirmPassword('')
@@ -122,23 +124,24 @@ const Signup = () => {
     }
   }
 
-  // useEffect(() => {
-  //   if (isAuthUser) navigate('/')
-  // }, [isAuthUser])
-  const registerDataChange = (e) => {
-    if (e.target.name === 'avatar') {
-      const reader = new FileReader()
+  useEffect(() => {
+    if (isAuthUser) navigate('/')
+    if (isAuthUserReg) navigate('/')
+  }, [isAuthUser, isAuthUserReg])
+  // const registerDataChange = (e) => {
+  //   if (e.target.name === 'avatar') {
+  //     const reader = new FileReader()
 
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setAvatarPreview(reader.result)
-          setAvatar(reader.result)
-        }
-      }
+  //     reader.onload = () => {
+  //       if (reader.readyState === 2) {
+  //         setAvatarPreview(reader.result)
+  //         setAvatar(reader.result)
+  //       }
+  //     }
 
-      reader.readAsDataURL(e.target.files[0])
-    }
-  }
+  //     reader.readAsDataURL(e.target.files[0])
+  //   }
+  // }
 
   return (
     <Container>
@@ -172,7 +175,7 @@ const Signup = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          <Avatar>
+          {/* <Avatar>
             <Image src={avatarPreview} alt='Avatar Preview' />
             <Input
               type='file'
@@ -180,7 +183,7 @@ const Signup = () => {
               accept='image/*'
               onChange={registerDataChange}
             />
-          </Avatar>
+          </Avatar> */}
         </Form>
         <Agreement>
           By creating an account I consent to the processing of my personal data

@@ -1,4 +1,4 @@
-import { Delete, LaunchOutlined } from '@mui/icons-material'
+import { Delete, Edit, LaunchOutlined } from '@mui/icons-material'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
@@ -7,7 +7,13 @@ import { DataGrid } from '@mui/x-data-grid'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import MyProducts from './MyProducts'
-import { getMyProducts } from '../action/productAction'
+import {
+  deleteProduct,
+  getMyProducts,
+  getProductDetails,
+} from '../action/productAction'
+import { DELETE_PRODUCT_RESET } from '../reducers/constant/allConstant'
+import { useAlert } from 'react-alert'
 
 const Container = styled.div``
 const Buy = styled.div``
@@ -61,9 +67,13 @@ function DashBoard() {
   const dispatch = useDispatch()
   const { loading, error, orders } = useSelector((state) => state.myOrders)
   const { myProducts } = useSelector((state) => state.myProducts)
+  // const { product } = useSelector((state) => state.productsDetails)
   const { user } = useSelector((state) => state.user)
+  const alert = useAlert()
   const navigate = useNavigate()
-
+  const { error: deleteError, isDeleted } = useSelector(
+    (state) => state.product
+  )
   const columns = [
     {
       field: 'id',
@@ -127,10 +137,22 @@ function DashBoard() {
 
   useEffect(() => {
     setTimeout(() => {}, 1000)
+
+    if (isDeleted) {
+      alert.success('Product Deleted Successfully')
+      // ('/admin/dashboard')
+      dispatch({ type: DELETE_PRODUCT_RESET })
+    }
     dispatch(myOrders())
     dispatch(getMyProducts())
-  }, [])
+  }, [dispatch, alert, error, deleteError, isDeleted])
 
+  const handleDelete = (pid, uid) => {
+    // dispatch(getProductDetails(id))
+    if (user._id !== uid)
+      alert.error('You dont have permission to delete this product')
+    else dispatch(deleteProduct(pid))
+  }
   return (
     <Container>
       <Buy>
@@ -151,14 +173,20 @@ function DashBoard() {
       </Buy>
       <Sell>
         <Name>Items For Sell</Name>
+        <btn onClick={() => navigate('/addItem')}>Add item</btn>
+        <btn onClick={() => navigate('/requestItem')}>requestItem</btn>
         {myProducts.map((i) => (
           <Item>
-            <Image src={i.images[0].url} />
+            {/* <Image src={i.images[0].url} alt='product preview' /> */}
 
             <Title>{i.name}</Title>
             <Price>₹{i.price}</Price>
-            <Status>available</Status>
-            <Delete fontSize='large' />
+            <Status>{i.productStatus}</Status>
+            <Delete
+              fontSize='large'
+              onClick={() => handleDelete(i._id, i.userId)}
+            />
+            <Edit onClick={() => navigate(`/product/update/${i._id}`)} />
           </Item>
         ))}
       </Sell>

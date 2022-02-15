@@ -42,7 +42,7 @@ export const login = (email, password) => async (dispatch) => {
   }
 }
 
-export const registerUser =
+export const registerUserAction =
   (name, email, password, avatar) => async (dispatch) => {
     try {
       const config = { headers: { 'Content-Type': 'application/json' } }
@@ -118,24 +118,29 @@ export const updateProfile = (name, email) => async (dispatch) => {
   }
 }
 
-export const updatePassword = (passwords) => async (dispatch) => {
-  try {
-    dispatch({ type: UPDATE_PASSWORD_REQUEST })
-    const config = { headers: { 'Content-Type': 'application/json' } }
+export const updatePassword =
+  (oldPassword, newPassword, confirmPassword) => async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_PASSWORD_REQUEST })
+      const config = { headers: { 'Content-Type': 'application/json' } }
 
-    const { data } = await axios.put(`/api/password/update`, passwords, config)
+      const { data } = await axios.put(
+        `/api/password/update`,
+        { oldPassword, newPassword, confirmPassword },
+        config
+      )
 
-    dispatch({
-      type: UPDATE_PASSWORD_SUCCESS,
-      payload: data.success,
-    })
-  } catch (error) {
-    dispatch({
-      type: UPDATE_PASSWORD_FAILED,
-      payload: error.response.data.message,
-    })
+      dispatch({
+        type: UPDATE_PASSWORD_SUCCESS,
+        payload: data,
+      })
+    } catch (error) {
+      dispatch({
+        type: UPDATE_PASSWORD_FAILED,
+        payload: error.response.data.message,
+      })
+    }
   }
-}
 
 export const clearError = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERROR })

@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAlert } from 'react-alert'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { clearErrors, createOrder } from '../action/orderAction'
+import emailjs from 'emailjs-com'
 
 const Container = styled.div`
   display: flex;
@@ -87,6 +88,8 @@ const ConfirmOrder = () => {
   const navigate = useNavigate()
   const alert = useAlert()
   const dispatch = useDispatch()
+  const [receiverEmail, setReceiverEmail] = useState('')
+  // const [socket, setSocket] = useState(null)
 
   let cost = 0
   {
@@ -104,9 +107,14 @@ const ConfirmOrder = () => {
     orderItems: cartItems,
     phoneNo: shippingInfo.mobileNo,
     address: shippingInfo.address,
+
     // image: cartItems.image,
     totalPrice: cost,
   }
+  // useEffect(() => {
+
+  // }, [socket])
+
   const placeOrder = () => {
     dispatch(createOrder(order))
 
@@ -116,18 +124,71 @@ const ConfirmOrder = () => {
     }, 1000)
     navigate('/dashboard')
   }
+  // const Cmsg = ``
+  // const receiver = `${cartItems[0].SellerEmail}`
+  // console.log(Cmsg)
+
+  emailjs.init('user_lmYx5RWozPhPcGqXPgyOn')
+
+  const sendEmail = () => {
+    cartItems.map((item) => {
+      const data = {
+        // to_name: user.name,
+        to_email: item.SellerEmail,
+        to_name: item.SellerName,
+        from_name: user.name,
+        buyer_email: user.email,
+        msg: `your product ${item.name} has been bought by ${user.name}`,
+      }
+      console.log(data)
+      emailjs
+        .send(
+          'service_qfkn687',
+          'template_tiwde1d',
+
+          data,
+          'user_lmYx5RWozPhPcGqXPgyOn'
+        )
+        .then(
+          function (response) {
+            console.log('SUCCESS!', response.status, response.text)
+          },
+          function (err) {
+            console.log('FAILED...', err)
+          }
+        )
+    })
+  }
+  // const client = new SMTPClient({
+  //   user: 'user',
+  //   password: 'vaiqwebhartyv',
+  //   host: 'smtp.',
+  //   ssl: true,
+  // })
+  // const msg=""
+  // const sendEmail = async () => {
+  //   try {
+  //     const message = await client.sendAsync({
+  //       text: `i hope this works${cartItems[0].sellerName}`,
+  //       from: 'you <username@jadenardolf.jr@gmail.com>',
+  //       to: 'someone <someone@vaibhav295555@email.com>',
+  //       subject: 'testing emailjs',
+  //     })
+  //     console.log(message)
+  //   } catch (err) {
+  //     console.error(err)
+  //   }
+  // }
 
   return (
     <Container>
       <Left>
+        <button onClick={(e) => sendEmail(e)}> email</button>
+
         <Heading>Shipping Details</Heading>
         <Address>
-          <p>
-            Name :<span>{user.name}</span>
-          </p>
-          <p>
-            Email :<span>{user.email}</span>{' '}
-          </p>
+          <p>{/* Name :<span>{user.name}</span> */}</p>
+          <p>{/* Email :<span>{user.email}</span>{' '} */}</p>
           <p>
             Mobile Number : <span>{shippingInfo.mobileNo}</span>
           </p>

@@ -1,10 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { LocalGroceryStoreOutlined, Person, Search } from '@mui/icons-material'
-import { Badge, SpeedDial, SpeedDialAction } from '@mui/material'
+import {
+  LocalGroceryStoreOutlined,
+  NotificationAdd,
+  Notifications,
+  Person,
+  Search,
+} from '@mui/icons-material'
+import { Badge, MenuItem, SpeedDial, SpeedDialAction } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import Signup from '../pages/Signup'
 import { useSelector } from 'react-redux'
+import { Menu } from '@material-ui/core'
 
 const Container = styled.div`
   height: 60px;
@@ -99,24 +106,12 @@ const Options = styled.div`
 
 function Navbar({ isAuthUser }) {
   const [keyword, setKeyword] = useState('')
-  const [open, setOpen] = useState('')
+  // const [notification, setNotification] = useState([])
   const navigate = useNavigate()
   // const { navigate } = this.props
+  const [anchorEl, setAnchorEl] = useState()
   const { cartItems } = useSelector((state) => state.cart)
-
-  // const titleHandle = () => {}
-  // const signUpHandle = () => {
-  //   navigate('/signup')
-  // }
-  // const loginHandle = () => {
-  //   navigate('/login')
-  // }
-  // const cartHandle = () => {
-  //   navigate('/cart')
-  // }
-  // const profileHandle = () => {
-  //   navigate('/profile')
-  // }
+  const { isAuthUserReg } = useSelector((state) => state.registerUser)
 
   const searchHandler = (e) => {
     e.preventDefault()
@@ -127,6 +122,12 @@ function Navbar({ isAuthUser }) {
     }
   }
   // console.log(keyword)
+  const open = Boolean(anchorEl)
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  useEffect(() => {}, [])
 
   return (
     <Container>
@@ -171,21 +172,20 @@ function Navbar({ isAuthUser }) {
             />
           )}
 
-          {/* <SpeedDial
-            ariaLabel='SpeedDail tooltip example'
-            onClose={() => setOpen(false)}
-            onOpen={() => setOpen(true)}
+          <button onClick={(e) => setAnchorEl(e.currentTarget)}>
+            dashboard
+          </button>
+          <Menu
+            id='basic-menu'
+            anchorEl={anchorEl}
             open={open}
-            icon={
-              <Person
-                // onClick={profileHandle}
-                fontSize='large'
-                style={{ marginLeft: '5px', cursor: 'pointer' }}
-              />
-            }
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
           >
-            <SpeedDialAction icon={<LocalGroceryStoreOutlined />} />
-          </SpeedDial> */}
+            {/* <MenuItem onClick={() => setNotification('btnClick')}>bt1</MenuItem> */}
+          </Menu>
         </Right>
       </Cover>
     </Container>

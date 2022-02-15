@@ -61,9 +61,9 @@ const Input = styled.input`
   font-weight: 900;
 `
 
-const UpdatePassword = ({ history }) => {
+const UpdatePassword = () => {
   const { user } = useSelector((state) => state.user)
-  const navigate = Navigate()
+  const navigate = useNavigate()
 
   const { error, isUpdated } = useSelector((state) => state.user)
   const dispatch = useDispatch()
@@ -77,14 +77,14 @@ const UpdatePassword = ({ history }) => {
 
   const updatePasswordSubmit = (e) => {
     e.preventDefault()
-    const myform = new FormData()
+    // const myform = new FormData()
 
-    myform.set('oldPassword', oldPassword)
-    myform.set('newPassword', newPassword)
-    myform.set('confirmPassword', confirmPassword)
+    // myform.set('oldPassword', oldPassword)
+    // myform.set('newPassword', newPassword)
+    // myform.set('confirmPassword', confirmPassword)
 
     // myform.set("avatar",avatar);
-    dispatch(updatePassword(myform))
+    dispatch(updatePassword(oldPassword, newPassword, confirmPassword))
   }
 
   useEffect(() => {
@@ -102,7 +102,7 @@ const UpdatePassword = ({ history }) => {
         type: UPDATE_PASSWORD_RESET,
       })
     }
-  }, [dispatch, error, alert, history, isUpdated])
+  }, [dispatch, error, alert, isUpdated])
   return (
     <Container>
       <Wrapper>
@@ -143,7 +143,7 @@ const UpdatePassword = ({ history }) => {
             type='submit'
             value='Update Password'
             className='updatePasswordBtn'
-            onClick={() => updatePasswordSubmit}
+            onClick={(e) => updatePasswordSubmit(e)}
           />
         </Form>
       </Wrapper>

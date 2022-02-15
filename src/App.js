@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import styled from 'styled-components'
@@ -24,6 +24,9 @@ import UpdatePassword from './pages/UpdatePassword'
 import Shipping from './pages/Shipping.js'
 import ConfirmOrder from './pages/ConfirmOrder'
 import OrderDetails from './pages/OrderDetails'
+import UpdateProductDetails from './pages/UpdateProductDetails'
+import RequestItem from './pages/RequestItem'
+
 const Container = styled.div``
 
 function App() {
@@ -49,10 +52,17 @@ function App() {
           <Route path='/profile' element={<Profile />} />
           <Route path='/profile/forgotPassword' element={<ForgotPassword />} />
           <Route path='/dashboard' element={<DashBoard />} />
+          <Route path='/requestItem' element={<RequestItem />} />
           <Route path='/profile/update' element={<UpdateProfile />} />
+          <Route path='/password/update' element={<UpdatePassword />} />
           <Route path='/login/shipping' element={<Shipping />} />
           <Route path='/order/confirm' element={<ConfirmOrder />} />
           <Route path='/order/:id' element={<OrderDetails />} />
+
+          <Route
+            path='/product/update/:id'
+            element={<UpdateProductDetails />}
+          />
           {/* <Route path='profile/updatePassword' element={<UpdatePassword />} /> */}
         </Routes>
 
