@@ -6,7 +6,11 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { removeCartItem } from '../action/cartAction'
 
-const Container = styled.div``
+const Container = styled.div`
+  @media (max-width: 600px) {
+    justify-content: flex-start;
+  }
+`
 const Wrapper = styled.div`
   padding: 20px;
   text-align: center;
@@ -32,6 +36,14 @@ const Btn = styled.button`
 const Bottom = styled.div`
   display: flex;
   justify-content: space-around;
+  @media (max-width: 600px) {
+    justify-content: flex-start;
+
+    display: flex;
+    flex-direction: column;
+
+    /* position: fixed; */
+  }
 `
 const Info = styled.div`
   flex: 1;
@@ -77,7 +89,11 @@ const Summary = styled.div`
   font-weight: 400;
   max-width: 25vw;
   height: 40vh;
+  @media (max-width: 600px) {
+    justify-content: flex-end;
+  }
 `
+
 const SummaryTitle = styled.h2`
   font-weight: 400;
 `

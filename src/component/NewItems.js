@@ -62,7 +62,7 @@ function NewItems() {
       </Heading>
       <Items>
         {products &&
-          products.slice(2, 6).map((item) => <SingleItem item={item} />)}
+          products.slice(0, 4).map((item) => <SingleItem item={item} />)}
       </Items>
     </Container>
   )

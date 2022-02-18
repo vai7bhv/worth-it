@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   FavoriteBorderOutlined,
   ShoppingCartOutlined,
@@ -15,10 +15,13 @@ import { useParams } from 'react-router-dom'
 import '../data'
 import { addToCart } from '../action/cartAction'
 import { useAlert } from 'react-alert'
+import { Backdrop, Fade, Modal, Typography } from '@mui/material'
+import { Box } from '@mui/system'
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: #f2f2f2;
 `
 
 const Wrapper = styled.div`
@@ -152,6 +155,17 @@ const Similar = styled.div`
 const Items = styled.div`
   display: flex;
 `
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: '#CAD1D4',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+}
 
 const ProductDetails = () => {
   const dispatch = useDispatch()
@@ -159,29 +173,28 @@ const ProductDetails = () => {
   // const { image } = useSelector((state) => state.productImage)
   // const { product, loading } = useSelector((state) => state.productDetails)
   const { products } = useSelector((state) => state.products)
+  const [open, setOpen] = useState(false)
   const { id } = useParams()
   const alert = useAlert()
 
-  const cartHandler = (e) => {
-    e.preventDefault()
+  const cartHandler = () => {
+    // e.preventDefault()
     dispatch(addToCart(id))
     alert.success('Item added to cart')
   }
-  // console.log('current cat', product.category)
   let pr = products.filter((i) => i._id === product._id)
-  // console.log('prdt for image', pr[0])
 
   let similarPr = products.filter((i) => i.category === product.category)
   similarPr = similarPr.filter((i) => i._id !== product._id)
-  // console.log('similar', similarPr)
 
   useEffect(() => {
     dispatch(getProductDetails(id))
 
     dispatch(getProduct())
   }, [dispatch, id])
-  // const imgU = pr[0]
-  // console.log('img url', imgU)
+
+  const handleClose = () => setOpen(false)
+
   return (
     <Container>
       <Wrapper>
@@ -190,7 +203,7 @@ const ProductDetails = () => {
           <Info>
             <Icon>
               <ShoppingCartOutlined
-                onClick={(e) => cartHandler(e)}
+                onClick={() => cartHandler()}
                 fontSize='large'
               />
             </Icon>
@@ -209,8 +222,36 @@ const ProductDetails = () => {
             <br />
           </Price>
           <Button>
-            <Text>Contact Owner </Text>
-            <Text>BUY NOW </Text>
+            <Button onClick={() => setOpen(true)}>Contact Owner</Button>
+            <Modal
+              aria-labelledby='transition-modal-title'
+              aria-describedby='transition-modal-description'
+              open={open}
+              onClose={handleClose}
+              closeAfterTransition
+              // BackdropComponent={Backdrop}
+              BackdropProps={{
+                timeout: 500,
+              }}
+            >
+              <Fade in={open}>
+                <Box sx={style}>
+                  <Typography
+                    id='transition-modal-title'
+                    variant='h6'
+                    component='h2'
+                  >
+                    Seller Information
+                  </Typography>
+                  <Typography id='transition-modal-description' sx={{ mt: 2 }}>
+                    <b>{`Seller Name : ${product.userName}`}</b>
+                    <br></br>
+                    <b>{``}</b>
+                  </Typography>
+                </Box>
+              </Fade>
+            </Modal>
+            <Text onClick={() => cartHandler()}>BUY NOW </Text>
           </Button>
         </InfoContainer>
       </Wrapper>

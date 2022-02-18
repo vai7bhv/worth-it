@@ -125,7 +125,14 @@ function Profile() {
           <Field>{user.email}</Field>
         </Info>
         <TwoBtn>
-          <Btn onClick={() => navigate('/dashboard')}>dashboard</Btn>
+          {user.role === 'admin' && (
+            <Btn onClick={() => navigate('/admin/products')}>dashboard</Btn>
+          )}
+
+          {user.role !== 'admin' && (
+            <Btn onClick={() => navigate('/dashboard')}>dashboard</Btn>
+          )}
+
           <Btn onClick={() => navigate('/password/update')}>
             update Password
           </Btn>
