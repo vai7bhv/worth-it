@@ -13,7 +13,8 @@ const Container = styled.div`
   margin-left: 50px;
   /* margin-right: 20px; */
   overflow-x: scroll;
-
+  justify-content: center;
+  align-items: center;
   width: 90%;
 `
 const Heading = styled.div`

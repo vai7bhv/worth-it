@@ -5,6 +5,7 @@ import { getProduct } from '../action/productAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import SortJsonArray from 'sort-json-array'
+
 const Container = styled.div`
   /* margin-top: 50px; */
   /* display: flex; */
@@ -20,6 +21,9 @@ const Container = styled.div`
   overflow-x: scroll;
 
   width: 90vw;
+  @media (max-width: 600px) {
+    margin: 10px;
+  }
 `
 const Heading = styled.div`
   /* font-weight: bolder; */
@@ -33,6 +37,8 @@ const HeadingRight = styled.h4``
 
 const Items = styled.div`
   display: flex;
+  @media (max-width: 600px) {
+  }
 `
 
 function NewItems() {

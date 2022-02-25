@@ -30,6 +30,7 @@ import ResetPassword from './pages/ResetPassword'
 import Products from './pages/admin/ProductList'
 import OrderList from './pages/admin/OrderList'
 import UserList from './pages/admin/UserList'
+import Requests from './pages/Requests'
 
 const Container = styled.div``
 
@@ -68,6 +69,8 @@ function App() {
           <Route path='/admin/products' element={<Products />} />
           <Route path='/admin/orders' element={<OrderList />} />
           <Route path='/admin/users' element={<UserList />} />
+
+          <Route path='/requests' element={<Requests />} />
 
           <Route
             path='/product/update/:id'

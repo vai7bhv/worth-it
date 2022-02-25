@@ -29,16 +29,25 @@ function Products() {
   const alert = useAlert()
 
   const { error, products } = useSelector((state) => state.products)
+  const { user } = useSelector((state) => state.user)
 
   const { error: deleteError, isDeleted } = useSelector(
     (state) => state.product
   )
 
+  // if (user.role !== 'admin') {
+  //   alert.error('You are not allowed to access  this page ')
+  //   navigate('/dashboard')
+  // }
   const deleteProductHandler = (id) => {
     dispatch(deleteProduct(id))
   }
 
   useEffect(() => {
+    if (user.role !== 'admin') {
+      alert.error('You are not allowed to access  this page ')
+      navigate('/dashboard')
+    }
     if (error) {
       alert.error(error)
       dispatch(clearErrors())

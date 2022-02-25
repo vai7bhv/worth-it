@@ -12,7 +12,7 @@ import {
   LOAD_FAILED,
   LOGOUT_SUCCESS,
   LOGOUT_FAILED,
-  UPDATE_PROFILE_FAILED,
+  UPDATE_PROFILE_FAIL,
   UPDATE_PROFILE_SUCCESS,
   UPDATE_PROFILE_REQUEST,
   UPDATE_PROFILE_RESET,
@@ -117,24 +117,29 @@ export const logout = () => async (dispatch) => {
     })
   }
 }
-export const updateProfile = (name, email) => async (dispatch) => {
-  try {
-    dispatch({ type: UPDATE_PROFILE_REQUEST })
-    const config = { headers: { 'Content-Type': 'application/json' } }
+export const updateProfile =
+  (name, email, department, sem, address) => async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_PROFILE_REQUEST })
+      const config = { headers: { 'Content-Type': 'application/json' } }
 
-    const { data } = await axios.put(`/api/register`, { name, email }, config)
+      const { data } = await axios.put(
+        `/api/profile/update`,
+        { name, email, department, sem, address },
+        config
+      )
 
-    dispatch({
-      type: UPDATE_PROFILE_SUCCESS,
-      payload: data.success,
-    })
-  } catch (error) {
-    dispatch({
-      type: UPDATE_PROFILE_FAILED,
-      payload: error.response.data.message,
-    })
+      dispatch({
+        type: UPDATE_PROFILE_SUCCESS,
+        payload: data.user,
+      })
+    } catch (error) {
+      dispatch({
+        type: UPDATE_PROFILE_FAIL,
+        payload: error.response.data.message,
+      })
+    }
   }
-}
 
 export const updatePassword =
   (oldPassword, newPassword, confirmPassword) => async (dispatch) => {

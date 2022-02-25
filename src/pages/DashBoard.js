@@ -14,6 +14,8 @@ import {
 } from '../action/productAction'
 import { DELETE_PRODUCT_RESET } from '../reducers/constant/allConstant'
 import { useAlert } from 'react-alert'
+import { Button } from '@mui/material'
+import { deleteRequest } from '../action/requestAction'
 
 const Container = styled.div``
 const Buy = styled.div``
@@ -40,6 +42,7 @@ const Image = styled.img`
   width: 120px;
   height: 120px;
 `
+const Req = styled.div``
 const Info = styled.div`
   margin-left: 10px;
 `
@@ -68,6 +71,7 @@ function DashBoard() {
   const { loading, error, orders } = useSelector((state) => state.myOrders)
   const { myProducts } = useSelector((state) => state.myProducts)
   // const { product } = useSelector((state) => state.productsDetails)
+  const { myRequests } = useSelector((state) => state.myRequests)
   const { user } = useSelector((state) => state.user)
   const alert = useAlert()
   const navigate = useNavigate()
@@ -123,6 +127,48 @@ function DashBoard() {
   ]
 
   const rows = []
+  const reqColumns = [
+    {
+      field: 'Name',
+      headerName: 'Name',
+      minWidth: 300,
+      flex: 1,
+    },
+    {
+      field: 'Description',
+      headerName: 'Description',
+      minWidth: 150,
+      flex: 0.3,
+    },
+    {
+      field: 'actions',
+      flex: 0.3,
+      headerName: 'Actions',
+      minWidth: 150,
+      type: 'number',
+      sortable: false,
+      renderCell: (params) => {
+        return (
+          <Button
+            onClick={() => deleteRequest(params.getValue(params.id, 'id'))}
+          >
+            <Delete />
+          </Button>
+        )
+      },
+    },
+  ]
+
+  const reqRows = []
+
+  myRequests &&
+    myRequests.forEach((item, index) => {
+      rows.push({
+        id: item._id,
+        name: item.name,
+        description: item.description,
+      })
+    })
 
   orders &&
     orders.forEach((item, index) => {
@@ -190,6 +236,20 @@ function DashBoard() {
           </Item>
         ))}
       </Sell>
+      <Req>
+        <Name>Requests By User</Name>
+        <DataGrid
+          rows={reqRows}
+          columns={reqColumns}
+          pageSize={10}
+          disableSelectionOnClick
+          // className='myOrdersTable'
+          autoHeight
+          style={{
+            fontWeight: 300,
+          }}
+        />
+      </Req>
     </Container>
   )
 }

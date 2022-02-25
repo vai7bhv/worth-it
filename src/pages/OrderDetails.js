@@ -125,16 +125,14 @@ function OrderDetails() {
           <Address>
             <p>
               Name:
-              <span>{user.name}</span>
+              {/* <span>{user.name}</span> */}
             </p>
-            <p>
-              Email :<span>{user.email}</span>
-            </p>
+            <p>{/* Email :<span>{user.email}</span> */}</p>
             <p>
               Mobile Number : <span>{order.phoneNo}</span>
             </p>
             <p>
-              Ordered On : <span>{order.createdAt.slice(0, 10)}</span>
+              {/* Ordered On : <span>{order.createdAt.slice(0, 10)}</span> */}
             </p>
 
             <p>

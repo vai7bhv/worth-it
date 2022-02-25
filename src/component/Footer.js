@@ -5,6 +5,12 @@ const Container = styled.div`
   /* padding: 20px; */
   background-color: gray;
   width: 100%;
+
+  position: relative;
+  @media (max-width: 600px) {
+    margin-top: 20vw;
+    /* position: fixed; */
+  }
 `
 const Wrapper = styled.div`
   /* flex-direction: column; */

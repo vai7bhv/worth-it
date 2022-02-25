@@ -3,7 +3,9 @@ import styled from 'styled-components'
 import {
   LocalGroceryStoreOutlined,
   NotificationAdd,
+  NotificationAddOutlined,
   Notifications,
+  NotificationsOutlined,
   Person,
   Search,
 } from '@mui/icons-material'
@@ -20,8 +22,8 @@ const Container = styled.div`
   width: 100vw;
   justify-content: space-evenly;
   @media (max-width: 600px) {
-    font-size: 10px;
-    justify-content: space-evenly;
+    font-size: 14px;
+    width: 114vw;
   }
 `
 const Cover = styled.div`
@@ -56,6 +58,9 @@ const SearchContainer = styled.div`
   border-radius: 7px;
   margin-bottom: 5px;
   background-color: #f6f7f6;
+  @media (max-width: 600px) {
+    width: 40vw;
+  }
 `
 const Input = styled.input`
   contain: content;
@@ -67,14 +72,16 @@ const Input = styled.input`
   font-size: 15px;
   width: 18vw;
   @media (max-width: 600px) {
-    width: 14vw;
+    width: 34vw;
   }
 `
 const Middle = styled.div`
   flex: 1;
   align-items: center;
   @media (max-width: 600px) {
-    flex: 0.5;
+    justify-content: 'center';
+    align-items: 'center';
+    margin-left: 10px;
   }
 `
 const Right = styled.div`
@@ -86,8 +93,8 @@ const Right = styled.div`
 
   @media (max-width: 600px) {
     margin-right: 0;
-    flex: 2;
-    justify-content: flex-start;
+    /* flex: 2; */
+    justify-content: flex-end;
   }
 `
 const Options = styled.div`
@@ -165,27 +172,18 @@ function Navbar({ isAuthUser }) {
             />
           </Badge>
           {isAuthUser && (
-            <Person
-              onClick={() => navigate('/profile')}
-              fontSize='large'
-              style={{ cursor: 'pointer', marginLeft: '5px' }}
-            />
+            <>
+              <NotificationsOutlined
+                fontSize='large'
+                onClick={() => navigate('/requests')}
+              />
+              <Person
+                onClick={() => navigate('/profile')}
+                fontSize='large'
+                style={{ cursor: 'pointer', marginLeft: '10px' }}
+              />
+            </>
           )}
-
-          <button onClick={(e) => setAnchorEl(e.currentTarget)}>
-            dashboard
-          </button>
-          <Menu
-            id='basic-menu'
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{
-              'aria-labelledby': 'basic-button',
-            }}
-          >
-            {/* <MenuItem onClick={() => setNotification('btnClick')}>bt1</MenuItem> */}
-          </Menu>
         </Right>
       </Cover>
     </Container>

@@ -72,6 +72,7 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { loading, error, isAuthUser } = useSelector((state) => state.user)
+  const navigate = useNavigate()
 
   const link = location.search ? location.search.split('=')[1] : '/profile'
   console.log(link)
@@ -82,18 +83,20 @@ const Login = () => {
     e.preventDefault()
     // console.log(e)
     dispatch(login(email, password))
+
+    // alert.success('Logged in Successfully')
+  }
+
+  useEffect(() => {
     if (error) {
       alert.error(error)
       dispatch(clearError())
-    } else alert.success('Logged in Successfully')
-  }
+    }
 
-  const navigate = useNavigate()
-  useEffect(() => {
     if (isAuthUser) {
       navigate(link)
     }
-  }, [isAuthUser, error, link])
+  }, [isAuthUser, dispatch, navigate, error, link, alert])
 
   return (
     <Container>

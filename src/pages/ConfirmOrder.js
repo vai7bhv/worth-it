@@ -128,7 +128,7 @@ const ConfirmOrder = () => {
         (message = `Hello from WorthIT Your Product ${i.name} is Bought by ${user.name} .Buyer Details ${user.email} name:  ${user.name}
           `),
         (subject = `
-        WorthIT notification
+        WorthIT notification 
         `)),
         axios.post('/api/confirmEmail', {
           email,
