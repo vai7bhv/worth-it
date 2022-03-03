@@ -118,14 +118,14 @@ export const logout = () => async (dispatch) => {
   }
 }
 export const updateProfile =
-  (name, email, department, sem, address) => async (dispatch) => {
+  (name, email, department, sem, mobileNo) => async (dispatch) => {
     try {
       dispatch({ type: UPDATE_PROFILE_REQUEST })
       const config = { headers: { 'Content-Type': 'application/json' } }
 
       const { data } = await axios.put(
         `/api/profile/update`,
-        { name, email, department, sem, address },
+        { name, email, department, sem, mobileNo },
         config
       )
 

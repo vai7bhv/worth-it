@@ -7,7 +7,7 @@ import { logout } from '../action/userAction'
 
 const Container = styled.div`
   margin-top: 20px;
-  height: 80vh;
+  height: auto;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   width: 80vw;
@@ -59,7 +59,7 @@ const Btn = styled.div`
 const Right = styled.div`
   display: flex;
   flex-direction: column;
-  height: 90vh;
+  height: auto;
   width: 100vw;
   max-width: 100%;
   /* justify-content: center; */
@@ -86,6 +86,8 @@ const Field = styled.p`
 const TwoBtn = styled.div`
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 `
 // const Btn = styled.div`
 //   font: 900 2.5vmax;
@@ -131,13 +133,19 @@ function Profile() {
           </Info>
           {user.sem && (
             <Info>
-              <Name>Email</Name>
+              <Name>Semester</Name>
               <Field>{user.sem}</Field>
+            </Info>
+          )}
+          {user.mobileNo && (
+            <Info>
+              <Name>Contact Number</Name>
+              <Field>{user.mobileNo}</Field>
             </Info>
           )}
           {user.department && (
             <Info>
-              <Name>Email</Name>
+              <Name>Department</Name>
               <Field>{user.department}</Field>
             </Info>
           )}
@@ -145,18 +153,20 @@ function Profile() {
 
         <TwoBtn>
           {user.role === 'admin' && (
-            <Btn onClick={() => navigate('/admin/products')}>dashboard</Btn>
+            <Btn onClick={() => navigate('/admin/products')}>
+              Admin dashboard
+            </Btn>
           )}
 
-          {user.role !== 'admin' && (
-            <Btn onClick={() => navigate('/dashboard')}>dashboard</Btn>
-          )}
+          <Btn onClick={() => navigate('/dashboard')}>dashboard</Btn>
+          <Btn onClick={() => navigate('/requestItem')}>request</Btn>
+
           <Btn onClick={() => navigate('/profile/update')}>Edit Profile</Btn>
 
           <Btn onClick={() => navigate('/password/update')}>
             update Password
           </Btn>
-          <Btn onClick={handleLogout}>Logout</Btn>
+          <Btn onClick={() => handleLogout()}>Logout</Btn>
           <Btn onClick={() => navigate('/additem')}>AddItem</Btn>
           <Btn onClick={() => navigate('/profile/update')}>Update Profile</Btn>
         </TwoBtn>

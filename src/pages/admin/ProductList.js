@@ -130,7 +130,7 @@ function Products() {
     products.forEach((item) => {
       rows.push({
         id: item._id,
-        status: item.status,
+        status: item.productStatus,
         price: item.price,
         name: item.name,
       })

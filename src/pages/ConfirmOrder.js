@@ -21,7 +21,7 @@ const Info = styled.div`
 const Heading = styled.h2`
   margin-top: 2vh;
   margin-left: 2vh;
-  font-weight: 400;
+  font-weight: 600;
 `
 const Left = styled.div``
 const Address = styled.div`
@@ -73,9 +73,9 @@ const Button = styled.button`
   padding: 8px;
   justify-content: center;
   align-items: center;
-  margin-left:20vw
+  margin-left: 20vw;
   margin: 5px;
-  border:none
+  border: none;
   /* border: 2px solid blue; */
 
   cursor: pointer;
@@ -157,10 +157,14 @@ const ConfirmOrder = () => {
       <Left>
         <Heading>Shipping Details</Heading>
         <Address>
-          <p>{/* Name :<span>{user.name}</span> */}</p>
-          <p>{/* Email :<span>{user.email}</span>{' '} */}</p>
           <p>
-            Mobile Number : <span>{shippingInfo.mobileNo}</span>
+            Name : <span>{user.name}</span>
+          </p>
+          <p>
+            Email : <span>{user.email}</span>
+          </p>
+          <p>
+            Mobile No. : <span>{shippingInfo.mobileNo}</span>
           </p>
           <p>
             Address : <span>{shippingInfo.address}</span>

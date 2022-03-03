@@ -1,7 +1,7 @@
 import { MenuItem, Select, Slider } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useNavigationType, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { getProduct } from '../action/productAction'
 import SingleItem from '../component/SingleItem'
@@ -10,9 +10,21 @@ import SingleItem from '../component/SingleItem'
 const Container = styled.div`
   align-items: center;
   justify-content: center;
+  display: flex;
+  position: relative;
+  min-height: 100vh;
 `
 const FilterContainer = styled.div`
   display: flex;
+  flex: 0.35;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  /* width: 20vmax; */
+  position: absolute;
+  top: 10vmax;
+  left: 1vmax;
 `
 const Filter = styled.div`
   margin: 20px;
@@ -35,6 +47,7 @@ const Categories = styled.div`
   margin-top: 50px;
   width: 80%;
   align-items: center;
+  flex: 0.65;
 `
 
 const Items = styled.div`
@@ -51,7 +64,7 @@ const CategoryName = styled.h2`
 function AllProduct() {
   const categories = [
     'All',
-    'books',
+    'Books',
     'Electronics',
     'Chemical',
     'Mechanical',
@@ -70,7 +83,7 @@ function AllProduct() {
   }
 
   // let availableProducts = products.filter((i) => i.status !== 'sold')
-
+  const navigate = useNavigate()
   useEffect(() => {
     dispatch(getProduct(keyword, price, category))
   }, [dispatch, keyword, price, category])
@@ -106,8 +119,20 @@ function AllProduct() {
       </FilterContainer>
       <Categories>
         <Items>
-          {products &&
-            products.slice(0, 7).map((item) => <SingleItem item={item} />)}
+          {products.length === 0 && (
+            <h1 style={{ alignItems: 'center', justifyContent: 'center' }}>
+              No products Found Modify your search
+              <br />
+              Or request your Item
+              <span
+                style={{ color: 'red', textDecoration: 'underline' }}
+                onClick={() => navigate('/requestItem')}
+              >
+                here
+              </span>
+            </h1>
+          )}
+          {products && products.map((item) => <SingleItem item={item} />)}
         </Items>
       </Categories>
     </Container>

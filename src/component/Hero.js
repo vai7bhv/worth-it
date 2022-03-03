@@ -29,30 +29,31 @@ const HeroSlide = styled.div`
   height: 100%;
 `
 const HeroSlider = styled.div`
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%
-display:flex;
-align-items:center;
-justify-content:center;
-&::before
-{
-    content:'',
-    position:absolute;
-    z-index:2;
-    width:100%;
-    height:100vh;
-    bottom:0vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100vh;
+    bottom: 0vh;
     left: 0;
     overflow: hidden;
     opacity: 0.4;
-    background : linear-gradient(0deg,
-     rgba(0,0,0,0.2) 0%,
-    rgba(0,0,0,0.2) 50%,
-     rgba(0,0,0,0.6) 100%,)
-}
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+  }
 `
 const HeroImage = styled.img`
   position: absolute;
@@ -98,7 +99,7 @@ const arrowButtons = css`
   height: 50px;
   color: #fff;
   cursor: pointer;
-  background: #000dla;
+  background: #000dda;
   border-radius: 50px;
   padding: 10px;
   margin-right: 1rem;

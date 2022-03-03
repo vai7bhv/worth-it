@@ -1,4 +1,5 @@
 import { CalendarToday, Dns, HomeOutlined, Phone } from '@mui/icons-material'
+import { Button, TextField } from '@mui/material'
 import React from 'react'
 import { useState } from 'react'
 import { useAlert } from 'react-alert'
@@ -13,23 +14,48 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+
+  @media (max-width: 600px) {
+    justify-content: flex-start;
+    width: 100%;
+    flex-direction: column;
+  }
 `
-const Form = styled.form`
+const Image = styled.img`
+  width: 50vw;
+  height: auto;
+`
+const Title = styled.h1`
+  font-size: 2.5vw;
+  margin: 20px;
+  @media (max-width: 600px) {
+    font-size: 25px;
+    /* position: fixed; */
+  }
+`
+const Form = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   margin: auto;
   padding: 2vmax;
-  justify-content: space-evenly;
+  justify-content: center;
   height: 80%;
   transition: all 0.5s;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  @media (max-width: 600px) {
+    width: 97vw;
+    justify-content: center;
+    /* position: fixed; */
+  }
 `
 const Item = styled.div`
-  display: flex;
+  padding: 1vmax 4vmax;
+  padding-right: 1vmax;
   width: 100%;
-  align-items: center;
-  /* margin: 5px; */
 `
 const Icon = styled.div`
   /* position: absolute; */
@@ -59,8 +85,8 @@ function Shipping() {
   const [department, setDepartment] = useState(shippingInfo.department)
   const [sem, setSem] = useState(shippingInfo.sem)
 
-  const shippingSubmit = (e) => {
-    e.preventDefault()
+  const shippingSubmit = () => {
+    // e.preventDefault()
 
     if (mobileNo.length < 10 || mobileNo.length > 10) {
       alert.error('Phone Number should be 10 digits Long')
@@ -71,48 +97,61 @@ function Shipping() {
   }
   return (
     <Container>
-      <Form onSubmit={shippingSubmit}>
+      <Image src='/image/Address-cuate.png' />
+      <Form>
+        <Title>Shipping Details</Title>
         <Item>
-          <HomeOutlined />
-          <Input
+          <TextField
             type='text'
-            placeholder='address'
+            variant='outlined'
+            label='address'
             required
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
         </Item>
         <Item>
-          <Phone />
-          <Input
-            type='number'
-            placeholder='mobile Number'
+          <TextField
+            type='text'
+            variant='outlined'
+            label='mobile Number'
             required
             value={mobileNo}
             onChange={(e) => setMobileNo(e.target.value)}
           />
         </Item>
         <Item>
-          <CalendarToday />
-          <Input
+          <TextField
             type='text'
-            placeholder='department'
+            variant='outlined'
+            label='department'
             required
             value={department}
             onChange={(e) => setDepartment(e.target.value)}
           />
         </Item>
         <Item>
-          <Dns />
-          <Input
+          <TextField
             type='text'
-            placeholder='semester'
+            variant='outlined'
+            label='semester'
             required
             value={sem}
             onChange={(e) => setSem(e.target.value)}
           />
         </Item>
-        <Input type='submit' value='Confirm Order' />
+        <Button
+          variant='contained'
+          onClick={() => shippingSubmit()}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            // marginLeft: '30%',
+            width: '90px',
+          }}
+        >
+          Confirm
+        </Button>
       </Form>
     </Container>
   )

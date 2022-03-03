@@ -17,7 +17,8 @@ import { Menu } from '@material-ui/core'
 
 const Container = styled.div`
   height: 60px;
-  background-color: #f6f7f6;
+  /* background-color: #f6f7f6; */
+  background-color: #fefffe;
   align-items: center;
   width: 100vw;
   justify-content: space-evenly;
@@ -44,10 +45,11 @@ const Left = styled.div`
     padding: 0%;
   }
 `
-const Title = styled.h2`
+const Title = styled.h1`
   cursor: pointer;
   max-width: 2vw;
-  font-weight: 200;
+  font-weight: 600;
+  /* font-size: 20px; */
 `
 const SearchContainer = styled.div`
   border: 1px solid grey;
@@ -57,7 +59,8 @@ const SearchContainer = styled.div`
   width: 20vw;
   border-radius: 7px;
   margin-bottom: 5px;
-  background-color: #f6f7f6;
+  background-color: #fefffe;
+
   @media (max-width: 600px) {
     width: 40vw;
   }
@@ -66,7 +69,8 @@ const Input = styled.input`
   contain: content;
   border: none;
   height: 30px;
-  background-color: #f6f7f6;
+  background-color: #fefffe;
+  /* background-color: #beb5e1; */
   outline: none;
   /* font-weight: 700; */
   font-size: 15px;
@@ -158,7 +162,7 @@ function Navbar({ isAuthUser }) {
           </SearchContainer>
         </Middle>
         <Right>
-          {!isAuthUser && (
+          {!isAuthUser && !isAuthUserReg && (
             <>
               <Options onClick={() => navigate('/signUp')}>SIGN IN</Options>
               <Options onClick={() => navigate('/login')}>LOG IN</Options>
@@ -171,7 +175,7 @@ function Navbar({ isAuthUser }) {
               fontSize='large'
             />
           </Badge>
-          {isAuthUser && (
+          {(isAuthUser || isAuthUserReg) && (
             <>
               <NotificationsOutlined
                 fontSize='large'

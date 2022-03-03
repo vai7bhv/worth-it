@@ -6,11 +6,18 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { registerUserAction } from '../action/userAction'
 import TextField from '@mui/material/TextField'
-import { Button, InputLabel, Menu, MenuItem, Select } from '@mui/material'
+import {
+  Button,
+  CssBaseline,
+  InputLabel,
+  Menu,
+  MenuItem,
+  Select,
+} from '@mui/material'
 
 const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  /* height: 100vh; */
   /* background: url('./Mobile-login.jpg') left center; */
   /* background-image: ; */
   display: flex;
@@ -21,6 +28,7 @@ const Container = styled.div`
 
   @media (max-width: 600px) {
     justify-content: flex-start;
+    flex-direction: column;
   }
 `
 
@@ -95,8 +103,8 @@ const Avatar = styled.div`
 `
 const Image = styled.img`
   cursor: pointer;
-  width: 50vw;
-  height: 60vw;
+  width: 40vw;
+  height: 40vw;
   /* z-index: 2; */
   /* height: 5vh; */
   border: none;
@@ -173,10 +181,11 @@ const Signup = () => {
 
   return (
     <Container>
-      {/* <Image src='./Mobile-login.jpg' /> */}
+      <CssBaseline />
+      <Image src='./Mobile-login.jpg' />
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
-        <Form type='submit' onSubmit={(e) => handleSignup(e)}>
+        <Form>
           <TextField
             // id='outlined-basic'
             label='Name'
@@ -217,30 +226,6 @@ const Signup = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             style={{ margin: '.7vw' }}
           />
-          {/* <InputLabel id='demo-simple-select-standard-label'>Age</InputLabel> */}
-          {/* <Select
-            value={dep}
-            onChange={(e) => setDep(e.target.value)}
-            style={{ margin: '.7vw', width: '14vw' }}
-            required
-            label='department'
-          >
-            <MenuItem value='department' disabled default>
-              Department
-            </MenuItem>
-            {department &&
-              department.map((d) => <MenuItem value={d}>{d}</MenuItem>)}
-          </Select> */}
-
-          {/* <Avatar>
-            <Image src={avatarPreview} alt='Avatar Preview' />
-            <Input
-              type='file'
-              name='avatar'
-              accept='image/*'
-              onChange={registerDataChange}
-            />
-          </Avatar> */}
         </Form>
         <Agreement>
           By creating an account I consent to the processing of my personal data

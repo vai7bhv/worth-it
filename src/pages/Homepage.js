@@ -4,7 +4,8 @@ import Category from '../component/Category'
 import NewItems from '../component/NewItems'
 import { useNavigate } from 'react-router-dom'
 import Hero from '../component/Hero'
-import { SliderData } from '../component/Slider'
+import Slider, { SliderData } from '../component/Slider'
+import MetaData from '../component/MetaData'
 // import { Sl } from '../component/SliderData'
 const Container = styled.div`
   position: relative;
@@ -39,6 +40,7 @@ function Homepage() {
 
   return (
     <Container>
+      <MetaData title='WorthIT' />
       {/* <Photo
         src='https://images.unsplash.com/photo-1468779036391-52341f60b55d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1368&q=80'
         alt='book-image'
@@ -48,7 +50,8 @@ function Homepage() {
 
         <h2>Make world better place</h2>
       </TextOnImage> */}
-      <Hero slides={SliderData} />
+      {/* <Hero slides={SliderData} /> */}
+      <Slider />
       <NewItems />
 
       <Category />

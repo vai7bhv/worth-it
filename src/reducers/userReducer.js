@@ -78,6 +78,7 @@ export const userReducer = (state = { user: {} }, action) => {
       return {
         loading: false,
         isAuthUser: false,
+        isAuthUserReg: false,
         user: null,
       }
 

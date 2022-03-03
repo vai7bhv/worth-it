@@ -19,32 +19,33 @@ import {
   MY_REQUEST_REQUEST,
 } from '../reducers/constant/allConstant'
 
-export const createRequest = (name, description) => async (dispatch) => {
-  try {
-    dispatch({ type: NEW_REQUEST_REQUEST })
+export const createRequest =
+  (name, description, userName, email) => async (dispatch) => {
+    try {
+      dispatch({ type: NEW_REQUEST_REQUEST })
 
-    const config = {
-      headers: { 'Content-Type': 'application/json' },
+      const config = {
+        headers: { 'Content-Type': 'application/json' },
+      }
+      console.log(name)
+
+      const { data } = await axios.post(
+        `/api/request/new`,
+        { name, description, userName, email },
+        config
+      )
+
+      dispatch({
+        type: NEW_REQUEST_SUCCESS,
+        payload: data,
+      })
+    } catch (error) {
+      dispatch({
+        type: NEW_REQUEST_FAIL,
+        payload: error.response.data.message,
+      })
     }
-    console.log(name)
-
-    const { data } = await axios.post(
-      `/api/request/new`,
-      { name, description },
-      config
-    )
-
-    dispatch({
-      type: NEW_REQUEST_SUCCESS,
-      payload: data,
-    })
-  } catch (error) {
-    dispatch({
-      type: NEW_REQUEST_FAIL,
-      payload: error.response.data.message,
-    })
   }
-}
 
 export const getMyRequests = () => async (dispatch) => {
   try {

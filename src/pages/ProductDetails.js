@@ -11,12 +11,13 @@ import {
   getProductDetails,
   getProductImages,
 } from '../action/productAction'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import '../data'
 import { addToCart } from '../action/cartAction'
 import { useAlert } from 'react-alert'
-import { Backdrop, Fade, Modal, Typography } from '@mui/material'
+import { Backdrop, Button, Fade, Modal, Typography } from '@mui/material'
 import { Box } from '@mui/system'
+import MetaData from '../component/MetaData'
 
 const Container = styled.div`
   display: flex;
@@ -110,21 +111,21 @@ const Price = styled.span`
 //   display: flex;
 //   justify-content: space-between;
 // `
-const Button = styled.button`
-  /* background-color: 'gray'; */
-  color: 'white';
+// const Button = styled.button`
+/* background-color: 'gray'; */
+// color: 'white';
 
-  font-size: 0.8em;
-  margin: 1em;
-  /* padding: 0.25em 1em; */
-  border: none;
+// font-size: 0.8em;
+// margin: 1em;
+// /* padding: 0.25em 1em; */
+// border: none;
 
-  /* cursor: pointer; */
+/* cursor: pointer; */
 
-  /* &:hover {
+/* &:hover {
     background-color: #f8f4f9;
   } */
-`
+// `
 const Text = styled.button`
   background: 'blue';
   color: 'black';
@@ -160,7 +161,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: '50vw',
   bgcolor: '#CAD1D4',
   border: '2px solid #000',
   boxShadow: 24,
@@ -176,12 +177,13 @@ const ProductDetails = () => {
   const [open, setOpen] = useState(false)
   const { id } = useParams()
   const alert = useAlert()
-
+  const navigate = useNavigate()
   const cartHandler = () => {
     // e.preventDefault()
     dispatch(addToCart(id))
     alert.success('Item added to cart')
   }
+  const mailLink = `mailto:${product.userEmail}}`
   let pr = products.filter((i) => i._id === product._id)
 
   let similarPr = products.filter((i) => i.category === product.category)
@@ -197,6 +199,7 @@ const ProductDetails = () => {
 
   return (
     <Container>
+      <MetaData title={`${product.name} at WorthIT`} />
       <Wrapper>
         <ImgContainer>
           {pr && pr.map((i) => <Image src={i.images[0].url} />)}
@@ -206,9 +209,6 @@ const ProductDetails = () => {
                 onClick={() => cartHandler()}
                 fontSize='large'
               />
-            </Icon>
-            <Icon>
-              <FavoriteBorderOutlined fontSize='large' />
             </Icon>
           </Info>
         </ImgContainer>
@@ -221,6 +221,7 @@ const ProductDetails = () => {
             ₹{product.price} <br />
             <br />
           </Price>
+
           <Button>
             <Button onClick={() => setOpen(true)}>Contact Owner</Button>
             <Modal
@@ -245,8 +246,64 @@ const ProductDetails = () => {
                   </Typography>
                   <Typography id='transition-modal-description' sx={{ mt: 2 }}>
                     <b>{`Seller Name : ${product.userName}`}</b>
-                    <br></br>
-                    <b>{``}</b>
+                    <Button>
+                      <Button onClick={() => setOpen(true)}>
+                        Contact Owner
+                      </Button>
+                      <Modal
+                        aria-labelledby='transition-modal-title'
+                        aria-describedby='transition-modal-description'
+                        open={open}
+                        onClose={handleClose}
+                        closeAfterTransition
+                        // BackdropComponent={Backdrop}
+                        BackdropProps={{
+                          timeout: 500,
+                        }}
+                      >
+                        <Fade in={open}>
+                          <Box sx={style}>
+                            <Typography
+                              id='transition-modal-title'
+                              variant='h6'
+                              component='h2'
+                            >
+                              Seller Information
+                            </Typography>
+                            <Typography
+                              id='transition-modal-description'
+                              sx={{ mt: 2 }}
+                            >
+                              <b>{`Owner Name : ${product.userName}`}</b>
+                              <br />
+                              <a
+                                class='mailto'
+                                href={mailLink}
+                                style={{
+                                  color: 'black',
+                                  textDecoration: 'none',
+                                }}
+                              >
+                                <b>{`Owner email : ${product.userEmail}`}</b>
+                              </a>
+
+                              {product.sem && (
+                                <b>{`Owner semester : ${product.sem} `}</b>
+                              )}
+                              <br />
+                              {product.mobileNo && (
+                                <b>{`Owner Mobile No. : ${product.mobileNo} `}</b>
+                              )}
+                              <br />
+                              {product.department && (
+                                <b>{`Owner department. : ${product.department} `}</b>
+                              )}
+                            </Typography>
+                          </Box>
+                        </Fade>
+                      </Modal>
+                      <Text onClick={() => cartHandler()}>BUY NOW </Text>
+                    </Button>
                   </Typography>
                 </Box>
               </Fade>

@@ -132,6 +132,8 @@ const UpdateProductDetails = () => {
       setCategory(product.category)
       // setImages(product.images[0])
       setOldImages(product.images)
+      setImages(product.images[0])
+      setImagesPreview(product.images)
       setProductStatus(product.productStatus)
     }
     if (error) {
@@ -153,7 +155,9 @@ const UpdateProductDetails = () => {
   }, [dispatch, alert, error, isUpdated, id, product, updateError])
 
   const handleUp = () => {
-    console.log(productStatus)
+    // console.log(productStatus)
+    // console.log(images)
+
     dispatch(
       updateProduct(
         id,
@@ -167,6 +171,7 @@ const UpdateProductDetails = () => {
     )
     navigate('/dashboard')
   }
+
   const updateProductImagesChange = (e) => {
     const files = Array.from(e.target.files)
 
@@ -183,6 +188,7 @@ const UpdateProductDetails = () => {
           setImages((old) => [...old, reader.result])
         }
       }
+      console.log(images)
 
       reader.readAsDataURL(file)
     })
@@ -235,7 +241,6 @@ const UpdateProductDetails = () => {
             name='avatar'
             accept='image/*'
             onChange={updateProductImagesChange}
-            multiple
           />
           <Prv>
             {oldImages &&
@@ -248,9 +253,9 @@ const UpdateProductDetails = () => {
               ))}
           </Prv>
           <Prv>
-            {imagesPreview.map((image, index) => (
-              <PreviewImg key={index} src={image} alt='Product Preview' />
-            ))}
+            {/* {imagesPreview.map((image, index) => (
+              // <PreviewImg key={index} src={image} alt='Product Preview' />
+            ))} */}
           </Prv>
         </Form>
 

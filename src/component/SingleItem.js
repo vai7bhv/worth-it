@@ -150,9 +150,6 @@ function SingleItem({ item }) {
         <Icon>
           <ShoppingCartOutlined onClick={() => addCartHandler(item._id)} />
         </Icon>
-        <Icon>
-          <FavoriteBorderOutlined />
-        </Icon>
       </Info>
     </Container>
   )

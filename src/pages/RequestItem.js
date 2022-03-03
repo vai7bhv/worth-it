@@ -5,15 +5,19 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 // import FileBase64 from 'react-file-base64'
 import { createRequest } from '../action/requestAction'
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { CssBaseline } from '@material-ui/core'
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(
+  /* background: linear-gradient(
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
     url(https://imgstaticcontent.lbb.in/lbbnew/wp-content/uploads/2017/09/13204610/13092017_Books_02.jpg)
-      center;
+      center; */
   display: flex;
   /* font-weight: 900; */
 
@@ -70,9 +74,13 @@ const Button1 = styled.button`
 
 const RequestItem = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [name, setName] = useState('')
+  const [userName, setUserName] = useState('')
+  const [email, setEmail] = useState('')
 
   const [description, setDescription] = useState('')
+  const { user } = useSelector((state) => state.user)
 
   // const myForm = new FormData()
 
@@ -82,13 +90,21 @@ const RequestItem = () => {
   // myForm.set('category', category)
   // console.log(myForm.get(name))
 
+  useEffect(() => {
+    setUserName(user.name)
+    setEmail(user.email)
+  }, [])
+
   const reqHandleUp = () => {
     console.log(name)
     console.log(description)
-    dispatch(createRequest(name, description))
+    dispatch(createRequest(name, description, userName, email))
+    navigate('/')
   }
+
   return (
     <Container>
+      <CssBaseline />
       <Wrapper>
         <Title>Request Item</Title>
         <Form>

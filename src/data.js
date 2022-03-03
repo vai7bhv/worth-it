@@ -1,26 +1,3 @@
-export const newItems = [
-  {
-    _id: '7yybhhdb',
-    img: 'https://www.madrasshoppe.com/26746-large_default/programming-in-ansi-c-balagurusamy.jpg',
-    name: 'Programming in ANSI C',
-  },
-  {
-    _id: 'ugewif838',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm-SosWJjTRb8OsGurPr1VA5e-dfa8BfFMRA&usqp=CAU',
-    name: 'KeyBoard',
-  },
-  {
-    _id: '99cugdeuy8f4',
-    img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
-    name: 'BreadBoard',
-  },
-  {
-    _id: '78sdvlih',
-    img: 'https://media.istockphoto.com/photos/isolated-shot-of-empty-measuring-beaker-on-white-background-picture-_id175601617?k=20&m=175601617&s=612x612&w=0&h=eE3Z3ZmLBuapCV7wbuS6Nm-V-SI_TPlUN95wLb87iu4=',
-    name: 'Beaker 100ml',
-  },
-]
-
 export const category = [
   {
     _id: 'electronic',
@@ -39,53 +16,42 @@ export const category = [
   },
 ]
 
-export const allProducts = [
+export const slideData = [
   {
-    _id: 1,
-    img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
-    name: 'item1',
-    price: 199,
+    id: 1,
+    img: 'https://thumbs.dreamstime.com/b/five-books-10758453.jpg',
+
+    title: 'View Products',
+    desc: 'Why every time buy new product at higher price when you get it at lesser price.',
+    bg: 'ffffff',
+    link: '/products',
+    name: 'View',
   },
   {
-    _id: 2,
-    img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
-    name: 'item2',
-    price: 199,
+    id: 2,
+    img: '/image/home1.png',
+    title: 'View Products',
+    desc: 'View Product based on Category and search product and choose what you want .',
+    bg: 'ffffff',
+    link: '/products',
+    name: 'View',
   },
   {
-    _id: 3,
-    img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
-    name: 'item3',
-    price: 199,
+    id: 3,
+    img: 'https://thumbs.dreamstime.com/b/drawing-tools-116036.jpg',
+    title: 'View Products',
+    desc: 'Why every time buy new product at higher price when you get it at lesser price.',
+    bg: 'e3e1de',
+    link: '/products',
+    name: 'View',
   },
   {
-    _id: 4,
-    img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
-    name: 'item4',
-    price: 199,
-  },
-  {
-    _id: 5,
-    img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
-    name: 'item5',
-    price: 199,
-  },
-  {
-    _id: 6,
-    img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
-    name: 'item6',
-    price: 199,
-  },
-  {
-    _id: 7,
-    img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
-    name: 'item7',
-    price: 199,
-  },
-  {
-    _id: 8,
-    img: 'https://5.imimg.com/data5/EP/DC/GB/SELLER-43948449/solderless-breadboard-with-400-points-500x500.jpg',
-    name: 'item8',
-    price: 199,
+    id: 4,
+    img: 'https://thumbs.dreamstime.com/b/drawing-tools-116036.jpg',
+    title: 'Request Item',
+    desc: 'If you dont find what you looking for Request the product.Click below to Request.',
+    bg: 'e3e1de',
+    link: '/requestItem',
+    name: 'Request Product',
   },
 ]

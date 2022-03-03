@@ -7,6 +7,8 @@ import styled from 'styled-components'
 import { removeCartItem } from '../action/cartAction'
 
 const Container = styled.div`
+  min-height: 100vh;
+
   @media (max-width: 600px) {
     justify-content: flex-start;
   }
@@ -46,7 +48,9 @@ const Bottom = styled.div`
   }
 `
 const Info = styled.div`
+  display: flex;
   flex: 1;
+  flex-direction: column;
 `
 
 const ProductDetails = styled.div`
@@ -192,7 +196,7 @@ function Cart({}) {
                   />
                   <Details>
                     <Name>{item.name}</Name>
-                    <Name name='seller'>From : {item.sellerName}</Name>
+                    <Name name='seller'>From : {item.SellerName}</Name>
                     <Price>₹{item.price}</Price>
                     <Tooltip title='Remove Item'>
                       <RemoveCircleOutline

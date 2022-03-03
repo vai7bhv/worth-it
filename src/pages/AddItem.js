@@ -24,10 +24,14 @@ const Container = styled.div`
   height: 100vh;
 
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   /* font-weight: 900; */
-  /* align-items: center;
-  justify-content: flex-start; */
+  align-items: center;
+  justify-content: center;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    margin-top: 30px;
+  }
 `
 
 const Wrapper = styled.div`
@@ -35,6 +39,10 @@ const Wrapper = styled.div`
   padding: 20px;
   background-color: white;
   display: flex;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+
   @media (max-width: 600px) {
     justify-content: flex-start;
     width: 90%;
@@ -49,6 +57,7 @@ const Image = styled.img`
   width: 50vw;
   height: 70vh;
   margin-right: 5vw;
+
   @media (max-width: 600px) {
     /* position: fixed; */
     height: 30vh;
@@ -61,22 +70,18 @@ const Form = styled.div`
   flex-wrap: wrap;
   flex-direction: column;
   /* font-weight: 900; */
+
   @media (max-width: 600px) {
     justify-content: flex-start;
-    width: 40%;
-    & > p {
-      font-size: large;
-    }
-
-    /* position: fixed; */
+    width: 90%;
   }
 `
 
 const Title = styled.h1`
   font-size: 30px;
-  margin-left: 40vw;
+  margin-left: 10vw;
   margin-top: 20px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   @media (max-width: 600px) {
     margin: 10px;
     margin-left: 30vw;
@@ -111,6 +116,9 @@ const AddItem = () => {
   const [description, setDescription] = useState('')
   const [category, setCategory] = useState('')
   const [images, setImages] = useState([])
+  const [department, setDepartment] = useState('')
+  const [sem, setSem] = useState()
+  const [mobileNo, setMobileNo] = useState()
   const [imagesPreview, setImagesPreview] = useState([])
   // const { register } = useForm()
   const navigate = useNavigate()
@@ -126,6 +134,7 @@ const AddItem = () => {
   ]
 
   const { loading, error, success } = useSelector((state) => state.newProduct)
+  const { user } = useSelector((state) => state.user)
 
   // const myForm = new FormData()
 
@@ -134,10 +143,20 @@ const AddItem = () => {
   // myForm.set('description', description)
   // myForm.set('category', category)
   // console.log(myForm.get(name))
+
   useEffect(() => {
     if (error) {
       alert.error(error)
       dispatch(clearErrors())
+    }
+    if (user.department) {
+      setDepartment(user.department)
+    }
+    if (user.mobileNo) {
+      setMobileNo(user.mobileNo)
+    }
+    if (user.sem) {
+      setSem(user.sem)
     }
 
     if (success) {
@@ -148,7 +167,18 @@ const AddItem = () => {
   }, [dispatch, alert, error, success])
 
   const handleUp = () => {
-    dispatch(createProduct(name, description, price, category, images))
+    dispatch(
+      createProduct(
+        name,
+        description,
+        price,
+        category,
+        images,
+        department,
+        sem,
+        mobileNo
+      )
+    )
     navigate('/dashboard')
   }
 
@@ -174,10 +204,10 @@ const AddItem = () => {
 
   return (
     <Container>
-      <Title>Add an Item</Title>
+      <Image src='/additemPhoto.png' />
       <Wrapper>
-        <Image src='/additemPhoto.png' />
         <Form>
+          <Title>Add an Item</Title>
           <TextField
             // id='outlined-basic'
             label='Name'
@@ -185,7 +215,7 @@ const AddItem = () => {
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            style={{ margin: '.7vw' }}
+            style={{ margin: '.5vw' }}
           />
           <TextField
             // id='outlined-basic'
@@ -196,7 +226,7 @@ const AddItem = () => {
             rows={3}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            style={{ margin: '.8vw' }}
+            style={{ margin: '.5vw' }}
           />
           <TextField
             // id='outlined-basic'
@@ -213,7 +243,7 @@ const AddItem = () => {
             <InputLabel style={{ margin: '5px' }}>Category</InputLabel>
             <Select
               onChange={(event) => setCategory(event.target.value)}
-              style={{ width: '100%', margin: '.9vw' }}
+              style={{ width: '60%', margin: '.9vw' }}
               value={category}
             >
               {categories.map((c) => (
@@ -221,7 +251,7 @@ const AddItem = () => {
               ))}
             </Select>
           </FormControl>
-          <p>vaibhav</p>
+
           <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
             <IconButton
               color='primary'
@@ -251,7 +281,9 @@ const AddItem = () => {
               width: '100px',
               alignItems: 'center',
               justifyContent: 'center',
-              marginLeft: '15vw',
+              marginLeft: '13vw',
+              marginTop: '20px',
+              marginBottom: '20px',
             }}
           >
             SUBMIT

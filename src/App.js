@@ -13,7 +13,7 @@ import DashBoard from './pages/DashBoard'
 import ForgotPassword from './pages/ForgotPassword'
 import Homepage from './pages/Homepage'
 import Login from './pages/Login'
-import ProfileOption from './pages/ProfileOption.js'
+// import ProfileOption from './pages/ProfileOption.js'
 import ProductDetails from './pages/ProductDetails'
 import Signup from './pages/Signup'
 import Profile from './pages/Profile.js'
@@ -30,7 +30,7 @@ import ResetPassword from './pages/ResetPassword'
 import Products from './pages/admin/ProductList'
 import OrderList from './pages/admin/OrderList'
 import UserList from './pages/admin/UserList'
-import Requests from './pages/Requests'
+import Requests from './pages/Requests.js'
 
 const Container = styled.div``
 
