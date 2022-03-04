@@ -1,6 +1,6 @@
-import '../App.css'
-import React, { Fragment } from 'react'
-import { MailOutline, RedeemRounded } from '@mui/icons-material'
+// import '../App.css'
+import React from 'react'
+// import { MailOutline, RedeemRounded } from '@mui/icons-material'
 // import Loader from './Loader/Loader'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -11,54 +11,100 @@ import styled from 'styled-components'
 import { updatePassword, updateProfile } from '../action/userAction'
 import { useAlert } from 'react-alert'
 import { UPDATE_PASSWORD_RESET } from '../reducers/constant/allConstant'
-import { registerUser } from '../action/userAction'
-import { LockOpen } from '@mui/icons-material'
-import { VpnKey } from '@mui/icons-material'
-import { Lock } from '@mui/icons-material'
+
+import {
+  Button,
+  ButtonBase,
+  FormControl,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from '@mui/material'
 
 const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
-    ),
-    url(https://imgstaticcontent.lbb.in/lbbnew/wp-content/uploads/2017/09/13204610/13092017_Books_02.jpg)
-      center;
+  width: 100%;
+  height: 100%;
+
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 900;
+  background-color: #e7e8e9;
+  @media (max-width: 600px) {
+    justify-content: flex-start;
+  }
 `
 
 const Wrapper = styled.div`
   width: 40%;
-  padding: 20px;
-  background-color: white;
+  padding: 2vw;
+  background-color: #f3f8fb;
+  margin: 10vw;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  @media (max-width: 600px) {
+    justify-content: flex-start;
+    width: 90%;
+    /* position: fixed; */
+  }
 `
 
 const Form = styled.form`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  font-weight: 900;
-`
-const Button = styled.button`
-  width: 20%;
-  padding: 15px 20px;
-  color: 'white';
+  /* font-weight: 900; */
 
-  font-size: 0.8em;
-  margin: 1em;
+  border-radius: 10px;
+  @media (max-width: 600px) {
+    justify-content: flex-start;
+    width: 40%;
+    & > p {
+      font-size: large;
+    }
 
-  border-radius: 3px;
-  cursor: pointer;
+    /* position: fixed; */
+  }
 `
+const Title = styled.h1`
+  font-size: 30px;
+  margin-left: 5vw;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  @media (max-width: 600px) {
+    margin: 10px;
+    margin-left: 30vw;
+    font-size: 24px;
+    /* position: fixed; */
+  }
+`
+
+// const Button = styled.button`
+//   width: 20%;
+//   padding: 15px 20px;
+//   color: 'white';
+
+//   font-size: 0.8em;
+//   margin: 1em;
+
+//   border-radius: 3px;
+//   cursor: pointer;
+// `
 const Input = styled.input`
   flex: 1;
   min-width: 40%;
   margin: 5px 10px 0px 0px;
   padding: 10px;
   font-weight: 900;
+`
+const Image = styled.img`
+  width: 40vw;
+  height: 70vh;
 `
 
 const UpdatePassword = () => {
@@ -77,22 +123,13 @@ const UpdatePassword = () => {
 
   const updatePasswordSubmit = (e) => {
     e.preventDefault()
-    // const myform = new FormData()
 
-    // myform.set('oldPassword', oldPassword)
-    // myform.set('newPassword', newPassword)
-    // myform.set('confirmPassword', confirmPassword)
-
-    // myform.set("avatar",avatar);
     dispatch(updatePassword(oldPassword, newPassword, confirmPassword))
   }
 
   useEffect(() => {
-    // setAvatar(user.avatar)
-
     if (error) {
       alert.error(error)
-      //   dispatch(clearError())
     }
     if (isUpdated) {
       alert.success('Password Updated Successfully')
@@ -105,46 +142,57 @@ const UpdatePassword = () => {
   }, [dispatch, error, alert, isUpdated])
   return (
     <Container>
+      <Image src='/image/resetpassword.png' />
       <Wrapper>
-        <h2>Change Password</h2>
-        <Form onSubmit={updatePasswordSubmit}>
-          <VpnKey />
-          <Input
-            type='password'
-            placeholder='old password'
+        <Title>Change Password</Title>
+        <Form>
+          <TextField
+            id='outlined-basic'
+            label='Old Password'
+            variant='outlined'
             required
+            type='password'
             value={oldPassword}
-            onChange={(e) => {
-              setOldPassword(e.target.value)
-            }}
+            onChange={(e) => setOldPassword(e.target.value)}
+            style={{ margin: '.7vw' }}
           />
-          <LockOpen />
-          <Input
-            type='password'
-            placeholder='new password'
+
+          <TextField
+            id='outlined-basic'
+            label='New Password'
+            variant='outlined'
             required
+            type='password'
             value={newPassword}
-            onChange={(e) => {
-              setNewPassword(e.target.value)
-            }}
+            onChange={(e) => setNewPassword(e.target.value)}
+            style={{ margin: '.7vw' }}
           />
-          <Lock />
-          <Input
-            type='password'
-            placeholder='confirm password'
+
+          <TextField
+            id='outlined-basic'
+            label='Confirm Ppassword'
+            variant='outlined'
             required
+            type='password'
             value={confirmPassword}
-            onChange={(e) => {
-              setConfirmPassword(e.target.value)
-            }}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            style={{ margin: '.7vw' }}
           />
 
           <Button
-            type='submit'
-            value='Update Password'
-            className='updatePasswordBtn'
+            variant='contained'
             onClick={(e) => updatePasswordSubmit(e)}
-          />
+            style={{
+              width: '100px',
+              alignItems: 'left',
+              justifyContent: 'center',
+              marginTop: '2vw',
+              marginLeft: '16vw',
+              marginRight: '15vw',
+            }}
+          >
+            Update
+          </Button>
         </Form>
       </Wrapper>
     </Container>

@@ -29,11 +29,12 @@ export const getProduct =
     try {
       dispatch({ type: ALL_PRODUCT_REQUEST })
       let link = `/api/products?keyword=${keyword}&price[gte]=${price[0]}&price[lte]=${price[1]}`
+
       if (category === 'All') category = ''
       if (category)
         link = `/api/products?keyword=${keyword}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}`
 
-      // console.log(link)
+      console.log(link)
       const { data } = await axios.get(link)
 
       dispatch({

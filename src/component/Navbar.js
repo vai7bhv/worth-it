@@ -9,7 +9,13 @@ import {
   Person,
   Search,
 } from '@mui/icons-material'
-import { Badge, MenuItem, SpeedDial, SpeedDialAction } from '@mui/material'
+import {
+  Badge,
+  MenuItem,
+  SpeedDial,
+  SpeedDialAction,
+  Tooltip,
+} from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import Signup from '../pages/Signup'
 import { useSelector } from 'react-redux'
@@ -17,8 +23,14 @@ import { Menu } from '@material-ui/core'
 
 const Container = styled.div`
   height: 60px;
-  /* background-color: #f6f7f6; */
-  background-color: #fefffe;
+  background-color: #ffffff;
+  /* background-color: #fefffe; */
+  /* background: rgb(245, 163, 195); */
+  /* background: linear-gradient(
+    238deg,
+    rgba(245, 163, 195, 1) 0%,
+    rgba(0, 117, 255, 0.8214636196275386) 71%
+  ); */
   align-items: center;
   width: 100vw;
   justify-content: space-evenly;
@@ -122,7 +134,7 @@ function Navbar({ isAuthUser }) {
   // const { navigate } = this.props
   const [anchorEl, setAnchorEl] = useState()
   const { cartItems } = useSelector((state) => state.cart)
-  const { isAuthUserReg } = useSelector((state) => state.registerUser)
+  // const { isAuthUserReg } = useSelector((state) => state.registerUser)
 
   const searchHandler = (e) => {
     e.preventDefault()
@@ -162,25 +174,30 @@ function Navbar({ isAuthUser }) {
           </SearchContainer>
         </Middle>
         <Right>
-          {!isAuthUser && !isAuthUserReg && (
+          {!isAuthUser && (
             <>
               <Options onClick={() => navigate('/signUp')}>SIGN IN</Options>
               <Options onClick={() => navigate('/login')}>LOG IN</Options>
             </>
           )}
           <Badge badgeContent={cartItems.length} color='secondary'>
-            <LocalGroceryStoreOutlined
-              style={{ marginLeft: '5px', cursor: 'pointer' }}
-              onClick={() => navigate('/cart')}
-              fontSize='large'
-            />
-          </Badge>
-          {(isAuthUser || isAuthUserReg) && (
-            <>
-              <NotificationsOutlined
+            <Tooltip title='Cart'>
+              <LocalGroceryStoreOutlined
+                style={{ marginLeft: '5px', cursor: 'pointer' }}
+                onClick={() => navigate('/cart')}
                 fontSize='large'
-                onClick={() => navigate('/requests')}
               />
+            </Tooltip>
+          </Badge>
+          {isAuthUser && (
+            <>
+              <Tooltip title='Requested Item'>
+                <NotificationsOutlined
+                  fontSize='large'
+                  onClick={() => navigate('/requests')}
+                  style={{ cursor: 'pointer', marginLeft: '10px' }}
+                />
+              </Tooltip>
               <Person
                 onClick={() => navigate('/profile')}
                 fontSize='large'

@@ -4,16 +4,18 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { logout } from '../action/userAction'
-
+import { Button, TextField } from '@mui/material'
 const Container = styled.div`
   margin-top: 20px;
-  height: auto;
+  margin-down: 20px;
+  height: 80vh;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  width: 80vw;
-  margin-left: 10vw;
+  width: 90vw;
+  margin-left: 5vw;
+  background-color: aliceblue;
   /* margin-left: 10vw; */
-  background-color: #afe1f4;
+  /* background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%); */
   align-items: center;
   justify-content: center;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
@@ -27,39 +29,36 @@ const Left = styled.div`
   align-items: center;
 `
 const Heading = styled.h1`
-  color: rgba(0, 0, 0, 0.7);
+  /* color: rgba(255, , 255, 0.7); */
   transform: translateX() (-10vmax) translateY(-2vmax);
   margin: 1vmax;
 `
-const Image = styled.img`
-  width: 20vw;
-  /* height: 40vh; */
-  border-radius: 50%;
-  transition: all 0.5s;
-  margin: 1vmax;
-  margin-left: 1vmax;
-`
+
 const Btn = styled.div`
   font: 900 2.5vmax;
-  color: white;
-  background-color: rgb(58, 57, 57);
+  color: #191a1a;
+  /* background-color: rgb(30, 30, 30); */
+  background-color: #508ce8;
   padding: 1vmax;
-  width: 25%;
+
   margin: 2vmax;
+  font-weight: 900;
   text-align: center;
   cursor: pointer;
   transition: all 0.5s;
+  border-radius: 15px;
 
   &:hover {
-    transform: scale(1.05);
-    /* background-color: red; */
+    color: #282d32;
+    transform: rotate(4deg);
+    background-color: #3274da;
   }
 `
 
 const Right = styled.div`
   display: flex;
   flex-direction: column;
-  height: auto;
+  height: 90vh;
   width: 100vw;
   max-width: 100%;
   /* justify-content: center; */
@@ -69,6 +68,7 @@ const Right = styled.div`
 const About = styled.div`
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
 `
 const Info = styled.div`
   display: flex;
@@ -86,8 +86,10 @@ const Field = styled.p`
 const TwoBtn = styled.div`
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
 `
 // const Btn = styled.div`
 //   font: 900 2.5vmax;
@@ -133,20 +135,26 @@ function Profile() {
           </Info>
           {user.sem && (
             <Info>
-              <Name>Semester</Name>
+              <Name>Sem</Name>
               <Field>{user.sem}</Field>
-            </Info>
-          )}
-          {user.mobileNo && (
-            <Info>
-              <Name>Contact Number</Name>
-              <Field>{user.mobileNo}</Field>
             </Info>
           )}
           {user.department && (
             <Info>
               <Name>Department</Name>
               <Field>{user.department}</Field>
+            </Info>
+          )}
+          {user.mobileNo && (
+            <Info>
+              <Name>MobileNo</Name>
+              <Field>{user.mobileNo}</Field>
+            </Info>
+          )}
+          {user.address && (
+            <Info>
+              <Name>Address</Name>
+              <Field>{user.address}</Field>
             </Info>
           )}
         </About>
@@ -167,8 +175,7 @@ function Profile() {
             update Password
           </Btn>
           <Btn onClick={() => handleLogout()}>Logout</Btn>
-          <Btn onClick={() => navigate('/additem')}>AddItem</Btn>
-          <Btn onClick={() => navigate('/profile/update')}>Update Profile</Btn>
+          <Btn onClick={() => navigate('/addItem')}>AddItem</Btn>
         </TwoBtn>
       </Right>
     </Container>

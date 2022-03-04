@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { registerUserAction } from '../action/userAction'
+import { clearError, registerUserAction } from '../action/userAction'
 import TextField from '@mui/material/TextField'
 import {
   Button,
@@ -130,18 +130,18 @@ const Signup = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { isAuthUser } = useSelector((state) => state.user)
-  const { isAuthUserReg } = useSelector((state) => state.registerUser)
+  const { error, isAuthUser } = useSelector((state) => state.user)
+  // const { isAuthUserReg } = useSelector((state) => state.registerUser)
   if (isAuthUser) navigate('/')
   const handleSignup = (e) => {
     e.preventDefault()
 
     if (password === confirmPassword) {
       dispatch(registerUserAction(name, email, password, avatar))
+      if (!error) navigate('/')
 
       if (!email) alert.error('Invalid email')
       if (!name) alert.error('Invalid name')
-      // navigate('/')
     } else {
       setPassword('')
       setConfirmPassword('')
@@ -150,9 +150,13 @@ const Signup = () => {
   }
 
   useEffect(() => {
+    if (error) {
+      alert.error(error)
+      dispatch(clearError())
+    }
     if (isAuthUser) navigate('/')
-    if (isAuthUserReg) navigate('/')
-  }, [isAuthUser, isAuthUserReg])
+    // if (isAuthUserReg) navigate('/')
+  }, [isAuthUser, error, alert, dispatch])
   // const registerDataChange = (e) => {
   //   if (e.target.name === 'avatar') {
   //     const reader = new FileReader()

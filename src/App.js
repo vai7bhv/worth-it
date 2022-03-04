@@ -51,7 +51,7 @@ function App() {
           <Route path='/products/:keyword' element={<AllProduct />} />
           <Route path='/product/:id' element={<ProductDetails />} />
           <Route path='/cart' element={<Cart />} />
-          <Route path='/additem' element={<AddItem />} />
+          <Route path='/addItem' element={<AddItem />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/profile' element={<Profile />} />

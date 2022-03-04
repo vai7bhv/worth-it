@@ -113,6 +113,11 @@ function Slider() {
 
     console.log(current)
   }
+
+  setTimeout(function () {
+    nextSlide()
+  }, 3000)
+
   return (
     <Container>
       <CssBaseline />

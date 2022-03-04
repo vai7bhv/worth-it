@@ -61,14 +61,14 @@ export const login = (email, password) => async (dispatch) => {
 }
 
 export const registerUserAction =
-  (name, email, password, avatar) => async (dispatch) => {
+  (name, email, password) => async (dispatch) => {
     try {
       const config = { headers: { 'Content-Type': 'application/json' } }
 
       dispatch({ type: REGISTER_REQUEST })
       const { data } = await axios.post(
         `/api/register`,
-        { email, password, name, avatar },
+        { email, password, name },
         config
       )
 
@@ -78,7 +78,7 @@ export const registerUserAction =
       })
     } catch (error) {
       dispatch({
-        REGISTER_FAILED,
+        type: REGISTER_FAILED,
         payload: error.response.data.message,
       })
     }

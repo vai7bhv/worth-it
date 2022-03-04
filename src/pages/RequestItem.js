@@ -1,75 +1,97 @@
 import styled from 'styled-components'
 // import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 // import { createProduct } from '../action/productAction'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 // import FileBase64 from 'react-file-base64'
-import { createRequest } from '../action/requestAction'
 import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import { CssBaseline } from '@material-ui/core'
+import { createRequest } from '../action/requestAction'
+import {
+  Button,
+  ButtonBase,
+  FormControl,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from '@mui/material'
+// import imageThree from '../image/imageThree.jpg'
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  /* background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
-    ),
-    url(https://imgstaticcontent.lbb.in/lbbnew/wp-content/uploads/2017/09/13204610/13092017_Books_02.jpg)
-      center; */
-  display: flex;
-  /* font-weight: 900; */
 
-  align-items: center;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  /* font-weight: 900; */
+  /* align-items: center;
+  justify-content: flex-start; */
 `
 
 const Wrapper = styled.div`
   width: 40%;
   padding: 20px;
   background-color: white;
-`
+  display: flex;
+  @media (max-width: 600px) {
+    justify-content: flex-start;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
 
-const Form = styled.form`
+    /* position: fixed; */
+  }
+`
+const Image = styled.img`
+  width: 50vw;
+  height: 70vh;
+  margin-right: 5vw;
+  margin-left: 5vw;
+  @media (max-width: 600px) {
+    /* position: fixed; */
+    height: 30vh;
+    width: 70vw;
+    margin-left: 15vw;
+  }
+`
+const Form = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   /* font-weight: 900; */
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  @media (max-width: 600px) {
+    justify-content: flex-start;
+    width: 40%;
+    & > p {
+      font-size: large;
+    }
+
+    /* position: fixed; */
+  }
 `
 
 const Title = styled.h1`
-  font-size: 24px;
+  font-size: 30px;
+  margin-left: 5vw;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  @media (max-width: 600px) {
+    margin: 10px;
+    margin-left: 30vw;
+    font-size: 24px;
+    /* position: fixed; */
+  }
   /* font-weight: 900; */
 `
-
 const Input = styled.input`
   flex: 1;
   min-width: 40%;
   margin: 20px 10px 0px 0px;
   padding: 10px;
   /* font-weight: 900; */
-`
-
-const Button = styled.button`
-  width: 20%;
-  padding: 12px 15px;
-  color: 'white';
-  font-size: 17px;
-  margin: 1em;
-  /* font-weight: 900; */
-  border-radius: 3px;
-  cursor: pointer;
-`
-const Button1 = styled.button`
-  width: 10%;
-  padding: 5px 7px;
-  color: 'white';
-  font-size: 12px;
-  margin: 1em;
-  /* font-weight: 900; */
-  border-radius: 3px;
-  cursor: pointer;
 `
 
 const RequestItem = () => {
@@ -81,7 +103,6 @@ const RequestItem = () => {
 
   const [description, setDescription] = useState('')
   const { user } = useSelector((state) => state.user)
-
   // const myForm = new FormData()
 
   // myForm.set('name', name)
@@ -89,7 +110,6 @@ const RequestItem = () => {
   // myForm.set('description', description)
   // myForm.set('category', category)
   // console.log(myForm.get(name))
-
   useEffect(() => {
     setUserName(user.name)
     setEmail(user.email)
@@ -99,30 +119,48 @@ const RequestItem = () => {
     console.log(name)
     console.log(description)
     dispatch(createRequest(name, description, userName, email))
-    navigate('/')
+    navigate('/profile')
   }
-
   return (
     <Container>
-      <CssBaseline />
       <Wrapper>
-        <Title>Request Item</Title>
+        <Image src='https://res.cloudinary.com/djplzfrk5/image/upload/v1646322127/form/request_nw2pnw.png' />
         <Form>
-          <Input
-            placeholder='Name of an Item'
+          <Title>Request Item</Title>
+          <TextField
+            // id='outlined-basic'
+            label='Name'
+            variant='outlined'
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
+            style={{ margin: '.7vw' }}
           />
-          <Input
-            placeholder='Description'
+          <TextField
+            // id='outlined-basic'
+            label='Description'
+            variant='outlined'
             required
+            multiline
+            rows={3}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            style={{ margin: '.8vw' }}
           />
+          <Button
+            variant='contained'
+            onClick={() => reqHandleUp()}
+            style={{
+              width: '100px',
+              alignItems: 'left',
+              justifyContent: 'center',
+              marginLeft: '10vw',
+              marginRight: '10vw',
+            }}
+          >
+            SUBMIT
+          </Button>
         </Form>
-
-        <Button onClick={() => reqHandleUp()}>SUBMIT</Button>
       </Wrapper>
     </Container>
   )

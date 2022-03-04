@@ -51,7 +51,8 @@ function SingleCategory({ item }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const handleCat = (cat) => {
+  const handleCat = (e, cat) => {
+    e.preventDefault()
     navigate('/products')
     setCategory(cat)
     console.log(cat)
@@ -59,7 +60,7 @@ function SingleCategory({ item }) {
   }
   return (
     <Container>
-      <Image onClick={() => handleCat(item._id)} src={item.img} />
+      <Image onClick={(e) => handleCat(e, item._id)} src={item.img} />
 
       <Title> {item.name}</Title>
     </Container>

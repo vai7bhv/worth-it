@@ -125,9 +125,11 @@ function OrderDetails() {
           <Address>
             <p>
               Name:
-              {/* <span>{user.name}</span> */}
+              <span>{user.name}</span>
             </p>
-            <p>{/* Email :<span>{user.email}</span> */}</p>
+            <p>
+              Email :<span>{user.email}</span>
+            </p>
             <p>
               Mobile Number : <span>{order.phoneNo}</span>
             </p>

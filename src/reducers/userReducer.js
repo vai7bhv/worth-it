@@ -78,7 +78,7 @@ export const userReducer = (state = { user: {} }, action) => {
       return {
         loading: false,
         isAuthUser: false,
-        isAuthUserReg: false,
+        // isAuthUserReg: false,
         user: null,
       }
 
@@ -95,6 +95,27 @@ export const userReducer = (state = { user: {} }, action) => {
     case LOGOUT_FAILED:
       return {
         loading: false,
+        error: action.payload,
+      }
+    case REGISTER_REQUEST:
+      return {
+        loading: true,
+        isAuthUser: false,
+      }
+
+    case REGISTER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isAuthUser: true,
+        user: action.payload,
+      }
+    case REGISTER_FAILED:
+      return {
+        ...state,
+        loading: true,
+        isAuthUser: false,
+        user: null,
         error: action.payload,
       }
 
@@ -145,38 +166,6 @@ export const forgotPasswordReducer = (state = {}, action) => {
   }
 }
 
-export const registerUserReducer = (state = { registerUser: {} }, action) => {
-  switch (action.type) {
-    case REGISTER_REQUEST:
-      return {
-        loading: true,
-        isAuthUserReg: false,
-      }
-
-    case REGISTER_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        isAuthUserReg: true,
-        user: action.payload,
-      }
-    case REGISTER_FAILED:
-      return {
-        ...state,
-        loading: true,
-        isAuthUserReg: false,
-        user: null,
-      }
-    case CLEAR_ERROR:
-      return {
-        ...state,
-        error: null,
-      }
-
-    default:
-      return state
-  }
-}
 export const profileReducer = (state = {}, action) => {
   switch (action.type) {
     case UPDATE_PROFILE_REQUEST:

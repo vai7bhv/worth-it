@@ -1,5 +1,5 @@
 import { Delete, Edit, LaunchOutlined } from '@mui/icons-material'
-import React, { useEffect } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { myOrders } from '../action/orderAction'
@@ -70,8 +70,9 @@ function DashBoard() {
   const dispatch = useDispatch()
   const { loading, error, orders } = useSelector((state) => state.myOrders)
   const { myProducts } = useSelector((state) => state.myProducts)
+  // const { myRequests } = useSelector((state) => state.myRequests)
   // const { product } = useSelector((state) => state.productsDetails)
-  const { myRequests } = useSelector((state) => state.myRequests)
+  const { requests } = useSelector((state) => state.myRequests)
   const { user } = useSelector((state) => state.user)
   const alert = useAlert()
   const navigate = useNavigate()
@@ -161,8 +162,8 @@ function DashBoard() {
 
   const reqRows = []
 
-  myRequests &&
-    myRequests.forEach((item, index) => {
+  requests &&
+    requests.forEach((item, index) => {
       rows.push({
         id: item._id,
         name: item.name,
@@ -181,6 +182,87 @@ function DashBoard() {
       })
     })
 
+  const productColumns = [
+    // {
+    //   field: 'id',
+    //   headerName: 'Product ID',
+    //   minWidth: 50,
+    //   flex: 0.5,
+    // },
+    {
+      field: 'images',
+      headerName: 'Images',
+
+      minWidth: 50,
+      flex: 1,
+      renderCell: (params) => (
+        <img
+          style={{ objectFit: 'contain', width: '15vw', height: '10vh' }}
+          src={params.value}
+        />
+      ),
+    },
+
+    {
+      field: 'name',
+      headerName: 'Name',
+      minWidth: 50,
+      flex: 1,
+    },
+
+    {
+      field: 'price',
+      headerName: 'Price',
+      type: 'number',
+      minWidth: 20,
+      flex: 0.5,
+    },
+    {
+      field: 'status',
+      headerName: 'Status',
+      type: 'string',
+      minWidth: 50,
+      flex: 0.5,
+    },
+
+    {
+      field: 'actions',
+      flex: 0.3,
+      headerName: 'Actions',
+      minWidth: 70,
+      type: 'number',
+      sortable: false,
+      renderCell: (params) => {
+        return (
+          <Fragment>
+            <Link to={`/product/update/${params.getValue(params.id, 'id')}`}>
+              <Edit />
+            </Link>
+
+            <Button
+              onClick={() => handleDelete(params.getValue(params.id, 'id'))}
+            >
+              <Delete />
+            </Button>
+          </Fragment>
+        )
+      },
+    },
+  ]
+
+  const productRows = []
+
+  myProducts &&
+    myProducts.forEach((item) => {
+      productRows.push({
+        id: item._id,
+        status: item.productStatus,
+        price: item.price,
+        name: item.name,
+        images: item.images[0].url,
+      })
+    })
+
   useEffect(() => {
     setTimeout(() => {}, 1000)
 
@@ -193,11 +275,12 @@ function DashBoard() {
     dispatch(getMyProducts())
   }, [dispatch, alert, error, deleteError, isDeleted])
 
-  const handleDelete = (pid, uid) => {
+  const handleDelete = (pid, userId) => {
     // dispatch(getProductDetails(id))
-    if (user._id !== uid)
-      alert.error('You dont have permission to delete this product')
-    else dispatch(deleteProduct(pid))
+    // if (user._id !== userId)
+    //   alert.error('You dont have permission to delete this product')
+    // else
+    dispatch(deleteProduct(pid))
   }
   return (
     <Container>
@@ -221,20 +304,17 @@ function DashBoard() {
         <Name>Items For Sell</Name>
         <btn onClick={() => navigate('/addItem')}>Add item</btn>
         <btn onClick={() => navigate('/requestItem')}>requestItem</btn>
-        {myProducts.map((i) => (
-          <Item>
-            {/* <Image src={i.images[0].url} alt='product preview' /> */}
-
-            <Title>{i.name}</Title>
-            <Price>₹{i.price}</Price>
-            <Status>{i.productStatus}</Status>
-            <Delete
-              fontSize='large'
-              onClick={() => handleDelete(i._id, i.userId)}
-            />
-            <Edit onClick={() => navigate(`/product/update/${i._id}`)} />
-          </Item>
-        ))}
+        <DataGrid
+          rows={productRows}
+          columns={productColumns}
+          pageSize={10}
+          disableSelectionOnClick
+          // className='myOrdersTable'
+          autoHeight
+          style={{
+            fontWeight: 300,
+          }}
+        />
       </Sell>
       <Req>
         <Name>Requests By User</Name>

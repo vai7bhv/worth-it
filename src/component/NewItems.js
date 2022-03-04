@@ -61,10 +61,10 @@ function NewItems() {
   return (
     <Container>
       <Heading>
-        <h4>Newly added items</h4>
-        <h6 onClick={() => productHandle()} style={{ cursor: 'pointer' }}>
+        <h4>Recently added items</h4>
+        <h5 onClick={() => productHandle()} style={{ cursor: 'pointer' }}>
           All Products
-        </h6>
+        </h5>
       </Heading>
       <Items>
         {products &&

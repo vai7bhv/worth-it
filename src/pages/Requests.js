@@ -50,17 +50,60 @@ function Requests() {
   useEffect(() => {
     dispatch(getAllRequests())
   }, [])
+  const columns = [
+    {
+      field: 'id',
+      headerName: 'Id',
+      minWidth: 300,
+      flex: 1,
+    },
+    {
+      field: 'Name',
+      headerName: 'Name',
+      minWidth: 100,
+      flex: 1,
+    },
+    {
+      field: 'Description',
+      headerName: 'Description',
+      minWidth: 150,
+      flex: 0.3,
+    },
+    {
+      field: 'email',
+      headerName: 'Email',
+      minWidth: 150,
+      flex: 0.3,
+    },
+  ]
+  const rows = []
+
+  requests &&
+    requests.forEach((item, index) => {
+      rows.push({
+        id: item._id,
+        Name: item.name,
+        Description: item.description,
+        email: item.email,
+      })
+    })
 
   return (
     <Container>
       <Req>
         <Name> All Requests </Name>
-        {requests.map((i) => (
-          <Item>
-            <Title>{i.name}</Title>
-            <Desc>{i.description}</Desc>
-          </Item>
-        ))}
+
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={10}
+          disableSelectionOnClick
+          // className='myOrdersTable'
+          autoHeight
+          style={{
+            fontWeight: 300,
+          }}
+        />
       </Req>
     </Container>
   )

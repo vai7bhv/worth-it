@@ -20,7 +20,7 @@ import {
 import { PhotoCamera } from '@mui/icons-material'
 
 const Container = styled.div`
-  width: 100vw;
+  width: 90vw;
   height: 100vh;
 
   display: flex;
@@ -54,7 +54,7 @@ const Wrapper = styled.div`
 `
 
 const Image = styled.img`
-  width: 50vw;
+  width: 40vw;
   height: 70vh;
   margin-right: 5vw;
 
@@ -256,11 +256,12 @@ const AddItem = () => {
             <IconButton
               color='primary'
               aria-label='upload picture'
-              component='span'
+              // component='span'
             >
               <PhotoCamera />
             </IconButton>
             <Input
+              // style={{ display: 'none' }}
               accept='image/*'
               id='contained-button-file'
               type='file'

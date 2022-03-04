@@ -10,27 +10,47 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { clearErrors } from '../action/orderAction'
 import { UPDATE_PRODUCT_RESET } from '../reducers/constant/allConstant'
 import { useAlert } from 'react-alert'
-import { MenuItem, Select } from '@mui/material'
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
-    ),
-    url(https://imgstaticcontent.lbb.in/lbbnew/wp-content/uploads/2017/09/13204610/13092017_Books_02.jpg)
-      center;
-  display: flex;
-  /* font-weight: 900; */
 
+import {
+  Button,
+  ButtonBase,
+  FormControl,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from '@mui/material'
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+
+  display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 400;
+  background-color: white;
+  @media (max-width: 600px) {
+    justify-content: flex-start;
+  }
 `
 
 const Wrapper = styled.div`
   width: 40%;
-  padding: 20px;
-  background-color: white;
+  padding: 2vw;
+  background-color: #f3f8fb;
+  margin: 5vw;
+  display: flex;
+  margin-top: 5vw;
+  flex-direction: column;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  @media (max-width: 600px) {
+    justify-content: flex-start;
+    width: 90%;
+    /* position: fixed; */
+  }
 `
 
 const Form = styled.form`
@@ -38,11 +58,32 @@ const Form = styled.form`
   flex-wrap: wrap;
   flex-direction: column;
   /* font-weight: 900; */
+  ${'' /* -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3); */}
+  ${'' /* box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3); */}
+  border-radius: 10px;
+  @media (max-width: 600px) {
+    justify-content: flex-start;
+    width: 30%;
+    & > p {
+      font-size: large;
+    }
+
+    /* position: fixed; */
+  }
+  /* font-weight: 900; */
 `
 
 const Title = styled.h1`
-  font-size: 24px;
-  /* font-weight: 900; */
+  font-size: 30px;
+  margin-left: 5vw;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  @media (max-width: 600px) {
+    margin: 10px;
+    margin-left: 30vw;
+    font-size: 24px;
+    /* position: fixed; */
+  }
 `
 
 const PreviewImg = styled.img`
@@ -58,16 +99,16 @@ const Input = styled.input`
   /* font-weight: 900; */
 `
 
-const Button = styled.button`
-  width: 20%;
-  padding: 12px 15px;
-  color: 'white';
-  font-size: 17px;
-  margin: 1em;
-  /* font-weight: 900; */
-  border-radius: 3px;
-  cursor: pointer;
-`
+// const Button = styled.button`
+//   width: 20%;
+//   padding: 12px 15px;
+//   color: 'white';
+//   font-size: 17px;
+//   margin: 1em;
+//   /* font-weight: 900; */
+//   border-radius: 3px;
+//   cursor: pointer;
+// `
 const Prv = styled.div`
   display: flex;
   overflow: auto;
@@ -81,6 +122,19 @@ const Button1 = styled.button`
   /* font-weight: 900; */
   border-radius: 3px;
   cursor: pointer;
+`
+const Image = styled.img`
+  width: 50vw;
+  height: 90vh;
+  margin-top: -30vw;
+  margin-right: 0vw;
+  margin-left: 10vw;
+  @media (max-width: 600px) {
+    /* position: fixed; */
+    height: 30vh;
+    width: 70vw;
+    margin-left: 15vw;
+  }
 `
 
 const UpdateProductDetails = () => {
@@ -130,10 +184,8 @@ const UpdateProductDetails = () => {
       setDescription(product.description)
       setPrice(product.price)
       setCategory(product.category)
-      // setImages(product.images[0])
-      setOldImages(product.images)
       setImages(product.images[0])
-      setImagesPreview(product.images)
+      setOldImages(product.images)
       setProductStatus(product.productStatus)
     }
     if (error) {
@@ -155,9 +207,7 @@ const UpdateProductDetails = () => {
   }, [dispatch, alert, error, isUpdated, id, product, updateError])
 
   const handleUp = () => {
-    // console.log(productStatus)
-    // console.log(images)
-
+    console.log(productStatus)
     dispatch(
       updateProduct(
         id,
@@ -171,7 +221,6 @@ const UpdateProductDetails = () => {
     )
     navigate('/dashboard')
   }
-
   const updateProductImagesChange = (e) => {
     const files = Array.from(e.target.files)
 
@@ -188,7 +237,6 @@ const UpdateProductDetails = () => {
           setImages((old) => [...old, reader.result])
         }
       }
-      console.log(images)
 
       reader.readAsDataURL(file)
     })
@@ -196,52 +244,64 @@ const UpdateProductDetails = () => {
 
   return (
     <Container>
+      <Image src='https://res.cloudinary.com/djplzfrk5/image/upload/v1646398082/form/Update_Item_brxdfh.png' />
       <Wrapper>
-        <Title>Update Item</Title>
         <Form>
-          <Input
-            placeholder='Name of an Item'
+          <Title>Update Item</Title>
+          <TextField
+            // id='outlined-basic'
+            label='Name'
+            variant='outlined'
             required
+            autowidth
             value={name}
             onChange={(e) => setName(e.target.value)}
+            style={{ margin: '.7vw', width: '80%' }}
           />
-          <Input
-            placeholder='Description'
+          <TextField
+            // id='outlined-basic'
+            label='Description'
+            variant='outlined'
             required
+            multiline
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            style={{ margin: '.7vw', width: '80%' }}
           />
           <Select
             onChange={(event) => setCategory(event.target.value)}
-            style={{ width: '100%', margin: '5px' }}
+            style={{ width: '80%', margin: '5px' }}
             value={category}
           >
             {categories.map((c) => (
               <MenuItem value={c}>{c}</MenuItem>
             ))}
           </Select>
-          <Input
+          <TextField
+            // id='outlined-basic'
+            label='Price'
+            variant='outlined'
             type='number'
-            placeholder='Price'
-            min='0'
             required
             value={price}
             onChange={(e) => setPrice(e.target.value)}
+            style={{ margin: '.7vw', width: '80%' }}
           />
           <Select
             onChange={(event) => setProductStatus(event.target.value)}
-            style={{ width: '100%', margin: '5px' }}
+            style={{ width: '80%', margin: '5px' }}
             value={productStatus}
           >
             <MenuItem value='available'>Available</MenuItem>
             <MenuItem value='delivered'>delivered</MenuItem>
           </Select>
-          <Input
+          {/* <Input
             type='file'
             name='avatar'
             accept='image/*'
             onChange={updateProductImagesChange}
-          />
+            multiple
+          /> */}
           <Prv>
             {oldImages &&
               oldImages.map((image, index) => (
@@ -253,13 +313,26 @@ const UpdateProductDetails = () => {
               ))}
           </Prv>
           <Prv>
-            {/* {imagesPreview.map((image, index) => (
-              // <PreviewImg key={index} src={image} alt='Product Preview' />
-            ))} */}
+            {imagesPreview.map((image, index) => (
+              <PreviewImg key={index} src={image} alt='Product Preview' />
+            ))}
           </Prv>
-        </Form>
 
-        <Button onClick={() => handleUp()}>Update</Button>
+          <Button
+            variant='contained'
+            onClick={() => handleUp()}
+            style={{
+              width: '100px',
+              alignItems: 'left',
+              justifyContent: 'center',
+              marginTop: '5vw',
+              marginLeft: '15vw',
+              marginRight: '20vw',
+            }}
+          >
+            Update
+          </Button>
+        </Form>
       </Wrapper>
     </Container>
   )

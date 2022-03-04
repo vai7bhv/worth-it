@@ -86,6 +86,7 @@ const ConfirmOrder = () => {
   const { shippingInfo, cartItems } = useSelector((state) => state.cart)
   const { user } = useSelector((state) => state.user)
   const { error } = useSelector((state) => state.newOrder)
+
   const navigate = useNavigate()
   const alert = useAlert()
   const dispatch = useDispatch()
@@ -125,7 +126,23 @@ const ConfirmOrder = () => {
     cartItems.map(
       (i) => (
         ((email = i.SellerEmail),
-        (message = `Hello from WorthIT Your Product ${i.name} is Bought by ${user.name} .Buyer Details ${user.email} name:  ${user.name}
+        (message = `Hello from WorthIT Your Product ${i.name} is Bought by ${user.name} .
+        
+                          Buyer Details 
+        
+         Buyer Email :  ${user.email}
+         Buyer name:  ${user.name}
+         Buyer Mobile No. : ${shippingInfo.mobileNo}
+         Buyer Address : ${shippingInfo.address}
+         Buyer semester : ${shippingInfo.sem}
+         Buyer department : ${shippingInfo.department}
+
+
+         Thank you for using WorthIT. 
+
+
+         Thank you 
+         WorthIT
           `),
         (subject = `
         WorthIT notification 

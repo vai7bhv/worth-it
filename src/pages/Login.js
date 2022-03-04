@@ -9,7 +9,6 @@ import { Button, TextField } from '@mui/material'
 const Container = styled.div`
   width: 100%;
   height: 100%;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,7 +74,7 @@ const Login = () => {
   const navigate = useNavigate()
 
   const link = location.search ? location.search.split('=')[1] : '/profile'
-  console.log(link)
+  // console.log(link)
   // const [user, setUser] = useState({})
   // console.log(email)
   // console.log(password)

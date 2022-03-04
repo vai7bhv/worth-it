@@ -150,10 +150,10 @@ function Cart({}) {
   //   socket.on('getNotification', (data) => {
   //     setNotification(data)
   //   })
-  const data = {
-    to_name: user.name,
-    from_name: user,
-  }
+  // const data = {
+  //   to_name: user.name,
+  //   from_name: user,
+  // }
   // const sendEmail = (e) => {
   //   e.preventDefault()
   //   emailjs

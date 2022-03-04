@@ -60,7 +60,7 @@ function Products() {
 
     if (isDeleted) {
       alert.success('Product Deleted Successfully')
-      navigate('/admin/dashboard')
+      // navigate('/admin/')
       dispatch({ type: DELETE_PRODUCT_RESET })
     }
 
@@ -68,6 +68,19 @@ function Products() {
   }, [dispatch, alert, error, deleteError, isDeleted])
 
   const columns = [
+    {
+      field: 'images',
+      headerName: 'Images',
+
+      minWidth: 50,
+      flex: 1,
+      renderCell: (params) => (
+        <img
+          style={{ objectFit: 'contain', width: '15vw', height: '10vh' }}
+          src={params.value}
+        />
+      ),
+    },
     {
       field: 'id',
       headerName: 'Product ID',
@@ -133,6 +146,7 @@ function Products() {
         status: item.productStatus,
         price: item.price,
         name: item.name,
+        images: item.images[0].url,
       })
     })
   return (

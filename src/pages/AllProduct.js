@@ -74,7 +74,7 @@ function AllProduct() {
 
   const { keyword } = useParams()
   const [price, setPrice] = useState([0, 1000])
-  const [category, setCategory] = useState('')
+  const [category, setCategory] = useState('All')
   const dispatch = useDispatch()
   const { products } = useSelector((state) => state.products)
 
