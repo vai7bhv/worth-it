@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { saveShippingInfo } from '../action/cartAction'
+import MetaData from '../component/MetaData'
 
 const Container = styled.div`
   width: 100vw;
@@ -97,6 +98,7 @@ function Shipping() {
   }
   return (
     <Container>
+      <MetaData title='Shipping Information -- WorthIT' />
       <Image src='/image/Address-cuate.png' />
       <Form>
         <Title>Shipping Details</Title>

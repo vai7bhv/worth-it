@@ -15,6 +15,7 @@ import { Button } from '@mui/material'
 import { TextField } from '@mui/material'
 import { Select, MenuItem, InputLabel, FormControl } from '@mui/material'
 import { CssBaseline } from '@material-ui/core'
+import MetaData from '../component/MetaData'
 
 const Container = styled.div`
   width: 100vw;
@@ -133,6 +134,7 @@ const UpdateProfile = ({ history }) => {
   }, [dispatch, error, alert, navigate, user, isUpdated])
   return (
     <Container>
+      <MetaData title='Update Profile -- WorthIT' />
       <Wrapper>
         <CssBaseline />
         <h2>Update Profile</h2>

@@ -18,6 +18,7 @@ import {
   TextField,
 } from '@mui/material'
 import { PhotoCamera } from '@mui/icons-material'
+import MetaData from '../component/MetaData'
 
 const Container = styled.div`
   width: 90vw;
@@ -204,6 +205,7 @@ const AddItem = () => {
 
   return (
     <Container>
+      <MetaData title='Add item    --WorthIT' />
       <Image src='/additemPhoto.png' />
       <Wrapper>
         <Form>

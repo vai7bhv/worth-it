@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { clearError, deleteUser, getAllUsers } from '../../action/userAction'
+import MetaData from '../../component/MetaData'
 import { DELETE_USER_RESET } from '../../reducers/constant/allConstant'
 import Sidebar from './Sidebar'
 
@@ -125,6 +126,7 @@ function UserList() {
 
   return (
     <div style={{ display: 'flex' }}>
+      <MetaData title='Admin All Users -- WorthIT' />
       <Sidebar />
       <Wrapper>
         <Title>Users List</Title>

@@ -8,9 +8,28 @@ import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
 import { getAllRequests } from '../action/requestAction'
+import MetaData from '../component/MetaData'
 
-const Container = styled.div``
+const Container = styled.div`
+  min-height: 100vh;
+  background-color: #e2eafc;
+  /* background-image: url('/image/SimpleShiny.svg'); */
+`
 
+const Button = styled.button`
+  width: 200px;
+  margin-left: 80vw;
+  background-color: #343a40;
+  padding: 10px;
+  color: #fdfffc;
+  border-radius: 5px;
+  font-size: 20px;
+  margin-top: 2vw;
+  &:hover {
+    background-color: #8e9aaf;
+    color: #dfe7fd;
+  }
+`
 const Req = styled.div`
   margin: 20px;
 `
@@ -52,21 +71,15 @@ function Requests() {
   }, [])
   const columns = [
     {
-      field: 'id',
-      headerName: 'Id',
-      minWidth: 300,
-      flex: 1,
-    },
-    {
       field: 'Name',
       headerName: 'Name',
-      minWidth: 100,
+      minWidth: 200,
       flex: 1,
     },
     {
       field: 'Description',
       headerName: 'Description',
-      minWidth: 150,
+      minWidth: 250,
       flex: 0.3,
     },
     {
@@ -90,6 +103,9 @@ function Requests() {
 
   return (
     <Container>
+      <MetaData title='Requests -- WorthIT' />
+      <Button onClick={() => navigate('/requestItem')}>Request Item</Button>
+
       <Req>
         <Name> All Requests </Name>
 
@@ -100,8 +116,16 @@ function Requests() {
           disableSelectionOnClick
           // className='myOrdersTable'
           autoHeight
-          style={{
-            fontWeight: 300,
+          sx={{
+            boxShadow: 2,
+            color: 'black',
+            fontWeight: 600,
+
+            // border: 2,
+            // borderColor: 'primary.light',
+            '& .MuiDataGrid-cell:hover': {
+              color: 'primary.main',
+            },
           }}
         />
       </Req>

@@ -16,6 +16,7 @@ import {
   Select,
   TextField,
 } from '@mui/material'
+import MetaData from '../component/MetaData'
 // import imageThree from '../image/imageThree.jpg'
 const Container = styled.div`
   width: 100vw;
@@ -123,6 +124,7 @@ const RequestItem = () => {
   }
   return (
     <Container>
+      <MetaData title='Request Item -- WorthIT' />
       <Wrapper>
         <Image src='https://res.cloudinary.com/djplzfrk5/image/upload/v1646322127/form/request_nw2pnw.png' />
         <Form>

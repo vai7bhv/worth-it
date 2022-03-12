@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { removeCartItem } from '../action/cartAction'
+import MetaData from '../component/MetaData'
 
 const Container = styled.div`
   min-height: 100vh;
@@ -174,6 +175,7 @@ function Cart({}) {
   // }
   return (
     <Container>
+      <MetaData title='Cart -- WorthIT' />
       {/* <button onClick={(e) => sendEmail(e)}> email</button> */}
       {cartItems.length === 0 ? (
         <EmptyCart>

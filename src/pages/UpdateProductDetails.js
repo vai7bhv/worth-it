@@ -21,6 +21,7 @@ import {
   Select,
   TextField,
 } from '@mui/material'
+import MetaData from '../component/MetaData'
 const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -244,6 +245,7 @@ const UpdateProductDetails = () => {
 
   return (
     <Container>
+      <MetaData title={`Update Products Details  -- WorthIT`} />
       <Image src='https://res.cloudinary.com/djplzfrk5/image/upload/v1646398082/form/Update_Item_brxdfh.png' />
       <Wrapper>
         <Form>

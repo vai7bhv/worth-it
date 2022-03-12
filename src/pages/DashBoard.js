@@ -7,6 +7,7 @@ import { DataGrid } from '@mui/x-data-grid'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import MyProducts from './MyProducts'
+
 import {
   deleteProduct,
   getMyProducts,
@@ -15,7 +16,8 @@ import {
 import { DELETE_PRODUCT_RESET } from '../reducers/constant/allConstant'
 import { useAlert } from 'react-alert'
 import { Button } from '@mui/material'
-import { deleteRequest } from '../action/requestAction'
+import { deleteRequest, getMyRequests } from '../action/requestAction'
+import MetaData from '../component/MetaData'
 
 const Container = styled.div``
 const Buy = styled.div``
@@ -70,9 +72,9 @@ function DashBoard() {
   const dispatch = useDispatch()
   const { loading, error, orders } = useSelector((state) => state.myOrders)
   const { myProducts } = useSelector((state) => state.myProducts)
-  // const { myRequests } = useSelector((state) => state.myRequests)
+  const { myRequests } = useSelector((state) => state.myRequests)
   // const { product } = useSelector((state) => state.productsDetails)
-  const { requests } = useSelector((state) => state.myRequests)
+  // const { requests } = useSelector((state) => state.myRequests)
   const { user } = useSelector((state) => state.user)
   const alert = useAlert()
   const navigate = useNavigate()
@@ -129,14 +131,21 @@ function DashBoard() {
 
   const rows = []
   const reqColumns = [
+    // {
+    //   field: 'id',
+    //   headerName: 'ID',
+    //   maxWidth: 0,
+    //   flex: 1,
+
+    // },
     {
-      field: 'Name',
+      field: 'name',
       headerName: 'Name',
       minWidth: 300,
       flex: 1,
     },
     {
-      field: 'Description',
+      field: 'description',
       headerName: 'Description',
       minWidth: 150,
       flex: 0.3,
@@ -151,7 +160,9 @@ function DashBoard() {
       renderCell: (params) => {
         return (
           <Button
-            onClick={() => deleteRequest(params.getValue(params.id, 'id'))}
+            onClick={() =>
+              handleDeleteRequest(params.getValue(params.id, 'id'))
+            }
           >
             <Delete />
           </Button>
@@ -162,9 +173,9 @@ function DashBoard() {
 
   const reqRows = []
 
-  requests &&
-    requests.forEach((item, index) => {
-      rows.push({
+  myRequests &&
+    myRequests.forEach((item, index) => {
+      reqRows.push({
         id: item._id,
         name: item.name,
         description: item.description,
@@ -273,6 +284,7 @@ function DashBoard() {
     }
     dispatch(myOrders())
     dispatch(getMyProducts())
+    dispatch(getMyRequests())
   }, [dispatch, alert, error, deleteError, isDeleted])
 
   const handleDelete = (pid, userId) => {
@@ -282,8 +294,13 @@ function DashBoard() {
     // else
     dispatch(deleteProduct(pid))
   }
+  const handleDeleteRequest = (id) => {
+    dispatch(deleteRequest(id))
+  }
+
   return (
     <Container>
+      <MetaData title='Dashboard -- WorthIT' />
       <Buy>
         <Name>My Orders</Name>
         <Orders>
@@ -294,16 +311,27 @@ function DashBoard() {
             disableSelectionOnClick
             // className='myOrdersTable'
             autoHeight
-            style={{
-              fontWeight: 300,
+            // style={{
+            //   fontWeight: 300,
+            // }}
+            sx={{
+              boxShadow: 2,
+              color: 'black',
+              fontWeight: 600,
+
+              // border: 2,
+              // borderColor: 'primary.light',
+              '& .MuiDataGrid-cell:hover': {
+                color: 'primary.main',
+              },
             }}
           />
         </Orders>
       </Buy>
       <Sell>
         <Name>Items For Sell</Name>
-        <btn onClick={() => navigate('/addItem')}>Add item</btn>
-        <btn onClick={() => navigate('/requestItem')}>requestItem</btn>
+        <Button onClick={() => navigate('/addItem')}>Add item</Button>
+
         <DataGrid
           rows={productRows}
           columns={productColumns}
@@ -311,13 +339,20 @@ function DashBoard() {
           disableSelectionOnClick
           // className='myOrdersTable'
           autoHeight
-          style={{
-            fontWeight: 300,
+          sx={{
+            boxShadow: 2,
+            color: 'black',
+            fontWeight: 600,
+
+            '& .MuiDataGrid-cell:hover': {
+              color: 'primary.main',
+            },
           }}
         />
       </Sell>
       <Req>
         <Name>Requests By User</Name>
+        <Button onClick={() => navigate('/requestItem')}>requestItem</Button>
         <DataGrid
           rows={reqRows}
           columns={reqColumns}
@@ -325,8 +360,14 @@ function DashBoard() {
           disableSelectionOnClick
           // className='myOrdersTable'
           autoHeight
-          style={{
-            fontWeight: 300,
+          sx={{
+            boxShadow: 2,
+            color: 'black',
+            fontWeight: 600,
+
+            '& .MuiDataGrid-cell:hover': {
+              color: 'primary.main',
+            },
           }}
         />
       </Req>

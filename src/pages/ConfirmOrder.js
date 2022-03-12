@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { clearErrors, createOrder } from '../action/orderAction'
 import emailjs from 'emailjs-com'
 import axios from 'axios'
+import MetaData from '../component/MetaData'
 
 const Container = styled.div`
   display: flex;
@@ -171,6 +172,7 @@ const ConfirmOrder = () => {
 
   return (
     <Container>
+      <MetaData title='Confirm Order -- WorthIT' />
       <Left>
         <Heading>Shipping Details</Heading>
         <Address>

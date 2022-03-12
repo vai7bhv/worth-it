@@ -11,15 +11,21 @@ import {
   getProductDetails,
   getProductImages,
 } from '../action/productAction'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import '../data'
 import { addToCart } from '../action/cartAction'
 import { useAlert } from 'react-alert'
-import { Backdrop, Button, Fade, Modal, Typography } from '@mui/material'
+import { Backdrop, Fade, Modal, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import MetaData from '../component/MetaData'
+import { Button } from '@mui/material'
 
 const Container = styled.div`
+  /* background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url(https://imgstaticcontent.lbb.in/lbbnew/wp-content/uploads/2017/09/13204610/13092017_Books_02.jpghttps://res.cloudinary.com/djplzfrk5/image/upload/v1646298874/BackGround/Flipping-books_mg29wj.jpg)
+      center; */
   display: flex;
   flex-direction: column;
   background-color: #f2f2f2;
@@ -27,7 +33,20 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   padding: 50px;
+  margin-left: 5vw;
+  background-color: #f3f8fb;
+  margin-top: 3vw;
+
   display: flex;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  box-sizing: border-box;
+  max-width: 90%;
+  height: auto;
+  border: solid #ffffff 10px;
+
+  padding: 5px;
   @media (max-width: 700px) {
     flex-direction: column;
     align-items: center;
@@ -36,6 +55,7 @@ const Wrapper = styled.div`
 
 const ImgContainer = styled.div`
   display: flex;
+  margin-top: 3vw;
   flex-direction: column;
 
   justify-content: center;
@@ -44,8 +64,9 @@ const ImgContainer = styled.div`
 `
 
 const Image = styled.img`
-  width: 100%;
-  height: 60vh;
+  max-width: 120%;
+  ${'' /* height: auto; */}
+  max-height:30vw;
   margin-bottom: 10px;
   object-fit: cover;
 `
@@ -59,6 +80,7 @@ const Info = styled.div`
   align-items: center;
   justify-content: center;
   transition: all 0.5s ease;
+  margin-bottom: -20px;
 `
 
 const Icon = styled.div`
@@ -78,18 +100,32 @@ const Icon = styled.div`
 const InfoContainer = styled.div`
   flex: 1;
   padding: 0px 50px;
+  width: 800px;
+  height: 800px;
 `
 
 const Title = styled.h1`
   font-weight: 400;
+  /* font-family: 'Times'; */
 `
 const Desc = styled.p`
   margin: 20px 0px;
-  font-weight: 200;
+  font-weight: 500;
+  font-family: 'Times';
+  font-size: 20px;
+  width: 700px;
+`
+const Desc1 = styled.p`
+  margin: 20px 0px;
+  font-weight: 500;
+  font-family: 'Times';
+  font-size: 25px;
+  width: 700px;
 `
 const Price = styled.span`
-  font-weight: 300;
+  font-weight: bold;
   font-size: 30px;
+  font-color: 'blue';
 `
 
 // const AddContainer = styled.div`
@@ -111,21 +147,21 @@ const Price = styled.span`
 //   display: flex;
 //   justify-content: space-between;
 // `
-// const Button = styled.button`
-/* background-color: 'gray'; */
-// color: 'white';
+const Button1 = styled.button`
+  /* background-color: 'gray'; */
+  color: 'white';
 
-// font-size: 0.8em;
-// margin: 1em;
-// /* padding: 0.25em 1em; */
-// border: none;
+  font-size: 0.8em;
+  margin: 1em;
+  /* padding: 0.25em 1em; */
+  border: none;
 
-/* cursor: pointer; */
+  /* cursor: pointer; */
 
-/* &:hover {
+  /* &:hover {
     background-color: #f8f4f9;
   } */
-// `
+`
 const Text = styled.button`
   background: 'blue';
   color: 'black';
@@ -161,7 +197,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '50vw',
+  width: 400,
   bgcolor: '#CAD1D4',
   border: '2px solid #000',
   boxShadow: 24,
@@ -177,13 +213,12 @@ const ProductDetails = () => {
   const [open, setOpen] = useState(false)
   const { id } = useParams()
   const alert = useAlert()
-  const navigate = useNavigate()
+
   const cartHandler = () => {
     // e.preventDefault()
     dispatch(addToCart(id))
     alert.success('Item added to cart')
   }
-  const mailLink = `mailto:${product.userEmail}}`
   let pr = products.filter((i) => i._id === product._id)
 
   let similarPr = products.filter((i) => i.category === product.category)
@@ -199,7 +234,6 @@ const ProductDetails = () => {
 
   return (
     <Container>
-      <MetaData title={`${product.name} at WorthIT`} />
       <Wrapper>
         <ImgContainer>
           {pr && pr.map((i) => <Image src={i.images[0].url} />)}
@@ -210,20 +244,27 @@ const ProductDetails = () => {
                 fontSize='large'
               />
             </Icon>
+            {/* <Icon>
+              <FavoriteBorderOutlined fontSize='large' />
+            </Icon> */}
           </Info>
         </ImgContainer>
         <InfoContainer>
           <Title>{product.name}</Title>
+          <br></br>
           {/* <Title>Ansic</Title> */}
+          <Desc1>Description:</Desc1>
           <Desc>{product.description}</Desc>
-
+          <Desc1>
+            Category:
+            <Desc style={{ marginTop: '5px' }}>{product.category}</Desc>
+          </Desc1>
           <Price>
             ₹{product.price} <br />
             <br />
           </Price>
-
           <Button>
-            <Button onClick={() => setOpen(true)}>Contact Owner</Button>
+            <Button1 onClick={() => setOpen(true)}>Contact Owner</Button1>
             <Modal
               aria-labelledby='transition-modal-title'
               aria-describedby='transition-modal-description'
@@ -246,69 +287,18 @@ const ProductDetails = () => {
                   </Typography>
                   <Typography id='transition-modal-description' sx={{ mt: 2 }}>
                     <b>{`Seller Name : ${product.userName}`}</b>
-                    <Button>
-                      <Button onClick={() => setOpen(true)}>
-                        Contact Owner
-                      </Button>
-                      <Modal
-                        aria-labelledby='transition-modal-title'
-                        aria-describedby='transition-modal-description'
-                        open={open}
-                        onClose={handleClose}
-                        closeAfterTransition
-                        // BackdropComponent={Backdrop}
-                        BackdropProps={{
-                          timeout: 500,
-                        }}
-                      >
-                        <Fade in={open}>
-                          <Box sx={style}>
-                            <Typography
-                              id='transition-modal-title'
-                              variant='h6'
-                              component='h2'
-                            >
-                              Seller Information
-                            </Typography>
-                            <Typography
-                              id='transition-modal-description'
-                              sx={{ mt: 2 }}
-                            >
-                              <b>{`Owner Name : ${product.userName}`}</b>
-                              <br />
-                              <a
-                                class='mailto'
-                                href={mailLink}
-                                style={{
-                                  color: 'black',
-                                  textDecoration: 'none',
-                                }}
-                              >
-                                <b>{`Owner email : ${product.userEmail}`}</b>
-                              </a>
+                    <br></br>
 
-                              {product.sem && (
-                                <b>{`Owner semester : ${product.sem} `}</b>
-                              )}
-                              <br />
-                              {product.mobileNo && (
-                                <b>{`Owner Mobile No. : ${product.mobileNo} `}</b>
-                              )}
-                              <br />
-                              {product.department && (
-                                <b>{`Owner department. : ${product.department} `}</b>
-                              )}
-                            </Typography>
-                          </Box>
-                        </Fade>
-                      </Modal>
-                      <Text onClick={() => cartHandler()}>BUY NOW </Text>
-                    </Button>
+                    <b>{`Seller Email : ${product.userEmail}`}</b>
+                    <br></br>
+                    <b>{`Seller Department : ${product.userDepartment}`}</b>
                   </Typography>
                 </Box>
               </Fade>
             </Modal>
-            <Text onClick={() => cartHandler()}>BUY NOW </Text>
+            <Button variant='contained' onClick={() => cartHandler()}>
+              BUY NOW
+            </Button>
           </Button>
         </InfoContainer>
       </Wrapper>

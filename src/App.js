@@ -32,7 +32,9 @@ import OrderList from './pages/admin/OrderList'
 import UserList from './pages/admin/UserList'
 import Requests from './pages/Requests.js'
 
-const Container = styled.div``
+const Container = styled.div`
+  /* background-color: #222831; */
+`
 
 function App() {
   const { isAuthUser, user } = useSelector((state) => state.user)

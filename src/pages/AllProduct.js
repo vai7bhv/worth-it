@@ -13,6 +13,9 @@ const Container = styled.div`
   display: flex;
   position: relative;
   min-height: 100vh;
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
 `
 const FilterContainer = styled.div`
   display: flex;
@@ -25,6 +28,12 @@ const FilterContainer = styled.div`
   position: absolute;
   top: 10vmax;
   left: 1vmax;
+  @media (max-width: 700px) {
+    top: 1vmax;
+
+    flex-direction: row;
+    /* margin-bottom: 60vh; */
+  }
 `
 const Filter = styled.div`
   margin: 20px;
@@ -36,10 +45,6 @@ const FilterText = styled.span`
   display: flex;
 
   margin-bottom: 5px;
-`
-const FilterCover = styled.div`
-  display: flex;
-  flex-direction: column;
 `
 
 const Categories = styled.div`
@@ -55,7 +60,26 @@ const Items = styled.div`
   flex-wrap: wrap;
   /* margin-lef: 0px; */
   margin: 30px;
-  margin-top: 0px;
+  /* margin-top: 0px; */
+  @media (max-width: 700px) {
+    justify-content: flex-start;
+    flex-direction: column;
+    flex-wrap: none;
+    margin-top: 90px;
+    margin-left: 0px;
+  }
+`
+const Image = styled.img`
+  margin-left: 30vw;
+  width: 20vw;
+  height: 10vw;
+
+  @media (max-width: 700px) {
+    margin-left: 8vw;
+    margin-top: 20vh;
+    width: 70vw;
+    height: 30vh;
+  }
 `
 const CategoryName = styled.h2`
   margin: 20px;
@@ -76,7 +100,7 @@ function AllProduct() {
   const [price, setPrice] = useState([0, 1000])
   const [category, setCategory] = useState('All')
   const dispatch = useDispatch()
-  const { products } = useSelector((state) => state.products)
+  const { loading, products } = useSelector((state) => state.products)
 
   const priceHandler = (event, newPrice) => {
     setPrice(newPrice)
@@ -108,7 +132,7 @@ function AllProduct() {
 
           <Select
             onChange={(event) => setCategory(event.target.value)}
-            style={{ width: '15vw' }}
+            style={{ width: '200px' }}
             value={category}
           >
             {categories.map((c) => (
@@ -118,22 +142,42 @@ function AllProduct() {
         </Filter>
       </FilterContainer>
       <Categories>
-        <Items>
-          {products.length === 0 && (
-            <h1 style={{ alignItems: 'center', justifyContent: 'center' }}>
-              No products Found Modify your search
-              <br />
-              Or request your Item
-              <span
-                style={{ color: 'red', textDecoration: 'underline' }}
-                onClick={() => navigate('/requestItem')}
+        {loading ? (
+          <Image
+            src='/image/loading.gif'
+            alt='loading ....'
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          />
+        ) : (
+          <Items>
+            {products.length === 0 && (
+              <h1
+                style={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginLeft: '20vw',
+                }}
               >
-                here
-              </span>
-            </h1>
-          )}
-          {products && products.map((item) => <SingleItem item={item} />)}
-        </Items>
+                No products Found Modify your search
+                <br />
+                Or request your Item
+                <span
+                  style={{
+                    color: 'red',
+                    textDecoration: 'underline',
+                  }}
+                  onClick={() => navigate('/requestItem')}
+                >
+                  here
+                </span>
+              </h1>
+            )}
+            {products && products.map((item) => <SingleItem item={item} />)}
+          </Items>
+        )}
       </Categories>
     </Container>
   )

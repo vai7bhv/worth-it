@@ -14,6 +14,7 @@ import {
   MenuItem,
   Select,
 } from '@mui/material'
+import MetaData from '../component/MetaData'
 
 const Container = styled.div`
   width: 100vw;
@@ -186,6 +187,7 @@ const Signup = () => {
   return (
     <Container>
       <CssBaseline />
+      <MetaData title='Signup -- WorthIT' />
       <Image src='./Mobile-login.jpg' />
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>

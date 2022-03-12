@@ -22,7 +22,8 @@ const Container = styled.div`
 
   width: 90vw;
   @media (max-width: 600px) {
-    margin: 10px;
+    margin: 2px;
+    width: 100vw;
   }
 `
 const Heading = styled.div`

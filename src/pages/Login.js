@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { clearError, login } from '../action/userAction'
 import { useAlert } from 'react-alert'
 import { Button, TextField } from '@mui/material'
+import MetaData from '../component/MetaData'
 
 const Container = styled.div`
   width: 100%;
@@ -99,6 +100,7 @@ const Login = () => {
 
   return (
     <Container>
+      <MetaData title='Login -- WorthIT' />
       <Wrapper>
         <Title>LOG IN</Title>
         <Form>

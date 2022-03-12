@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { clearErrors } from '../action/orderAction'
 import { forgotPassword } from '../action/userAction'
+import MetaData from '../component/MetaData'
 
 const Container = styled.div`
   width: 100vw;
@@ -104,6 +105,7 @@ const ForgotPassword = (e) => {
 
   return (
     <Container>
+      <MetaData title='Forgot Password -- WorthIT' />
       <Image src='/image/forgot.png' />
       <Wrapper>
         <Title>Forgot Password</Title>

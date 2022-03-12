@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { deleteOrder, getAllOrders } from '../../action/orderAction'
 import { clearError } from '../../action/userAction'
+import MetaData from '../../component/MetaData'
 import { DELETE_ORDER_RESET } from '../../reducers/constant/allConstant'
 import Sidebar from './Sidebar'
 
@@ -126,6 +127,7 @@ function OrderList() {
 
   return (
     <div style={{ display: 'flex' }}>
+      <MetaData title='Admin All Orders -- WorthIT' />
       <Sidebar />
       <Wrapper>
         <Title>Orders List</Title>

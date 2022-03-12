@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { resetPassword } from '../action/userAction'
+import MetaData from '../component/MetaData'
 
 const Container = styled.div`
   width: 100vw;
@@ -79,6 +80,7 @@ function ResetPassword() {
   }, [success, error, navigate, alert])
   return (
     <Container>
+      <MetaData title='Reset password -- WorthIT' />
       <Image src='/image/resetpassword.png' />
       <Wrapper>
         <Title>Reset Password</Title>

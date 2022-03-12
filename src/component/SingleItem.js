@@ -2,6 +2,7 @@ import {
   FavoriteBorderOutlined,
   ShoppingCartOutlined,
 } from '@mui/icons-material'
+import { CssBaseline } from '@mui/material'
 import React from 'react'
 import { useAlert } from 'react-alert'
 import { useDispatch } from 'react-redux'
@@ -35,19 +36,26 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   padding: 10px;
-  background-color: #f5fbfd;
+  /* background-color: #f5fbfd; */
+  background-color: #dbd8e3;
   text-decoration: none;
   border-radius: 10px;
   align-items: center;
   position: relative;
   flex-wrap: wrap;
   @media (max-width: 700px) {
-    width: 50vw;
-    height: 45vh;
+    width: 65vw;
+    height: 65vh;
+    flex-direction: column;
   }
 
   &:hover ${Info} {
     opacity: 1;
+    /* background-color: #f5fbfd; */
+  }
+  &:hover {
+    /* opacity: 1; */
+    background-color: #8d99ae;
   }
 `
 
@@ -136,6 +144,7 @@ function SingleItem({ item }) {
   }
   return (
     <Container>
+      <CssBaseline />
       <Image
         src={item.images[0].url}
         alt={item.images[0].alt}

@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { clearErrors } from '../../action/orderAction'
 import { deleteProduct, getAdminProduct } from '../../action/productAction'
+import MetaData from '../../component/MetaData'
 import { DELETE_PRODUCT_RESET } from '../../reducers/constant/allConstant'
 import Sidebar from './Sidebar'
 
@@ -151,6 +152,7 @@ function Products() {
     })
   return (
     <Container>
+      <MetaData title='Admin All Products -- WorthIT' />
       <Sidebar />
       <Right>
         <Title>Product List</Title>

@@ -11,6 +11,7 @@ import { useAlert } from 'react-alert'
 import { Button, MenuItem, Select } from '@mui/material'
 import { useState } from 'react'
 import { loadUser } from '../action/userAction'
+import MetaData from '../component/MetaData'
 
 const Container = styled.div``
 const Wrapper = styled.div`
@@ -118,6 +119,7 @@ function OrderDetails() {
   // const address = order.createdAt.slice(0, 10)
   return (
     <Container>
+      <MetaData title={`'Order Details ${id} -- WorthIT'`} />
       <Heading>OrderID #{id}</Heading>
       <Wrapper>
         <Left>

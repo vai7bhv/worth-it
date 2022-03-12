@@ -40,7 +40,7 @@ const Wrapper = styled.div`
   height: 100%;
   display: flex;
   transition: all 1.5s ease;
-  transform: translateX(${(props) => props.slideNum * -100}vw);
+  /* transform: translateX(${(props) => props.slideNum * -100}vw); */
 `
 const Slide = styled.div`
   display: flex;
@@ -48,16 +48,25 @@ const Slide = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #${(props) => props.bg};
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
   /* background-color: red; */
 `
 const ImgContainer = styled.div`
   height: 100%;
   flex: 1;
+  @media (max-width: 700px) {
+    height: 40%;
+  }
 `
 const Image = styled.img`
   height: 80%;
   width: 100%;
   border-radius: 10px;
+  @media (max-width: 700px) {
+    height: 100%;
+  }
   /* margin-top: 20px; */
 `
 const InfoContainer = styled.div`
@@ -65,18 +74,32 @@ const InfoContainer = styled.div`
 `
 const Title = styled.h6`
   font-size: 5vw;
+  color: #4361ee;
+  @media (max-width: 700px) {
+    font-size: 36px;
+  }
 `
 const Desc = styled.p`
   margin: 50px 0px;
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 1px;
+  width: 40vw;
+  @media (max-width: 700px) {
+    font-size: 16px;
+    width: 90vw;
+    margin: 10px;
+  }
 `
 const Button = styled.button`
   padding: 10px;
   font-size: 20px;
   background-color: transparent;
   cursor: pointer;
+  @media (max-width: 700px) {
+    margin-left: 30vw;
+    margin-top: 20px;
+  }
 `
 
 function Slider() {
@@ -114,45 +137,45 @@ function Slider() {
     console.log(current)
   }
 
-  setTimeout(function () {
-    nextSlide()
-  }, 3000)
+  // setTimeout(function () {
+  //   nextSlide()
+  // }, 3000)
 
   return (
     <Container>
       <CssBaseline />
-      <Arrow direction='left'>
+      {/* <Arrow direction='left'>
         <ArrowLeftOutlined
           direction='left'
           fontSize='large'
           onClick={() => prevSlide()}
         />
-      </Arrow>
+      </Arrow> */}
       <Wrapper slideNum={slideNum}>
-        {slideData &&
-          slideData.map((i) => (
-            <Slide bg={i.bg}>
-              <ImgContainer>
-                {/* <Image src='./image/image02.jpg' /> */}
-                <Image src={i.img} />
-              </ImgContainer>
-              <InfoContainer>
-                <Title>{i.title}</Title>
-                <Desc>{i.desc}</Desc>
+        <Slide>
+          <ImgContainer>
+            {/* <Image src='./image/image02.jpg' /> */}
+            <Image src='/image/bookHome.png' />
+          </ImgContainer>
+          <InfoContainer>
+            <Title>View Products</Title>
+            <Desc>
+              "Why every time buy new product at higher price when you get it at
+              lesser price."
+            </Desc>
 
-                <Button onClick={() => navigate(i.link)}>{i.name}</Button>
-              </InfoContainer>
-            </Slide>
-          ))}
+            <Button onClick={() => navigate('/products')}>View</Button>
+          </InfoContainer>
+        </Slide>
       </Wrapper>
-      <Arrow direction='right'>
+      {/* <Arrow direction='right'>
         <ArrowRightOutlined
           direction='right'
           fontSize='large'
           // onClick={() => handleClick('right')}
           onClick={() => nextSlide()}
         />
-      </Arrow>
+      </Arrow> */}
     </Container>
   )
 }

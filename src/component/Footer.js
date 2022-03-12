@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 
 const Container = styled.div`
   /* padding: 20px; */
@@ -40,10 +41,17 @@ const Column = styled.div`
 //     grid-template-columns: repeat(auto-fill, min-max(200px, 1fr));
 //   }
 //  `
-const Link = styled.div`
+const Link1 = styled.div`
   background-color: gray;
   cursor: pointer;
-  color: gold;
+  color: #343a40;
+  margin-bottom: 10px;
+  color: #4a4e69;
+`
+const Link = styled.a`
+  background-color: gray;
+  cursor: pointer;
+  color: #dee2e6;
   margin-bottom: 10px;
 `
 const Title = styled.div`
@@ -52,6 +60,7 @@ const Title = styled.div`
 `
 
 function Footer() {
+  const navigate = useNavigate()
   return (
     <Container>
       <Wrapper>
@@ -59,10 +68,10 @@ function Footer() {
 
         <Column>
           <Title>Menu</Title>
-          <Link href='/products'>View Items</Link>
-          <Link href='#'>Categories</Link>
-          <Link href='/cart'>MyCart</Link>
-          <Link href='/profile'>Profile</Link>
+          <Link1 onClick={() => navigate('/products')}>View Items</Link1>
+          <Link1 onClick={() => navigate('/')}>Categories</Link1>
+          <Link1 onClick={() => navigate('/cart')}>MyCart</Link1>
+          <Link1 onClick={() => navigate('/profile')}>Profile</Link1>
         </Column>
         <Column>
           <Title>Contact Us</Title>
@@ -71,10 +80,10 @@ function Footer() {
         </Column>
         <Column>
           <Title>Social</Title>
-          <Link href='#'>Instagram</Link>
-          <Link href='#'>Github</Link>
+          <Link href='http://instagram.com/vansh_1_7'>Instagram</Link>
+          {/* <Link to="/react">React</Link> */}
+          <Link href='https://github.com/vansh017/'>Github</Link>
           <Link href='#'>Facebook</Link>
-          <Link href='#'>Linked In</Link>
         </Column>
         {/* </Row> */}
       </Wrapper>

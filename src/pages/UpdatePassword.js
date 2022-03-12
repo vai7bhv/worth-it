@@ -22,6 +22,7 @@ import {
   Select,
   TextField,
 } from '@mui/material'
+import MetaData from '../component/MetaData'
 
 const Container = styled.div`
   width: 100%;
@@ -142,6 +143,7 @@ const UpdatePassword = () => {
   }, [dispatch, error, alert, isUpdated])
   return (
     <Container>
+      <MetaData title='Update password -- WorthIT' />
       <Image src='/image/resetpassword.png' />
       <Wrapper>
         <Title>Change Password</Title>

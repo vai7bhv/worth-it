@@ -2,9 +2,6 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import {
   LocalGroceryStoreOutlined,
-  NotificationAdd,
-  NotificationAddOutlined,
-  Notifications,
   NotificationsOutlined,
   Person,
   Search,
@@ -32,11 +29,11 @@ const Container = styled.div`
     rgba(0, 117, 255, 0.8214636196275386) 71%
   ); */
   align-items: center;
-  width: 100vw;
+  width: 100%;
   justify-content: space-evenly;
   @media (max-width: 600px) {
     font-size: 14px;
-    width: 114vw;
+    /* width: 100%; */
   }
 `
 const Cover = styled.div`
@@ -45,6 +42,10 @@ const Cover = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 600px) {
+    font-size: 14px;
+    /* width: 100%; */
+  }
 `
 
 const Left = styled.div`
@@ -61,6 +62,11 @@ const Title = styled.h1`
   cursor: pointer;
   max-width: 2vw;
   font-weight: 600;
+  @media (max-width: 600px) {
+    font-size: 20px;
+    max-width: 2.5vw;
+  }
+
   /* font-size: 20px; */
 `
 const SearchContainer = styled.div`
@@ -74,7 +80,8 @@ const SearchContainer = styled.div`
   background-color: #fefffe;
 
   @media (max-width: 600px) {
-    width: 40vw;
+    width: 30vw;
+    margin-left: 10px;
   }
 `
 const Input = styled.input`
@@ -88,7 +95,7 @@ const Input = styled.input`
   font-size: 15px;
   width: 18vw;
   @media (max-width: 600px) {
-    width: 34vw;
+    width: 24vw;
   }
 `
 const Middle = styled.div`
@@ -108,7 +115,8 @@ const Right = styled.div`
   margin: 15px;
 
   @media (max-width: 600px) {
-    margin-right: 0;
+    /* margin-right: 0; */
+    margin: 0;
     /* flex: 2; */
     justify-content: flex-end;
   }
@@ -123,6 +131,7 @@ const Options = styled.div`
   @media (max-width: 600px) {
     font-size: 12px;
     margin-left: 0;
+    margin: 0px;
   }
 `
 // const Reg = styled.div``

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { logout } from '../action/userAction'
 import { Button, TextField } from '@mui/material'
+import MetaData from '../component/MetaData'
 const Container = styled.div`
   margin-top: 20px;
   margin-down: 20px;
@@ -120,6 +121,7 @@ function Profile() {
   }, [isAuthUser])
   return (
     <Container>
+      <MetaData title={`${user.name}'s profile -- WorthIT`} />
       <Left>
         <Heading>{user.name}'s profile</Heading>
       </Left>
