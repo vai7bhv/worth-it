@@ -160,8 +160,8 @@ function Slider() {
           <InfoContainer>
             <Title>View Products</Title>
             <Desc>
-              "Why every time buy new product at higher price when you get it at
-              lesser price."
+              Why every time buy new product at higher price when you get it at
+              lesser price.
             </Desc>
 
             <Button onClick={() => navigate('/products')}>View</Button>

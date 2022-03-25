@@ -11,10 +11,12 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  margin-top: 10px;
   align-items: center;
   justify-content: center;
   font-weight: 400;
   background-color: #e7e8e9;
+  /* padding-top: 10px; */
   @media (max-width: 600px) {
     justify-content: flex-start;
   }
@@ -55,14 +57,25 @@ const Title = styled.h1`
 `
 
 const Link = styled.a`
-  margin: 5px 0px;
-  font-size: 12px;
+  /* margin: 5px 0px; */
+  font-size: 15px;
   text-decoration: underline;
   cursor: pointer;
   font-weight: 600;
   margin-left: 3px;
   color: #343742;
   justify-content: flex-end;
+`
+const Option = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  font-size: 18px;
+`
+const Op = styled.div`
+  display: flex;
+  flex-direction: column;
 `
 
 const Login = () => {
@@ -106,7 +119,7 @@ const Login = () => {
         <Form>
           <TextField
             id='outlined-basic'
-            label='email'
+            label='Email'
             type='email'
             variant='outlined'
             required
@@ -117,7 +130,7 @@ const Login = () => {
           />
           <TextField
             id='outlined-basic'
-            label='password'
+            label='Password'
             variant='outlined'
             required
             type='password'
@@ -139,17 +152,20 @@ const Login = () => {
         >
           LOGIN
         </Button>
-        <Link
-          onClick={() => navigate('/forgotPassword')}
-          style={{
-            alignItems: 'flex-end',
-            justifyContent: 'flex-end',
-          }}
-        >
-          FORGOT PASSWORD?
-        </Link>
-        <label>New at Worth It?</label>
-        <Link onClick={() => navigate('/signup')}>CREATE AN ACCOUNT</Link>
+        <Option>
+          <Link
+            style={{ marginTop: '10px' }}
+            onClick={() => navigate('/forgotPassword')}
+          >
+            FORGOT PASSWORD?
+          </Link>
+          <Op>
+            <label>
+              New at <b>WorthIT</b>?
+            </label>
+            <Link onClick={() => navigate('/signup')}>CREATE AN ACCOUNT</Link>
+          </Op>
+        </Option>
       </Wrapper>
     </Container>
   )

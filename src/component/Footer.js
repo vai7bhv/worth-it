@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 const Container = styled.div`
   /* padding: 20px; */
-  background-color: gray;
+  background-color: #180c54;
   width: 100%;
 
   position: relative;
@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   justify-content: center;
   max-width: 80%;
   margin: 0 auto;
-  background-color: gray;
+  background-color: #180c54;
   display: flex;
   margin-top: 10px;
 `
@@ -28,7 +28,7 @@ const Column = styled.div`
   text-align: left;
   margin-left: 60px;
   font-weight: bold;
-  background-color: gray;
+  background-color: #180c54;
 `
 // const Row = styled.div`
 //   background-color: gray;
@@ -42,20 +42,20 @@ const Column = styled.div`
 //   }
 //  `
 const Link1 = styled.div`
-  background-color: gray;
+  background-color: #180c54;
   cursor: pointer;
-  color: #343a40;
+  color: gold;
   margin-bottom: 10px;
-  color: #4a4e69;
 `
 const Link = styled.a`
-  background-color: gray;
+  background-color: #180c54;
   cursor: pointer;
-  color: #dee2e6;
+  color: gold;
   margin-bottom: 10px;
 `
 const Title = styled.div`
-  background-color: gray;
+  background-color: #180c54;
+  color: white;
   margin-bottom: 10px;
 `
 
@@ -90,5 +90,4 @@ function Footer() {
     </Container>
   )
 }
-
 export default Footer

@@ -52,7 +52,7 @@ function OrderList() {
     }
 
     dispatch(getAllOrders())
-  }, [dispatch, alert, error, deleteError, isDeleted])
+  }, [dispatch, alert, error, navigate, deleteError, isDeleted])
 
   const columns = [
     { field: 'id', headerName: 'Order ID', minWidth: 100, flex: 1 },
@@ -64,8 +64,8 @@ function OrderList() {
       flex: 0.5,
     },
     {
-      field: 'User',
-      headerName: 'User Name',
+      field: 'user',
+      headerName: 'UserName',
       minWidth: 50,
       flex: 0.5,
     },

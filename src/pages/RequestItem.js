@@ -120,7 +120,7 @@ const RequestItem = () => {
     console.log(name)
     console.log(description)
     dispatch(createRequest(name, description, userName, email))
-    navigate('/profile')
+    navigate('/requests')
   }
   return (
     <Container>

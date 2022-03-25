@@ -18,6 +18,7 @@ import { useAlert } from 'react-alert'
 import { Backdrop, Fade, Modal, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { Button } from '@mui/material'
+import MetaData from '../component/MetaData'
 
 const Container = styled.div`
   /* background: linear-gradient(
@@ -44,31 +45,42 @@ const Wrapper = styled.div`
   box-sizing: border-box;
   max-width: 90%;
   height: auto;
-  border: solid #ffffff 10px;
+  /* border: solid #ffffff 10px; */
 
-  padding: 5px;
+  /* padding: 5px; */
   @media (max-width: 700px) {
     flex-direction: column;
     align-items: center;
+    margin: 20px;
   }
 `
 
 const ImgContainer = styled.div`
   display: flex;
   margin-top: 3vw;
+  /* min-width: 30%; */
   flex-direction: column;
 
   justify-content: center;
 
   /* flex: 1; */
+  @media (max-width: 700px) {
+    width: 80%;
+    /* height: 20vh; */
+    margin: 20px;
+    height: 35vh;
+  }
 `
 
 const Image = styled.img`
-  max-width: 120%;
-  ${'' /* height: auto; */}
-  max-height:30vw;
+  max-width: 90%;
+
+  max-height: 30vw;
   margin-bottom: 10px;
   object-fit: cover;
+  @media (max-width: 700px) {
+    max-height: 100vh;
+  }
 `
 
 const Info = styled.div`
@@ -100,32 +112,53 @@ const Icon = styled.div`
 const InfoContainer = styled.div`
   flex: 1;
   padding: 0px 50px;
-  width: 800px;
-  height: 800px;
+  /* width: ; */
+  /* height: 800px; */
+  @media (max-width: 700px) {
+    margin-top: 40px;
+  }
 `
 
 const Title = styled.h1`
-  font-weight: 400;
+  font-weight: 600;
+  width: 40vw;
   /* font-family: 'Times'; */
+  @media (max-width: 700px) {
+    font-size: 20px;
+    width: 90%;
+  }
 `
 const Desc = styled.p`
   margin: 20px 0px;
   font-weight: 500;
-  font-family: 'Times';
+  /* font-family: 'Times'; */
   font-size: 20px;
-  width: 700px;
+  width: 40vw;
+  color: #4a4e69;
+  @media (max-width: 700px) {
+    font-size: 15px;
+    width: 90%;
+  }
 `
 const Desc1 = styled.p`
   margin: 20px 0px;
-  font-weight: 500;
-  font-family: 'Times';
+  font-weight: 700;
+  /* font-family: 'Times'; */
   font-size: 25px;
-  width: 700px;
+  width: 10vw;
+  @media (max-width: 700px) {
+    font-size: 20px;
+    /* width: 90%; */
+  }
 `
 const Price = styled.span`
   font-weight: bold;
   font-size: 30px;
   font-color: 'blue';
+  @media (max-width: 700px) {
+    font-size: 20px;
+    /* width: 90%; */
+  }
 `
 
 // const AddContainer = styled.div`
@@ -151,7 +184,7 @@ const Button1 = styled.button`
   /* background-color: 'gray'; */
   color: 'white';
 
-  font-size: 0.8em;
+  font-size: 20px;
   margin: 1em;
   /* padding: 0.25em 1em; */
   border: none;
@@ -234,6 +267,7 @@ const ProductDetails = () => {
 
   return (
     <Container>
+      <MetaData title={`${product.name} at WorthIT`} />
       <Wrapper>
         <ImgContainer>
           {pr && pr.map((i) => <Image src={i.images[0].url} />)}
@@ -253,10 +287,10 @@ const ProductDetails = () => {
           <Title>{product.name}</Title>
           <br></br>
           {/* <Title>Ansic</Title> */}
-          <Desc1>Description:</Desc1>
+          <Desc1>Description</Desc1>
           <Desc>{product.description}</Desc>
           <Desc1>
-            Category:
+            Category
             <Desc style={{ marginTop: '5px' }}>{product.category}</Desc>
           </Desc1>
           <Price>
@@ -291,7 +325,15 @@ const ProductDetails = () => {
 
                     <b>{`Seller Email : ${product.userEmail}`}</b>
                     <br></br>
-                    <b>{`Seller Department : ${product.userDepartment}`}</b>
+                    {product.sem && <b>{`Owner semester : ${product.sem} `}</b>}
+                    <br />
+                    {product.mobileNo && (
+                      <b>{`Owner Mobile No. : ${product.mobileNo} `}</b>
+                    )}
+                    <br />
+                    {product.department && (
+                      <b>{`Owner department. : ${product.department} `}</b>
+                    )}
                   </Typography>
                 </Box>
               </Fade>

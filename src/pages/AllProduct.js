@@ -12,6 +12,8 @@ const Container = styled.div`
   justify-content: center;
   display: flex;
   position: relative;
+  /* background-color: #e0fbfc; */
+  background-color: #e7e8e9;
   min-height: 100vh;
   @media (max-width: 700px) {
     flex-direction: column;

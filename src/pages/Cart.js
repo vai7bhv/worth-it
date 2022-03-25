@@ -8,7 +8,8 @@ import { removeCartItem } from '../action/cartAction'
 import MetaData from '../component/MetaData'
 
 const Container = styled.div`
-  min-height: 100vh;
+  min-height: 90vh;
+  /* background-color: #e7e8e9; */
 
   @media (max-width: 600px) {
     justify-content: flex-start;
@@ -19,7 +20,7 @@ const Wrapper = styled.div`
   text-align: center;
 `
 const Title = styled.h1`
-  font-weight: 400;
+  font-weight: 600;
 `
 const Top = styled.div`
   display: flex;
@@ -96,6 +97,7 @@ const Summary = styled.div`
   height: 40vh;
   @media (max-width: 600px) {
     justify-content: flex-end;
+    max-width: 80vw;
   }
 `
 
@@ -175,7 +177,7 @@ function Cart({}) {
   // }
   return (
     <Container>
-      <MetaData title='Cart -- WorthIT' />
+      <MetaData title='Cart     -- WorthIT' />
       {/* <button onClick={(e) => sendEmail(e)}> email</button> */}
       {cartItems.length === 0 ? (
         <EmptyCart>

@@ -31,6 +31,8 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   justify-content: space-evenly;
+  display: flex;
+
   @media (max-width: 600px) {
     font-size: 14px;
     /* width: 100%; */
@@ -60,8 +62,17 @@ const Left = styled.div`
 `
 const Title = styled.h1`
   cursor: pointer;
-  max-width: 2vw;
-  font-weight: 600;
+  /* width: 2vw; */
+  font-weight: 500;
+  font-size: 40px;
+  font-family: pacifico;
+  color: #7400b8;
+  /* color: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 1) 50%,
+    rgba(252, 176, 69, 1) 100%
+  ); */
   @media (max-width: 600px) {
     font-size: 20px;
     max-width: 2.5vw;
@@ -163,59 +174,59 @@ function Navbar({ isAuthUser }) {
 
   return (
     <Container>
-      <Cover>
-        <Left>
-          <Title onClick={() => navigate('/')}>WorthIT</Title>
-        </Left>
-        <Middle>
-          <SearchContainer>
-            <Input
-              placeholder='search ...'
-              type='search'
-              onSubmit={searchHandler}
-              onChange={(e) => setKeyword(e.target.value)}
-            />
+      {/* <Cover> */}
+      <Left>
+        <Title onClick={() => navigate('/')}>WorthIT</Title>
+      </Left>
+      <Middle>
+        <SearchContainer>
+          <Input
+            placeholder='search ...'
+            type='search'
+            onSubmit={searchHandler}
+            onChange={(e) => setKeyword(e.target.value)}
+          />
 
-            <Search
-              onClick={searchHandler}
-              style={{ color: 'gray', fontSize: '20px' }}
+          <Search
+            onClick={searchHandler}
+            style={{ color: 'gray', fontSize: '20px' }}
+          />
+        </SearchContainer>
+      </Middle>
+      <Right>
+        {!isAuthUser && (
+          <>
+            <Options onClick={() => navigate('/signUp')}>SIGN IN</Options>
+            <Options onClick={() => navigate('/login')}>LOG IN</Options>
+          </>
+        )}
+        <Badge badgeContent={cartItems.length} color='secondary'>
+          <Tooltip title='Cart'>
+            <LocalGroceryStoreOutlined
+              style={{ marginLeft: '5px', cursor: 'pointer' }}
+              onClick={() => navigate('/cart')}
+              fontSize='large'
             />
-          </SearchContainer>
-        </Middle>
-        <Right>
-          {!isAuthUser && (
-            <>
-              <Options onClick={() => navigate('/signUp')}>SIGN IN</Options>
-              <Options onClick={() => navigate('/login')}>LOG IN</Options>
-            </>
-          )}
-          <Badge badgeContent={cartItems.length} color='secondary'>
-            <Tooltip title='Cart'>
-              <LocalGroceryStoreOutlined
-                style={{ marginLeft: '5px', cursor: 'pointer' }}
-                onClick={() => navigate('/cart')}
+          </Tooltip>
+        </Badge>
+        {isAuthUser && (
+          <>
+            <Tooltip title='Requested Item'>
+              <NotificationsOutlined
                 fontSize='large'
-              />
-            </Tooltip>
-          </Badge>
-          {isAuthUser && (
-            <>
-              <Tooltip title='Requested Item'>
-                <NotificationsOutlined
-                  fontSize='large'
-                  onClick={() => navigate('/requests')}
-                  style={{ cursor: 'pointer', marginLeft: '10px' }}
-                />
-              </Tooltip>
-              <Person
-                onClick={() => navigate('/profile')}
-                fontSize='large'
+                onClick={() => navigate('/requests')}
                 style={{ cursor: 'pointer', marginLeft: '10px' }}
               />
-            </>
-          )}
-        </Right>
-      </Cover>
+            </Tooltip>
+            <Person
+              onClick={() => navigate('/profile')}
+              fontSize='large'
+              style={{ cursor: 'pointer', marginLeft: '10px' }}
+            />
+          </>
+        )}
+      </Right>
+      {/* </Cover> */}
     </Container>
   )
 }

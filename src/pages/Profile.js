@@ -8,8 +8,8 @@ import { Button, TextField } from '@mui/material'
 import MetaData from '../component/MetaData'
 const Container = styled.div`
   margin-top: 20px;
-  margin-down: 20px;
-  height: 80vh;
+  margin-bottom: 20px;
+  min-height: 80vh;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   width: 90vw;
@@ -22,6 +22,9 @@ const Container = styled.div`
   box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
     rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
     rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  @media (max-width: 700px) {
+    font-size: 15px;
+  }
 `
 const Left = styled.div`
   display: flex;

@@ -11,9 +11,9 @@ import { getAllRequests } from '../action/requestAction'
 import MetaData from '../component/MetaData'
 
 const Container = styled.div`
-  min-height: 100vh;
-  background-color: #e2eafc;
-  /* background-image: url('/image/SimpleShiny.svg'); */
+  min-height: 90vh;
+  margin-bottom: 10px;
+  background-color: #edf2f4;
 `
 
 const Button = styled.button`
@@ -24,24 +24,35 @@ const Button = styled.button`
   color: #fdfffc;
   border-radius: 5px;
   font-size: 20px;
-  margin-top: 2vw;
+  margin-top: 1vw;
+  margin-bottom: 2vw;
   &:hover {
     background-color: #8e9aaf;
     color: #dfe7fd;
   }
+  @media (max-width: 700px) {
+    margin-top: 20px;
+    margin-left: 50vw;
+    width: 150px;
+    font-size: medium;
+  }
 `
 const Req = styled.div`
-  margin: 20px;
+  /* margin: 20px; */
 `
 const Name = styled.h2`
   text-align: center;
   font: 400 1.2vmax;
   padding: 0.5vmax;
-  margin: 4vh;
+  margin: 2vh;
   box-sizing: border-box;
   color: rgb(255, 255, 255);
   transition: all 0.5s;
   background-color: rgb(44, 44, 44);
+  @media (max-width: 700px) {
+    /* font-size: 20px; */
+    /* margin-top: 50px; */
+  }
 `
 const Item = styled.div`
   display: flex;
@@ -104,10 +115,10 @@ function Requests() {
   return (
     <Container>
       <MetaData title='Requests -- WorthIT' />
-      <Button onClick={() => navigate('/requestItem')}>Request Item</Button>
 
       <Req>
         <Name> All Requests </Name>
+        <Button onClick={() => navigate('/requestItem')}>Request Item</Button>
 
         <DataGrid
           rows={rows}
@@ -117,9 +128,12 @@ function Requests() {
           // className='myOrdersTable'
           autoHeight
           sx={{
-            boxShadow: 2,
+            boxShadow: 5,
             color: 'black',
             fontWeight: 600,
+            width: '90%',
+            marginLeft: '5vw',
+            borderRadius: '10px',
 
             // border: 2,
             // borderColor: 'primary.light',

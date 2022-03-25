@@ -125,9 +125,9 @@ const Button1 = styled.button`
   cursor: pointer;
 `
 const Image = styled.img`
-  width: 50vw;
-  height: 90vh;
-  margin-top: -30vw;
+  width: 40vw;
+  height: 80vh;
+  margin-top: 3vh;
   margin-right: 0vw;
   margin-left: 10vw;
   @media (max-width: 600px) {
@@ -295,7 +295,7 @@ const UpdateProductDetails = () => {
             value={productStatus}
           >
             <MenuItem value='available'>Available</MenuItem>
-            <MenuItem value='delivered'>delivered</MenuItem>
+            <MenuItem value='delivered'>Delivered</MenuItem>
           </Select>
           {/* <Input
             type='file'
@@ -304,6 +304,18 @@ const UpdateProductDetails = () => {
             onChange={updateProductImagesChange}
             multiple
           /> */}
+          <p
+            style={{
+              color: 'gray',
+              fontSize: '15px',
+              width: '80%',
+              margin: '10px',
+            }}
+          >
+            If you have Delivered your product Please change Product status from
+            Available to Delivered
+          </p>
+
           <Prv>
             {oldImages &&
               oldImages.map((image, index) => (

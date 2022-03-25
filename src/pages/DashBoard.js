@@ -6,7 +6,6 @@ import { myOrders } from '../action/orderAction'
 import { DataGrid } from '@mui/x-data-grid'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import MyProducts from './MyProducts'
 
 import {
   deleteProduct,
@@ -66,6 +65,28 @@ const Status = styled.h4``
 const Price = styled.h3``
 const Sell = styled.div`
   margin: 20px;
+`
+const Button1 = styled.button`
+  width: 200px;
+  /* margin: 50px; */
+  background-color: #343a40;
+  padding: 10px;
+  color: #fdfffc;
+  border-radius: 5px;
+  font-size: 20px;
+  margin-top: 1vw;
+  margin-left: 2vw;
+  margin-bottom: 2vw;
+  &:hover {
+    background-color: #8e9aaf;
+    color: #000;
+  }
+  @media (max-width: 700px) {
+    margin: 20px;
+    /* margin-left:; */
+    width: 150px;
+    font-size: medium;
+  }
 `
 
 function DashBoard() {
@@ -210,6 +231,7 @@ function DashBoard() {
         <img
           style={{ objectFit: 'contain', width: '15vw', height: '10vh' }}
           src={params.value}
+          alt='Product image'
         />
       ),
     },
@@ -300,7 +322,7 @@ function DashBoard() {
 
   return (
     <Container>
-      <MetaData title='Dashboard -- WorthIT' />
+      <MetaData title='Dashboard    --WorthIT' />
       <Buy>
         <Name>My Orders</Name>
         <Orders>
@@ -315,7 +337,7 @@ function DashBoard() {
             //   fontWeight: 300,
             // }}
             sx={{
-              boxShadow: 2,
+              boxShadow: 5,
               color: 'black',
               fontWeight: 600,
 
@@ -330,7 +352,7 @@ function DashBoard() {
       </Buy>
       <Sell>
         <Name>Items For Sell</Name>
-        <Button onClick={() => navigate('/addItem')}>Add item</Button>
+        <Button1 onClick={() => navigate('/addItem')}>Add item</Button1>
 
         <DataGrid
           rows={productRows}
@@ -340,7 +362,7 @@ function DashBoard() {
           // className='myOrdersTable'
           autoHeight
           sx={{
-            boxShadow: 2,
+            boxShadow: 5,
             color: 'black',
             fontWeight: 600,
 
@@ -352,7 +374,7 @@ function DashBoard() {
       </Sell>
       <Req>
         <Name>Requests By User</Name>
-        <Button onClick={() => navigate('/requestItem')}>requestItem</Button>
+        <Button1 onClick={() => navigate('/requestItem')}>requestItem</Button1>
         <DataGrid
           rows={reqRows}
           columns={reqColumns}
@@ -361,9 +383,11 @@ function DashBoard() {
           // className='myOrdersTable'
           autoHeight
           sx={{
-            boxShadow: 2,
+            boxShadow: 5,
             color: 'black',
             fontWeight: 600,
+            width: '95%',
+            marginLeft: '2vw',
 
             '& .MuiDataGrid-cell:hover': {
               color: 'primary.main',

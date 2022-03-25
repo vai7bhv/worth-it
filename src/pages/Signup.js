@@ -18,18 +18,21 @@ import MetaData from '../component/MetaData'
 
 const Container = styled.div`
   width: 100vw;
-  /* height: 100vh; */
+  min-height: 80vh;
   /* background: url('./Mobile-login.jpg') left center; */
   /* background-image: ; */
   display: flex;
   align-items: center;
   justify-content: center;
+  /* margin-top: 10px; */
+
   font-weight: 400;
   background-color: #e7e8e9;
 
   @media (max-width: 600px) {
     justify-content: flex-start;
     flex-direction: column;
+    width: 100%;
   }
 `
 
@@ -38,7 +41,7 @@ const Wrapper = styled.div`
   padding: 2vw;
   background-color: #f3f8fb;
 
-  margin: 10vw;
+  margin: 5vw;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   border-radius: 10px;
@@ -113,9 +116,14 @@ const Image = styled.img`
   font: 400 0.8vmax;
   transition: all 0.5s;
   /* padding: 1vmax; */
-
+  border-radius: 10px;
   color: rgba(0, 0, 0, 0.623);
   background-color: rgb(255, 255, 255);
+  @media (max-width: 700px) {
+    width: 75%;
+    height: 30vh;
+    margin-top: 20px;
+  }
 `
 
 const Signup = () => {

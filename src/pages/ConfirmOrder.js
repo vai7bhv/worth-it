@@ -11,12 +11,19 @@ import MetaData from '../component/MetaData'
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
+  min-height: 80vh;
+  @media (max-width: 700px) {
+    width: 90%;
+    flex-direction: column;
+  }
 `
 const Info = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 5px;
   margin-top: 2vh;
+  align-items: center;
+  /* justify-content: center; */
 `
 
 const Heading = styled.h2`
@@ -24,12 +31,13 @@ const Heading = styled.h2`
   margin-left: 2vh;
   font-weight: 600;
 `
-const Left = styled.div``
+const Left = styled.div`
+  margin-left: 10px;
+`
 const Address = styled.div`
   margin-top: 3vh;
   margin-bottom: 2vh;
   margin-left: 2vw;
-  font-weight: 700;
   font-weight: 300;
 `
 const Item = styled.div``
@@ -38,14 +46,31 @@ const Image = styled.img`
   height: 15vh;
   cursor: pointer;
   object-fit: contain;
+  @media (max-width: 700px) {
+    width: 15vw;
+    height: 20vh;
+  }
 `
 const Title = styled.h3`
   margin: 5px;
-  font-weight: 300;
+  font-weight: 400;
+  max-width: 20vw;
+
+  @media (max-width: 700px) {
+    font-size: 15px;
+    margin-left: 10px;
+    /* margin-top: 20px; */
+  }
 `
 const Price = styled.h4`
   margin: 1vw;
   font-weight: 300;
+  align-items: center;
+  justify-content: center;
+  @media (max-width: 700px) {
+    font-size: 15px;
+    margin-left: 10px;
+  }
 `
 const Right = styled.div`
   flex: 1;
@@ -58,6 +83,11 @@ const Right = styled.div`
   font-weight: bolder;
   max-width: 25vw;
   height: 40vh;
+  margin-right: 50px;
+  @media (max-width: 700px) {
+    max-width: 80%;
+    margin-right: 5px;
+  }
 `
 const SummaryTitle = styled.h2`
   font-weight: 400;
@@ -95,9 +125,9 @@ const ConfirmOrder = () => {
   // const [socket, setSocket] = useState(null)
 
   let cost = 0
-  {
-    cartItems.map((i) => (cost += i.price))
-  }
+
+  cartItems.map((i) => (cost += i.price))
+
   useEffect(() => {
     if (error) {
       alert.error(error)

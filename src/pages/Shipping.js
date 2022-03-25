@@ -18,7 +18,7 @@ const Container = styled.div`
 
   @media (max-width: 600px) {
     justify-content: flex-start;
-    width: 100%;
+    width: 90%;
     flex-direction: column;
   }
 `
@@ -48,7 +48,8 @@ const Form = styled.div`
   box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   @media (max-width: 600px) {
-    width: 97vw;
+    width: 80vw;
+    margin-left: 10vw;
     justify-content: center;
     /* position: fixed; */
   }

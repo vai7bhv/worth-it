@@ -35,6 +35,7 @@ const Container = styled.div`
   background-color: #e7e8e9;
   @media (max-width: 600px) {
     justify-content: flex-start;
+    flex-direction: column;
   }
 `
 
@@ -50,7 +51,7 @@ const Wrapper = styled.div`
   border-radius: 10px;
   @media (max-width: 600px) {
     justify-content: flex-start;
-    width: 90%;
+    width: 80%;
     /* position: fixed; */
   }
 `
@@ -79,8 +80,9 @@ const Title = styled.h1`
   margin-bottom: 20px;
   @media (max-width: 600px) {
     margin: 10px;
-    margin-left: 30vw;
+    margin-left: 10vw;
     font-size: 24px;
+
     /* position: fixed; */
   }
 `
@@ -106,6 +108,10 @@ const Input = styled.input`
 const Image = styled.img`
   width: 40vw;
   height: 70vh;
+  @media (max-width: 700px) {
+    width: 80vw;
+    height: 40vh;
+  }
 `
 
 const UpdatePassword = () => {

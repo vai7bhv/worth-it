@@ -137,7 +137,7 @@ const UpdateProfile = ({ history }) => {
       <MetaData title='Update Profile -- WorthIT' />
       <Wrapper>
         <CssBaseline />
-        <h2>Update Profile</h2>
+        <h1>Update Profile</h1>
         <Form>
           {/* <img src={avatarPreview} alt="Avatar Preview" />
         <Input

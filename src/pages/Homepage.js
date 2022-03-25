@@ -69,8 +69,8 @@ const Image = styled.img`
   margin-left: 10vw;
   margin-right: 10vw;
   margin-top: 14vh;
-  animation: slideInLeft;
-  animation-duration: 1.5s;
+  /* animation: slideInLeft; */
+  /* animation-duration: 1.5s; */
   align-items: center;
   justify-content: center;
   /* background-color: #5463ff; */
@@ -81,8 +81,8 @@ const Image = styled.img`
   }
 `
 const Info = styled.div`
-  animation: slideInDown; /* referring directly to the animation's @keyframe declaration */
-  animation-duration: 1s;
+  /* animation: slideInDown; /* referring directly to the animation's @keyframe declaration */
+  /* animation-duration: 1s;  */
   /* --animate-delay: 2s; */
   align-items: center;
   justify-content: center;
